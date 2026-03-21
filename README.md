@@ -14,83 +14,125 @@ Code-only release for GoldMDD experiments (wrappers, configs, scripts, evaluatio
 - See `docs/TRAINING_PROTOCOL.md`.
 - Unified runs target consistent training controls (80 epochs, batch size 8, augmentation preset `goldmdd_v2`) unless explicitly marked as native.
 
-## Complete method coverage
+## Complete method list
+- Total models: **33**
 
-Total models tracked: **33**
+| Model | Status | Venue | Local path | Official GitHub repo |
+|---|---|---|---|---|
+| DeepLabV3+ | completed | ECCV2018 | `misc/train_semseg_smp.py` | https://github.com/qubvel-org/segmentation_models.pytorch |
+| UPerNet | completed | ECCV2018 | `slurm/submit_goldmdd_ssaseg_single.slurm` (`MODEL=upernet_swin_tiny`) | https://github.com/xwmaxwma/SSA-Seg.git |
+| FarSeg | completed | CVPR2020 | `misc/train_semseg_farseg.py --model farseg` | https://github.com/Z-Zheng/FarSeg.git |
+| OCRNet | completed | ECCV2020 | `slurm/submit_goldmdd_ssaseg_single.slurm` (`MODEL=ocrnet_hr48`) | https://github.com/xwmaxwma/SSA-Seg.git |
+| ABCNet | completed | ISPRSJPRS2021 | `third_party/GeoSeg/train_supervision.py -c third_party/GeoSeg/config/goldmdd/abcnet.py` | https://github.com/WangLibo1995/GeoSeg.git |
+| BANet | completed | RS2021 | `third_party/GeoSeg/train_supervision.py -c third_party/GeoSeg/config/goldmdd/banet.py` | https://github.com/WangLibo1995/GeoSeg.git |
+| SegFormer | completed | NeurIPS2021 | `misc/train_semseg_segformer.py` | https://github.com/huggingface/transformers |
+| A2FPN | completed | IJRS2022 | `third_party/GeoSeg/train_supervision.py -c third_party/GeoSeg/config/goldmdd/a2fpn.py` | https://github.com/WangLibo1995/GeoSeg.git |
+| DC-Swin | completed | TGRS2022 | `third_party/GeoSeg/train_supervision.py -c third_party/GeoSeg/config/goldmdd/dcswin.py` | https://github.com/WangLibo1995/GeoSeg.git |
+| MANet | completed | TGRS2022 | `third_party/GeoSeg/train_supervision.py -c third_party/GeoSeg/config/goldmdd/manet.py` | https://github.com/WangLibo1995/GeoSeg.git |
+| Mask2Former | completed | CVPR2022 | `slurm/submit_goldmdd_mask2former_single.slurm` | https://github.com/facebookresearch/Mask2Former.git |
+| SegNeXt | completed | NeurIPS2022 | `slurm/submit_goldmdd_ssaseg_single.slurm` (`MODEL=segnext_tiny`) | https://github.com/xwmaxwma/SSA-Seg.git |
+| UNetFormer | completed | ISPRSJPRS2022 | `third_party/GeoSeg/train_supervision.py -c third_party/GeoSeg/config/goldmdd/unetformer.py` | https://github.com/WangLibo1995/GeoSeg.git |
+| Afformer | completed | AAAI2023 | `slurm/submit_goldmdd_ssaseg_single.slurm` (`MODEL=afformer_base`) | https://github.com/xwmaxwma/SSA-Seg.git |
+| EfficientViT-Seg | completed | ICCV2023 | `misc/train_semseg_efficientvit.py` | https://github.com/mit-han-lab/efficientvit.git |
+| FarSeg++ | completed | TGRS2023 | `misc/train_semseg_farseg.py --model farsegpp` | https://github.com/Z-Zheng/FarSeg.git |
+| HQ-SAM | completed | NeurIPS2023 | `misc/train_semseg_sam_family.py --model-family hq_sam` | https://github.com/SysCV/sam-hq |
+| LoGCAN | completed | ICASSP2023 | `slurm/submit_goldmdd_rsseg_single.slurm` (`METHOD=logcan`) | https://github.com/xwmaxwma/rssegmentation.git |
+| SACANet | completed | ICME2023 | `slurm/submit_goldmdd_rsseg_single.slurm` (`METHOD=sacanet`) | https://github.com/xwmaxwma/rssegmentation.git |
+| SeaFormer | completed | ICLR2023 | `slurm/submit_goldmdd_ssaseg_single.slurm` (`MODEL=seaformer_base`) | https://github.com/xwmaxwma/SSA-Seg.git |
+| CGRSeg | completed | ECCV2024 | `slurm/submit_goldmdd_ssaseg_single.slurm` (`MODEL=cgrseg_b`) | https://github.com/xwmaxwma/SSA-Seg.git |
+| DOCNet | completed | GRSL2024 | `slurm/submit_goldmdd_rsseg_single.slurm` (`METHOD=docnet`) | https://github.com/xwmaxwma/rssegmentation.git |
+| PEM | completed | CVPR2024 | `slurm/submit_goldmdd_pem_single.slurm` | https://github.com/NiccoloCavagnero/PEM.git |
+| RS3Mamba | completed | GRSL2024 | `misc/train_semseg_rs3mamba.py` | https://github.com/sstary/SSRS.git |
+| SAM_RS | completed | TGRS2024 | `misc/train_semseg_sam_rs.py` | https://github.com/sstary/SSRS.git |
+| LoGCAN++ | completed | TGRS2025 | `slurm/submit_goldmdd_rsseg_single.slurm` (`METHOD=logcanplus`) | https://github.com/xwmaxwma/rssegmentation.git |
+| MCPNet | completed | TGRS2025 | `third_party/MCPNet/tools/train.py -c third_party/MCPNet/configs/goldmdd_mcpnet_full_80ep_bs8*.py` | https://github.com/fsqy-zhang/MCPNet.git |
+| MF-Mamba | completed | TGRS2025 | `misc/train_semseg_mfmamba.py` | https://github.com/Mango-Mars/MF-Mamba.git |
+| PPMambaSeg | running | GRSL2025 | `slurm/submit_goldmdd_ppmambaseg_single.slurm` | https://github.com/Jerrymo59/PPMambaSeg.git |
+| PyramidMamba | completed | JAG2025 | `third_party/GeoSeg/train_supervision.py -c third_party/GeoSeg/config/goldmdd/pyramidmamba.py` | https://github.com/WangLibo1995/GeoSeg.git |
+| RSAM-Seg | completed | TGRS2025 | `misc/train_semseg_rsamseg.py` | https://github.com/Chief-byte/RSAM-Seg |
+| SAM2.1 | completed | ICLR2025 | `misc/train_semseg_sam_family.py --model-family sam2_1` | https://github.com/facebookresearch/sam2 |
+| SESSRS | completed | TGRS2025 | `misc/run_sessrs_postprocess_geoseg_official.py` | https://github.com/qycools/SESSRS.git |
 
-| Model | Status | Venue | Upstream project | Upstream repo | Local entrypoint |
-|---|---|---|---|---|---|
-| DeepLabV3+ | completed | ECCV2018 | SMP + torchvision | https://github.com/qubvel-org/segmentation_models.pytorch | `misc/train_semseg_smp.py` |
-| UPerNet | completed | ECCV2018 | SSA-Seg | https://github.com/xwmaxwma/SSA-Seg.git | `slurm/submit_goldmdd_ssaseg_single.slurm` (`MODEL=upernet_swin_tiny`) |
-| FarSeg | completed | CVPR2020 | FarSeg | https://github.com/Z-Zheng/FarSeg.git | `misc/train_semseg_farseg.py --model farseg` |
-| OCRNet | completed | ECCV2020 | SSA-Seg | https://github.com/xwmaxwma/SSA-Seg.git | `slurm/submit_goldmdd_ssaseg_single.slurm` (`MODEL=ocrnet_hr48`) |
-| ABCNet | completed | ISPRSJPRS2021 | GeoSeg | https://github.com/WangLibo1995/GeoSeg.git | `third_party/GeoSeg/train_supervision.py -c third_party/GeoSeg/config/goldmdd/abcnet.py` |
-| BANet | completed | RS2021 | GeoSeg | https://github.com/WangLibo1995/GeoSeg.git | `third_party/GeoSeg/train_supervision.py -c third_party/GeoSeg/config/goldmdd/banet.py` |
-| SegFormer | completed | NeurIPS2021 | Transformers | https://github.com/huggingface/transformers | `misc/train_semseg_segformer.py` |
-| A2FPN | completed | IJRS2022 | GeoSeg | https://github.com/WangLibo1995/GeoSeg.git | `third_party/GeoSeg/train_supervision.py -c third_party/GeoSeg/config/goldmdd/a2fpn.py` |
-| DC-Swin | completed | TGRS2022 | GeoSeg | https://github.com/WangLibo1995/GeoSeg.git | `third_party/GeoSeg/train_supervision.py -c third_party/GeoSeg/config/goldmdd/dcswin.py` |
-| MANet | completed | TGRS2022 | GeoSeg | https://github.com/WangLibo1995/GeoSeg.git | `third_party/GeoSeg/train_supervision.py -c third_party/GeoSeg/config/goldmdd/manet.py` |
-| Mask2Former | completed | CVPR2022 | Mask2Former | https://github.com/facebookresearch/Mask2Former.git | `slurm/submit_goldmdd_mask2former_single.slurm` |
-| SegNeXt | completed | NeurIPS2022 | SSA-Seg | https://github.com/xwmaxwma/SSA-Seg.git | `slurm/submit_goldmdd_ssaseg_single.slurm` (`MODEL=segnext_tiny`) |
-| UNetFormer | completed | ISPRSJPRS2022 | GeoSeg | https://github.com/WangLibo1995/GeoSeg.git | `third_party/GeoSeg/train_supervision.py -c third_party/GeoSeg/config/goldmdd/unetformer.py` |
-| Afformer | completed | AAAI2023 | SSA-Seg | https://github.com/xwmaxwma/SSA-Seg.git | `slurm/submit_goldmdd_ssaseg_single.slurm` (`MODEL=afformer_base`) |
-| EfficientViT-Seg | completed | ICCV2023 | EfficientViT | https://github.com/mit-han-lab/efficientvit.git | `misc/train_semseg_efficientvit.py` |
-| FarSeg++ | completed | TGRS2023 | FarSeg | https://github.com/Z-Zheng/FarSeg.git | `misc/train_semseg_farseg.py --model farsegpp` |
-| HQ-SAM | completed | NeurIPS2023 | SAM-HQ | https://github.com/SysCV/sam-hq | `misc/train_semseg_sam_family.py --model-family hq_sam` |
-| LoGCAN | completed | ICASSP2023 | rssegmentation | https://github.com/xwmaxwma/rssegmentation.git | `slurm/submit_goldmdd_rsseg_single.slurm` (`METHOD=logcan`) |
-| SACANet | completed | ICME2023 | rssegmentation | https://github.com/xwmaxwma/rssegmentation.git | `slurm/submit_goldmdd_rsseg_single.slurm` (`METHOD=sacanet`) |
-| SeaFormer | completed | ICLR2023 | SSA-Seg | https://github.com/xwmaxwma/SSA-Seg.git | `slurm/submit_goldmdd_ssaseg_single.slurm` (`MODEL=seaformer_base`) |
-| CGRSeg | completed | ECCV2024 | SSA-Seg | https://github.com/xwmaxwma/SSA-Seg.git | `slurm/submit_goldmdd_ssaseg_single.slurm` (`MODEL=cgrseg_b`) |
-| DOCNet | completed | GRSL2024 | rssegmentation | https://github.com/xwmaxwma/rssegmentation.git | `slurm/submit_goldmdd_rsseg_single.slurm` (`METHOD=docnet`) |
-| PEM | completed | CVPR2024 | PEM | https://github.com/NiccoloCavagnero/PEM.git | `slurm/submit_goldmdd_pem_single.slurm` |
-| RS3Mamba | completed | GRSL2024 | SSRS | https://github.com/sstary/SSRS.git | `misc/train_semseg_rs3mamba.py` |
-| SAM_RS | completed | TGRS2024 | SSRS | https://github.com/sstary/SSRS.git | `misc/train_semseg_sam_rs.py` |
-| LoGCAN++ | completed | TGRS2025 | rssegmentation | https://github.com/xwmaxwma/rssegmentation.git | `slurm/submit_goldmdd_rsseg_single.slurm` (`METHOD=logcanplus`) |
-| MCPNet | completed | TGRS2025 | MCPNet | https://github.com/fsqy-zhang/MCPNet.git | `third_party/MCPNet/tools/train.py -c third_party/MCPNet/configs/goldmdd_mcpnet_full_80ep_bs8*.py` |
-| MF-Mamba | completed | TGRS2025 | MF-Mamba | https://github.com/Mango-Mars/MF-Mamba.git | `misc/train_semseg_mfmamba.py` |
-| PPMambaSeg | running | GRSL2025 | PPMambaSeg | https://github.com/Jerrymo59/PPMambaSeg.git | `slurm/submit_goldmdd_ppmambaseg_single.slurm` |
-| PyramidMamba | completed | JAG2025 | GeoSeg | https://github.com/WangLibo1995/GeoSeg.git | `third_party/GeoSeg/train_supervision.py -c third_party/GeoSeg/config/goldmdd/pyramidmamba.py` |
-| RSAM-Seg | completed | TGRS2025 | RSAM-Seg | https://github.com/Chief-byte/RSAM-Seg | `misc/train_semseg_rsamseg.py` |
-| SAM2.1 | completed | ICLR2025 | SAM2 | https://github.com/facebookresearch/sam2 | `misc/train_semseg_sam_family.py --model-family sam2_1` |
-| SESSRS | completed | TGRS2025 | SESSRS | https://github.com/qycools/SESSRS.git | `misc/run_sessrs_postprocess_geoseg_official.py` |
+## Complete results table (all runs)
+- Total runs: **75**
 
-## Key results (best completed run per model)
-
-| Model | Venue | Backbone | Loss | Test mIoU (present) | Test Macro-F1 (present) | Test OA_fg | Params (M) | GFLOPs | Latency ms (1x3x512x512) |
-|---|---|---|---|---:|---:|---:|---:|---:|---:|
-| A2FPN | IJRS2022 | ResNet-18 | weighted_ce+dice | 0.3720 | 0.5107 | 0.7094 | 12.1620 | 27.1366 | 3.8670 |
-| ABCNet | ISPRSJPRS2021 | ResNet-18 | ce+dice+aux_ce | 0.3145 | 0.4302 | 0.6831 | 13.9645 | 32.3860 | 4.0397 |
-| Afformer | AAAI2023 | AFFormer-Base | ce+dice | 0.3047 | 0.4362 | 0.6389 | 2.9690 | 8.5730 | 7.4704 |
-| BANet | RS2021 | ResT-Lite | ce+dice | 0.2926 | 0.4147 | 0.6535 | 12.8608 | 31.3805 | 4.6832 |
-| CGRSeg | ECCV2024 | EfficientFormerV2-B | ce+dice | 0.2679 | 0.3961 | 0.5844 | 19.0799 | 7.5003 | 15.2859 |
-| DC-Swin | TGRS2022 | Swin-Small | ce+dice | 0.2971 | 0.4173 | 0.6584 | 66.9503 | 144.3925 | 12.9504 |
-| DOCNet | GRSL2024 | HRNet-W32 | ce+aux_ce (native) | 0.3147 | 0.4398 | 0.6785 | 39.1269 | 395.3173 | 22.5021 |
-| DeepLabV3+ | ECCV2018 | ConvNeXt-Tiny | ce+dice | 0.3895 | 0.5260 | 0.7189 | 29.3108 | 75.9139 | 4.4970 |
-| EfficientViT-Seg | ICCV2023 | EfficientViT-B2 | ce+dice | 0.3799 | 0.5065 | 0.7258 | 15.2802 | 18.3156 | 6.4212 |
-| FarSeg | CVPR2020 | ResNet-50 | ce (native) | 0.3564 | 0.4726 | 0.7130 | 31.3698 | 94.1161 | 3.9675 |
-| FarSeg++ | TGRS2023 | MiT-B2 | ce (native) | 0.3062 | 0.4358 | 0.6669 | 32.5566 | 95.0793 | 8.3478 |
-| HQ-SAM | NeurIPS2023 | ViT-B + HQ decoder (full finetune, msfpn) | weighted_ce+dice | 0.2538 | 0.3711 | 0.6150 | 97.8294 | 983.1302 | 189.3055 |
-| LoGCAN | ICASSP2023 | ResNet-50 | ce+aux_ce (native) | 0.3108 | 0.4081 | 0.7474 | 30.9157 | 99.2253 | 6.0530 |
-| LoGCAN++ | TGRS2025 | RepViT-M2.3 | ce+aux_ce (native) | 0.2264 | 0.3066 | 0.6353 | 25.1927 | 74.3696 | 17.1870 |
-| MANet | TGRS2022 | ResNet-50 | focal+dice | 0.3999 | 0.5431 | 0.6848 | 35.8629 | 109.6158 | 4.7845 |
-| MCPNet | TGRS2025 | ResNet-50 | ce (native) | 0.3293 | 0.4489 | 0.7103 | 45.1516 | 110.9866 | 7.1530 |
-| MF-Mamba | TGRS2025 | HRNet-W18 | ce+dice | 0.3001 | 0.4242 | 0.6376 | 11.2729 | 38.9439 | 20.5415 |
-| Mask2Former | CVPR2022 | ResNet-50 | set_matching_ce+mask+dice | 0.2985 | 0.4285 | 0.6561 | 44.0064 | 133.2907 | 17.4630 |
-| OCRNet | ECCV2020 | HRNet-W48 | ce+dice | 0.2722 | 0.3954 | 0.5735 | 70.3653 | 325.3542 | 61.4944 |
-| PEM | CVPR2024 | ResNet-50 | set_matching_ce+mask+dice | 0.2789 | 0.4011 | 0.6502 | 35.5313 | 60.6003 | 11.5152 |
-| PPMambaSeg | GRSL2025 | swsl-ResNet-18 | weighted_ce+dice | 0.3854 | 0.5298 | 0.6816 | 21.7049 | 45.9905 | 11.2748 |
-| PyramidMamba | JAG2025 | Swin-Base | ce+dice | 0.3985 | 0.5360 | 0.6833 | 125.1077 | 217.7548 | 29.2066 |
-| RS3Mamba | GRSL2024 | ResNet-18 + VMamba-Tiny | weighted_ce+dice | 0.3068 | 0.4280 | 0.6519 | 43.3254 | 78.5912 | 11.6012 |
-| RSAM-Seg | TGRS2025 | SAM-ViT-B (frozen encoder) | weighted_ce+dice | 0.3696 | 0.5085 | 0.6978 | 98.5875 | 247.0546 | 15.1369 |
-| SACANet | ICME2023 | HRNet-W32 | ce+aux_ce (native) | 0.3294 | 0.4557 | 0.6573 | 30.2704 | 115.9042 | 20.6124 |
-| SAM2.1 | ICLR2025 | Hiera-B+ (full finetune, msfpn) | focal+dice | 0.2980 | 0.4155 | 0.6870 | 83.8976 | 191.8167 | 10.4669 |
-| SAM_RS | TGRS2024 | UNetFormer + SAM priors | seg+bdy+obj (native) | 0.3241 | 0.4452 | 0.6839 | 11.6880 | - | 3.2453 |
-| SESSRS | TGRS2025 | UNetFormer (ce+dice) | t1/t2 search + postprocess | 0.3958 | 0.5167 | 0.7279 | 11.7259 | 23.5509 | 6.9183 |
-| SeaFormer | ICLR2023 | SeaFormer-Base | ce+dice | 0.3117 | 0.4408 | 0.6392 | 8.5838 | 3.4741 | 12.4666 |
-| SegFormer | NeurIPS2021 | MiT-B2 | weighted_ce+dice | 0.4010 | 0.5297 | 0.7163 | 27.3574 | 121.9349 | 8.3250 |
-| SegNeXt | NeurIPS2022 | MSCAN-Tiny | ce+dice | 0.2682 | 0.3884 | 0.6065 | 4.2285 | 12.6449 | 9.2612 |
-| UNetFormer | ISPRSJPRS2022 | ResNet-18 | ce+dice+aux_ce | 0.3941 | 0.5152 | 0.7276 | 11.7259 | 23.5509 | 5.8413 |
-| UPerNet | ECCV2018 | Swin-Tiny | ce+dice | 0.3371 | 0.4651 | 0.6729 | 59.8371 | 472.1168 | 22.6344 |
+| Run | Status | Model | Backbone | Loss | Venue | Test mIoU (present) | Test Macro-F1 (present) | Test OA_fg | Best Val mIoU (present) | Params (M) | GFLOPs | Latency ms | Peak VRAM (GB) |
+|---|---|---|---|---|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| baseline1_augv2_ce_dice | completed | DeepLabV3+ | ConvNeXt-Tiny | ce+dice | ECCV2018 | 0.3895 | 0.5260 | 0.7189 | 0.3545 | 29.3108 | 75.9139 | 4.4970 | 0.2086 |
+| baseline3_augv2_focal_dice | completed | DeepLabV3+ | ConvNeXt-Tiny | focal+dice | ECCV2018 | 0.3735 | 0.5068 | 0.7048 | 0.3581 | 29.3108 | 75.9139 | 4.4970 | 0.2086 |
+| baseline2_augv2_weighted_ce_dice | completed | DeepLabV3+ | ConvNeXt-Tiny | weighted_ce+dice | ECCV2018 | 0.3766 | 0.5193 | 0.6840 | 0.3750 | 29.3108 | 75.9139 | 4.4970 | 0.2086 |
+| deeplabv3p_resnet50_baseline1_augv2_ce_dice | completed | DeepLabV3+ | ResNet-50 | ce+dice | ECCV2018 | 0.3662 | 0.4897 | 0.7092 | 0.3379 | 26.6809 | 73.5922 | 2.8963 | 0.2300 |
+| deeplabv3p_resnet50_baseline3_augv2_focal_dice | completed | DeepLabV3+ | ResNet-50 | focal+dice | ECCV2018 | 0.3515 | 0.4819 | 0.7000 | 0.3461 | 26.6809 | 73.5922 | 2.8963 | 0.2300 |
+| deeplabv3p_resnet50_baseline2_augv2_weighted_ce_dice | completed | DeepLabV3+ | ResNet-50 | weighted_ce+dice | ECCV2018 | 0.3438 | 0.4755 | 0.6951 | 0.3427 | 26.6809 | 73.5922 | 2.8963 | 0.2300 |
+| upernet_swin_tiny_goldmdd | completed | UPerNet | Swin-Tiny | ce+dice | ECCV2018 | 0.3371 | 0.4651 | 0.6729 | 0.2873 | 59.8371 | 472.1168 | 22.6344 | 0.5306 |
+| farseg_r50_native | completed | FarSeg | ResNet-50 | ce (native) | CVPR2020 | 0.3564 | 0.4726 | 0.7130 | 0.2989 | 31.3698 | 94.1161 | 3.9675 | 0.2414 |
+| ocrnet_hr48_goldmdd | completed | OCRNet | HRNet-W48 | ce+dice | ECCV2020 | 0.2722 | 0.3954 | 0.5735 | 0.2954 | 70.3653 | 325.3542 | 61.4944 | 0.5052 |
+| geoseg_abcnet_goldmdd_b8_e80_poly_ce_dice | completed | ABCNet | ResNet-18 | ce+dice+aux_ce | ISPRSJPRS2021 | 0.3145 | 0.4302 | 0.6831 | 0.3070 | 13.9645 | 32.3860 | 4.0397 | 0.1004 |
+| geoseg_banet_goldmdd_b8_e80_poly_ce_dice | completed | BANet | ResT-Lite | ce+dice | RS2021 | 0.2926 | 0.4147 | 0.6535 | 0.2992 | 12.8608 | 31.3805 | 4.6832 | 0.1026 |
+| segformer_b2_baseline1_augv2_ce_dice | completed | SegFormer | MiT-B2 | ce+dice | NeurIPS2021 | 0.3222 | 0.4594 | 0.6484 | 0.3480 | 27.3574 | 121.9349 | 8.3250 | 0.5432 |
+| segformer_b2_baseline3_augv2_focal_dice | completed | SegFormer | MiT-B2 | focal+dice | NeurIPS2021 | 0.3332 | 0.4760 | 0.6385 | 0.3501 | 27.3574 | 121.9349 | 8.3250 | 0.5432 |
+| segformer_b2_baseline2_augv2_weighted_ce_dice | completed | SegFormer | MiT-B2 | weighted_ce+dice | NeurIPS2021 | 0.4010 | 0.5297 | 0.7163 | 0.3423 | 27.3574 | 121.9349 | 8.3250 | 0.5432 |
+| geoseg_a2fpn_goldmdd_b8_e80_poly_ce_dice | completed | A2FPN | ResNet-18 | ce+dice | IJRS2022 | 0.3688 | 0.4834 | 0.7335 | 0.3085 | 12.1620 | 27.1366 | 3.8670 | 0.2150 |
+| geoseg_a2fpn_goldmdd_b8_e80_poly_focal_dice | completed | A2FPN | ResNet-18 | focal+dice | IJRS2022 | 0.3363 | 0.4602 | 0.6659 | 0.3027 | 12.1620 | 27.1366 | 3.8670 | 0.2150 |
+| geoseg_a2fpn_goldmdd_b8_e80_poly_weighted_ce_dice | completed | A2FPN | ResNet-18 | weighted_ce+dice | IJRS2022 | 0.3720 | 0.5107 | 0.7094 | 0.3187 | 12.1620 | 27.1366 | 3.8670 | 0.2150 |
+| geoseg_dcswin_small_goldmdd_b8_e80_poly_ce_dice | completed | DC-Swin | Swin-Small | ce+dice | TGRS2022 | 0.2971 | 0.4173 | 0.6584 | 0.2884 | 66.9503 | 144.3925 | 12.9504 | 0.3561 |
+| geoseg_manet_goldmdd_b8_e80_poly_ce_dice | completed | MANet | ResNet-50 | ce+dice | TGRS2022 | 0.3711 | 0.4922 | 0.6862 | 0.3147 | 35.8629 | 109.6158 | 4.7845 | 0.3940 |
+| geoseg_manet_goldmdd_b8_e80_poly_focal_dice | completed | MANet | ResNet-50 | focal+dice | TGRS2022 | 0.3999 | 0.5431 | 0.6848 | 0.3246 | 35.8629 | 109.6158 | 4.7845 | 0.3940 |
+| geoseg_manet_goldmdd_b8_e80_poly_weighted_ce_dice | completed | MANet | ResNet-50 | weighted_ce+dice | TGRS2022 | 0.3828 | 0.5228 | 0.6759 | 0.3316 | 35.8629 | 109.6158 | 4.7845 | 0.3940 |
+| mask2former_r50_baseline_semseg_default | completed | Mask2Former | ResNet-50 | set_matching_ce+mask+dice | CVPR2022 | 0.2985 | 0.4285 | 0.6561 | 0.3033 | 44.0064 | 133.2907 | 17.4630 | 0.4213 |
+| segnext_tiny_goldmdd | completed | SegNeXt | MSCAN-Tiny | ce+dice | NeurIPS2022 | 0.2682 | 0.3884 | 0.6065 | 0.2896 | 4.2285 | 12.6449 | 9.2612 | 0.1673 |
+| geoseg_unetformer_goldmdd_b8_e80_poly_ce_dice | completed | UNetFormer | ResNet-18 | ce+dice+aux_ce | ISPRSJPRS2022 | 0.3941 | 0.5152 | 0.7276 | 0.3388 | 11.7259 | 23.5509 | 5.8413 | 0.0899 |
+| geoseg_unetformer_goldmdd_b8_e80_poly_focal_dice_auxfocal | completed | UNetFormer | ResNet-18 | focal+dice+aux_focal | ISPRSJPRS2022 | 0.3765 | 0.4989 | 0.7182 | 0.3314 | 11.7259 | 23.5509 | 5.8413 | 0.0899 |
+| geoseg_unetformer_goldmdd_b8_e80_poly_weighted_ce_dice_auxce | completed | UNetFormer | ResNet-18 | weighted_ce+dice+aux_ce | ISPRSJPRS2022 | 0.3566 | 0.4931 | 0.6811 | 0.3275 | 11.7259 | 23.5509 | 5.8413 | 0.0899 |
+| afformer_base_goldmdd | completed | Afformer | AFFormer-Base | ce+dice | AAAI2023 | 0.3047 | 0.4362 | 0.6389 | 0.3153 | 2.9690 | 8.5730 | 7.4704 | 0.1691 |
+| efficientvit_b2_baseline1_augv2_ce_dice | completed | EfficientViT-Seg | EfficientViT-B2 | ce+dice | ICCV2023 | 0.3799 | 0.5065 | 0.7258 | 0.3444 | 15.2802 | 18.3156 | 6.4212 | 0.1213 |
+| efficientvit_b2_baseline3_augv2_focal_dice | completed | EfficientViT-Seg | EfficientViT-B2 | focal+dice | ICCV2023 | 0.3693 | 0.5086 | 0.6781 | 0.3790 | 15.2802 | 18.3156 | 6.4212 | 0.1213 |
+| efficientvit_b2_baseline2_augv2_weighted_ce_dice | completed | EfficientViT-Seg | EfficientViT-B2 | weighted_ce+dice | ICCV2023 | 0.3790 | 0.5181 | 0.7154 | 0.3840 | 15.2802 | 18.3156 | 6.4212 | 0.1213 |
+| farsegpp_mitb2_native | completed | FarSeg++ | MiT-B2 | ce (native) | TGRS2023 | 0.3062 | 0.4358 | 0.6669 | 0.3284 | 32.5566 | 95.0793 | 8.3478 | 0.2784 |
+| hq_sam_default_full_e80_b8_ce_dice_msfpn | completed | HQ-SAM | ViT-B + HQ decoder (full finetune, msfpn) | ce+dice | NeurIPS2023 | 0.2485 | 0.3558 | 0.6390 | 0.2226 | 97.8294 | 983.1302 | 189.3055 | 2.7571 |
+| hq_sam_default_full_e80_b8_focal_dice_msfpn | completed | HQ-SAM | ViT-B + HQ decoder (full finetune, msfpn) | focal+dice | NeurIPS2023 | 0.2503 | 0.3561 | 0.6539 | 0.2248 | 97.8294 | 983.1302 | 189.3055 | 2.7571 |
+| hq_sam_default_full_e80_b8_weighted_ce_dice_msfpn | completed | HQ-SAM | ViT-B + HQ decoder (full finetune, msfpn) | weighted_ce+dice | NeurIPS2023 | 0.2538 | 0.3711 | 0.6150 | 0.2237 | 97.8294 | 983.1302 | 189.3055 | 2.7571 |
+| rsseg_logcan_r50_ce_dice | completed | LoGCAN | ResNet-50 | ce+aux_ce (native) | ICASSP2023 | 0.3108 | 0.4081 | 0.7474 | 0.2951 | 30.9157 | 99.2253 | 6.0530 | 0.2298 |
+| rsseg_sacanet_hrnetw32 | completed | SACANet | HRNet-W32 | ce+aux_ce (native) | ICME2023 | 0.3294 | 0.4557 | 0.6573 | 0.3215 | 30.2704 | 115.9042 | 20.6124 | 0.3073 |
+| seaformer_base_goldmdd | completed | SeaFormer | SeaFormer-Base | ce+dice | ICLR2023 | 0.3117 | 0.4408 | 0.6392 | 0.3116 | 8.5838 | 3.4741 | 12.4666 | 0.1700 |
+| cgrseg_b_goldmdd | completed | CGRSeg | EfficientFormerV2-B | ce+dice | ECCV2024 | 0.2679 | 0.3961 | 0.5844 | 0.3054 | 19.0799 | 7.5003 | 15.2859 | 0.2569 |
+| rsseg_docnet_hrnetw32 | completed | DOCNet | HRNet-W32 | ce+aux_ce (native) | GRSL2024 | 0.3147 | 0.4398 | 0.6785 | 0.2772 | 39.1269 | 395.3173 | 22.5021 | 0.4263 |
+| pem_r50_baseline_semseg_default | completed | PEM | ResNet-50 | set_matching_ce+mask+dice | CVPR2024 | 0.2789 | 0.4011 | 0.6502 | 0.2549 | 35.5313 | 60.6003 | 11.5152 | 0.3881 |
+| rs3mamba_baseline1_augv2_ce_dice | completed | RS3Mamba | ResNet-18 + VMamba-Tiny | ce+dice | GRSL2024 | 0.2385 | 0.3080 | 0.7257 | 0.1559 | 43.3254 | 78.5912 | 11.6012 | 0.4624 |
+| rs3mamba_baseline3_augv2_focal_dice | completed | RS3Mamba | ResNet-18 + VMamba-Tiny | focal+dice | GRSL2024 | 0.2399 | 0.3125 | 0.7251 | 0.1910 | 43.3254 | 78.5912 | 11.6012 | 0.4624 |
+| rs3mamba_baseline2_augv2_weighted_ce_dice | completed | RS3Mamba | ResNet-18 + VMamba-Tiny | weighted_ce+dice | GRSL2024 | 0.3068 | 0.4280 | 0.6519 | 0.2313 | 43.3254 | 78.5912 | 11.6012 | 0.4624 |
+| sam_rs_abcnet_baseline1_augv2_seg_bdy_obj_fp32fix | completed | SAM_RS | ABCNet + SAM priors | seg+bdy+obj (native) | TGRS2024 | 0.2964 | 0.4098 | 0.6573 | 0.3104 | 13.9645 | - | 2.6472 | 0.1014 |
+| sam_rs_cmtfnet_baseline1_augv2_seg_bdy_obj | completed | SAM_RS | CMTFNet + SAM priors | seg+bdy+obj (native) | TGRS2024 | 0.2916 | 0.4084 | 0.6598 | 0.2909 | 30.0727 | - | 6.3132 | 0.3345 |
+| sam_rs_ftunetformer_baseline1_augv2_seg_bdy_obj | completed | SAM_RS | FTUNetFormer + SAM priors | seg+bdy+obj (native) | TGRS2024 | 0.2922 | 0.4094 | 0.6871 | 0.2859 | 96.1376 | - | 14.9292 | 0.4374 |
+| sam_rs_unetformer_baseline1_augv2_seg_bdy_obj_rerun_a10080 | completed | SAM_RS | UNetFormer + SAM priors | seg+bdy+obj (native) | TGRS2024 | 0.3241 | 0.4452 | 0.6839 | 0.2971 | 11.6880 | - | 3.2453 | 0.0874 |
+| rsseg_logcanplus_repvitm23 | completed | LoGCAN++ | RepViT-M2.3 | ce+aux_ce (native) | TGRS2025 | 0.2264 | 0.3066 | 0.6353 | 0.2264 | 25.1927 | 74.3696 | 17.1870 | 0.2225 |
+| mcpnet_r50_native_aligned_rerun | completed | MCPNet | ResNet-50 | ce (native) | TGRS2025 | 0.3293 | 0.4489 | 0.7103 | 0.3063 | 45.1516 | 110.9866 | 7.1530 | 0.3528 |
+| mcpnet_r50_baseline1_augv2_ce_dice | completed | MCPNet | ResNet-50 | ce+dice | TGRS2025 | 0.3056 | 0.4267 | 0.6680 | 0.3051 | 45.1516 | 110.9866 | 7.1530 | 0.3528 |
+| mcpnet_r50_baseline3_augv2_focal_dice_fix | completed | MCPNet | ResNet-50 | focal+dice | TGRS2025 | 0.3233 | 0.4448 | 0.6898 | 0.3027 | 45.1516 | 110.9866 | 7.1530 | 0.3528 |
+| mcpnet_r50_baseline2_augv2_weighted_ce_dice_fix | completed | MCPNet | ResNet-50 | weighted_ce+dice | TGRS2025 | 0.3193 | 0.4552 | 0.6405 | 0.3181 | 45.1516 | 110.9866 | 7.1530 | 0.3528 |
+| mfmamba_baseline1_augv2_ce_dice | completed | MF-Mamba | HRNet-W18 | ce+dice | TGRS2025 | 0.3001 | 0.4242 | 0.6376 | 0.3039 | 11.2729 | 38.9439 | 20.5415 | 0.1326 |
+| ppmambaseg_ppmamba_goldmdd_b8_e80_poly_ce_dice | completed | PPMambaSeg | swsl-ResNet-18 | ce+dice | GRSL2025 | 0.3520 | 0.4780 | 0.6683 | 0.3362 | 21.7049 | 45.9905 | 11.2748 | 0.3103 |
+| ppmambaseg_ppmamba_goldmdd_b8_e80_poly_focal_dice | running | PPMambaSeg | swsl-ResNet-18 | focal+dice | GRSL2025 | - | - | - | - | 21.7049 | 45.9905 | 11.2748 | 0.3103 |
+| ppmambaseg_ppmamba_goldmdd_b8_e80_poly_weighted_ce_dice | completed | PPMambaSeg | swsl-ResNet-18 | weighted_ce+dice | GRSL2025 | 0.3854 | 0.5298 | 0.6816 | 0.3466 | 21.7049 | 45.9905 | 11.2748 | 0.3103 |
+| geoseg_pyramidmamba_goldmdd_b8_e80_poly_ce_dice | completed | PyramidMamba | Swin-Base | ce+dice | JAG2025 | 0.3985 | 0.5360 | 0.6833 | 0.3703 | 125.1077 | 217.7548 | 29.2066 | 0.6582 |
+| rsamseg_vit_b_baseline1_augv2_ce_dice | completed | RSAM-Seg | SAM-ViT-B (frozen encoder) | ce+dice | TGRS2025 | 0.3263 | 0.4472 | 0.6978 | 0.2959 | 98.5875 | 247.0546 | 15.1369 | 0.6103 |
+| rsamseg_vit_b_baseline3_augv2_focal_dice | completed | RSAM-Seg | SAM-ViT-B (frozen encoder) | focal+dice | TGRS2025 | 0.3450 | 0.4642 | 0.7430 | 0.2841 | 98.5875 | 247.0546 | 15.1369 | 0.6103 |
+| rsamseg_vit_b_baseline2_augv2_weighted_ce_dice | completed | RSAM-Seg | SAM-ViT-B (frozen encoder) | weighted_ce+dice | TGRS2025 | 0.3696 | 0.5085 | 0.6978 | 0.3333 | 98.5875 | 247.0546 | 15.1369 | 0.6103 |
+| sam2_1_freeze_backbone_e80_b8_ce_dice_msfpn | completed | SAM2.1 | Hiera-B+ (frozen backbone, msfpn) | ce+dice | ICLR2025 | 0.2422 | 0.3510 | 0.6193 | 0.2242 | 83.8976 | 191.8167 | 10.4669 | 0.5898 |
+| sam2_1_freeze_backbone_e80_b8_focal_dice_msfpn | completed | SAM2.1 | Hiera-B+ (frozen backbone, msfpn) | focal+dice | ICLR2025 | 0.2351 | 0.3438 | 0.6158 | 0.2288 | 83.8976 | 191.8167 | 10.4669 | 0.5898 |
+| sam2_1_freeze_backbone_e80_b8_weighted_ce_dice_msfpn | completed | SAM2.1 | Hiera-B+ (frozen backbone, msfpn) | weighted_ce+dice | ICLR2025 | 0.2207 | 0.3235 | 0.5938 | 0.2326 | 83.8976 | 191.8167 | 10.4669 | 0.5898 |
+| sam2_1_default_full_e80_b8_ce_dice_msfpn | completed | SAM2.1 | Hiera-B+ (full finetune, msfpn) | ce+dice | ICLR2025 | 0.2885 | 0.4089 | 0.6562 | 0.2903 | 83.8976 | 191.8167 | 10.4669 | 0.5898 |
+| sam2_1_default_full_e80_b8_focal_dice_msfpn | completed | SAM2.1 | Hiera-B+ (full finetune, msfpn) | focal+dice | ICLR2025 | 0.2980 | 0.4155 | 0.6870 | 0.2906 | 83.8976 | 191.8167 | 10.4669 | 0.5898 |
+| sam2_1_default_full_e80_b8_weighted_ce_dice_msfpn | completed | SAM2.1 | Hiera-B+ (full finetune, msfpn) | weighted_ce+dice | ICLR2025 | 0.2875 | 0.4058 | 0.6769 | 0.2933 | 83.8976 | 191.8167 | 10.4669 | 0.5898 |
+| geoseg_a2fpn_goldmdd_b8_e80_poly_ce_dice/sessrs_official | completed | SESSRS | A2FPN (ce+dice) | t1/t2 search + postprocess | TGRS2025 | 0.3702 | 0.4848 | 0.7338 | 0.3094 | 12.1620 | 27.1366 | 5.3153 | 0.2150 |
+| geoseg_a2fpn_goldmdd_b8_e80_poly_focal_dice/sessrs_official | completed | SESSRS | A2FPN (focal) | t1/t2 search + postprocess | TGRS2025 | 0.3374 | 0.4613 | 0.6663 | 0.3035 | 12.1620 | 27.1366 | 5.9873 | 0.2150 |
+| geoseg_a2fpn_goldmdd_b8_e80_poly_weighted_ce_dice/sessrs_official | completed | SESSRS | A2FPN (weighted) | t1/t2 search + postprocess | TGRS2025 | 0.3745 | 0.5139 | 0.7098 | 0.3214 | 12.1620 | 27.1366 | 5.4877 | 0.2150 |
+| geoseg_abcnet_goldmdd_b8_e80_poly_ce_dice/sessrs_official | completed | SESSRS | ABCNet (ce+dice+aux) | t1/t2 search + postprocess | TGRS2025 | 0.3154 | 0.4311 | 0.6835 | 0.3078 | 13.9645 | 32.3860 | 82.7830 | 0.1004 |
+| geoseg_banet_goldmdd_b8_e80_poly_ce_dice/sessrs_official | completed | SESSRS | BANet (ce+dice) | t1/t2 search + postprocess | TGRS2025 | 0.2937 | 0.4161 | 0.6536 | 0.3006 | 12.8608 | 31.3805 | 12.8519 | 0.1029 |
+| geoseg_manet_goldmdd_b8_e80_poly_ce_dice/sessrs_official | completed | SESSRS | MANet (ce+dice) | t1/t2 search + postprocess | TGRS2025 | 0.3604 | 0.4820 | 0.6775 | 0.3162 | 35.8629 | 109.6158 | 12.4341 | 0.3940 |
+| geoseg_unetformer_goldmdd_b8_e80_poly_ce_dice/sessrs_official | completed | SESSRS | UNetFormer (ce+dice) | t1/t2 search + postprocess | TGRS2025 | 0.3958 | 0.5167 | 0.7279 | 0.3399 | 11.7259 | 23.5509 | 6.9183 | 0.0876 |
+| geoseg_unetformer_goldmdd_b8_e80_poly_focal_dice_auxfocal/sessrs_official | completed | SESSRS | UNetFormer (focal) | t1/t2 search + postprocess | TGRS2025 | 0.3873 | 0.5091 | 0.7195 | 0.3406 | 11.7259 | 23.5509 | 7.1679 | 0.0876 |
+| geoseg_unetformer_goldmdd_b8_e80_poly_weighted_ce_dice_auxce/sessrs_official | completed | SESSRS | UNetFormer (weighted) | t1/t2 search + postprocess | TGRS2025 | 0.3578 | 0.4943 | 0.6816 | 0.3286 | 11.7259 | 23.5509 | 7.3700 | 0.0876 |
 
 Full suite tables and per-class metrics:
 - `results/summary.md`
