@@ -14,8 +14,8 @@ Code-only release for GoldMDD experiments (wrappers, configs, scripts, evaluatio
 - Unified runs target consistent training controls (80 epochs, batch size 8, augmentation preset `goldmdd_v2`) unless explicitly marked as native.
 
 ## Hugging Face links
-- Dataset: https://huggingface.co/datasets/ckn3/GoldMiningMDD
-- Model checkpoints: https://huggingface.co/ckn3/GoldMiningMDD-checkpoints
+- Dataset: https://huggingface.co/datasets/kangnicui2/GoldMiningMDD
+- Model checkpoints: https://huggingface.co/kangnicui2/GoldMiningMDD-checkpoints
 
 ## Patch generation (512x512)
 - Script: `misc/build_cropped_dataset.py`
