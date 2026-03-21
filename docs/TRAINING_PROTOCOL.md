@@ -15,4 +15,4 @@
   - suite sync/aggregation is handled by `misc/sync_experiment_tables.py`
 - Efficiency metrics (Params/GFLOPs/Latency/Peak VRAM):
   - generated with `misc/benchmark_semseg_model.py`
-  - current latency suite is standardized on L40S runs via `slurm/run_goldmdd_latency_l40s.sh`.
+  - current latency suite is standardized on L40S runs via `misc/benchmark_semseg_model.py` and summary sync scripts.
