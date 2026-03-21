@@ -1,0 +1,42 @@
+diff --git a/efficientvit/models/efficientvit/__init__.py b/efficientvit/models/efficientvit/__init__.py
+index 5a53088..92f3a00 100644
+--- a/efficientvit/models/efficientvit/__init__.py
++++ b/efficientvit/models/efficientvit/__init__.py
+@@ -1,5 +1,14 @@
+ from .backbone import *
+ from .cls import *
+-from .dc_ae import *
+-from .sam import *
+ from .seg import *
++
++# Optional modules pull in extra dependencies (segment-anything, omegaconf, etc.)
++# that are not required for EfficientViT semantic segmentation training.
++try:  # pragma: no cover
++    from .dc_ae import *
++except Exception:
++    pass
++try:  # pragma: no cover
++    from .sam import *
++except Exception:
++    pass
+diff --git a/efficientvit/models/nn/__init__.py b/efficientvit/models/nn/__init__.py
+index 3328d2e..71a5cc2 100644
+--- a/efficientvit/models/nn/__init__.py
++++ b/efficientvit/models/nn/__init__.py
+@@ -1,5 +1,14 @@
+ from .act import *
+-from .drop import *
+ from .norm import *
+ from .ops import *
+-from .triton_rms_norm import *
++
++# Optional for segmentation inference/training here; keeping imports lazy avoids
++# pulling trainer/export dependencies (onnx stack) during model construction.
++try:  # pragma: no cover
++    from .drop import *
++except Exception:
++    pass
++try:  # pragma: no cover
++    from .triton_rms_norm import *
++except Exception:
++    pass

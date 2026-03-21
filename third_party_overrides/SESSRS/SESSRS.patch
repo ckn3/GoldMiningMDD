@@ -1,0 +1,61 @@
+diff --git a/GeoSeg/train_supervision.py b/GeoSeg/train_supervision.py
+index 6eda7fa..009eeb1 100644
+--- a/GeoSeg/train_supervision.py
++++ b/GeoSeg/train_supervision.py
+@@ -167,28 +167,42 @@ def main():
+     config = py2cfg(args.config_path)
+     seed_everything(42)
+ 
+-    checkpoint_callback = ModelCheckpoint(save_top_k=config.save_top_k, monitor=config.monitor,
+-                                          save_last=config.save_last, mode=config.monitor_mode,
+-                                          dirpath=config.weights_path,
+-                                          filename=config.weights_name)
+-    
+-    early_stop_callback = EarlyStopping(
++    checkpoint_callback = ModelCheckpoint(
++        save_top_k=config.save_top_k,
+         monitor=config.monitor,
+-        min_delta=0.00,
+-        patience=20,
+-        verbose=True,
+-        mode='max'
++        save_last=config.save_last,
++        mode=config.monitor_mode,
++        dirpath=config.weights_path,
++        filename=config.weights_name,
+     )
++
++    use_early_stopping = getattr(config, "use_early_stopping", False)
++    early_stop_patience = getattr(config, "early_stop_patience", 20)
++    callbacks = [checkpoint_callback]
++    if use_early_stopping:
++        early_stop_callback = EarlyStopping(
++            monitor=config.monitor,
++            min_delta=0.00,
++            patience=early_stop_patience,
++            verbose=True,
++            mode='max',
++        )
++        callbacks.append(early_stop_callback)
+     logger = CSVLogger('lightning_logs', name=config.log_name)
+ 
+     model = Supervision_Train(config)
+     if config.pretrained_ckpt_path:
+         model = Supervision_Train.load_from_checkpoint(config.pretrained_ckpt_path, config=config)
+ 
+-    trainer = pl.Trainer(devices=config.gpus, max_epochs=config.max_epoch, accelerator='auto',
+-                         check_val_every_n_epoch=config.check_val_every_n_epoch,
+-                         callbacks=[checkpoint_callback,early_stop_callback], strategy=args.strategy,
+-                         logger=logger)
++    trainer = pl.Trainer(
++        devices=config.gpus,
++        max_epochs=config.max_epoch,
++        accelerator='auto',
++        check_val_every_n_epoch=config.check_val_every_n_epoch,
++        callbacks=callbacks,
++        strategy=args.strategy,
++        logger=logger,
++    )
+     trainer.fit(model=model, ckpt_path=config.resume_ckpt_path)
+ 
+ if __name__ == "__main__":

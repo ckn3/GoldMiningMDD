@@ -1,0 +1,7 @@
+name: bench_base
+channels:
+  - defaults
+dependencies:
+  - pip
+  - python=3.11
+prefix: /deac/csc/alqahtaniGrp/cuij/miniconda3/envs/bench_base

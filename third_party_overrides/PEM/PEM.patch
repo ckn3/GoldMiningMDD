@@ -1,0 +1,84 @@
+diff --git a/pem/config.py b/pem/config.py
+index a9eb266..77b9015 100644
+--- a/pem/config.py
++++ b/pem/config.py
+@@ -13,6 +13,8 @@ def add_maskformer2_config(cfg):
+     cfg.INPUT.DATASET_MAPPER_NAME = "mask_former_semantic"
+     # Color augmentation
+     cfg.INPUT.COLOR_AUG_SSD = False
++    cfg.INPUT.RANDOM_FLIP_VERTICAL = False
++    cfg.INPUT.RANDOM_ROTATE_90 = False
+     # We retry random cropping until no single category in semantic segmentation GT occupies more
+     # than `SINGLE_CATEGORY_MAX_AREA` part of the crop.
+     cfg.INPUT.CROP.SINGLE_CATEGORY_MAX_AREA = 1.0
+diff --git a/pem/data/dataset_mappers/mask_former_semantic_dataset_mapper.py b/pem/data/dataset_mappers/mask_former_semantic_dataset_mapper.py
+index 36ff315..ea60d36 100644
+--- a/pem/data/dataset_mappers/mask_former_semantic_dataset_mapper.py
++++ b/pem/data/dataset_mappers/mask_former_semantic_dataset_mapper.py
+@@ -79,7 +79,17 @@ class MaskFormerSemanticDatasetMapper:
+             )
+         if cfg.INPUT.COLOR_AUG_SSD:
+             augs.append(ColorAugSSDTransform(img_format=cfg.INPUT.FORMAT))
+-        augs.append(T.RandomFlip())
++        if cfg.INPUT.RANDOM_FLIP != "none":
++            augs.append(
++                T.RandomFlip(
++                    horizontal=cfg.INPUT.RANDOM_FLIP == "horizontal",
++                    vertical=cfg.INPUT.RANDOM_FLIP == "vertical",
++                )
++            )
++        if getattr(cfg.INPUT, "RANDOM_FLIP_VERTICAL", False):
++            augs.append(T.RandomFlip(horizontal=False, vertical=True))
++        if getattr(cfg.INPUT, "RANDOM_ROTATE_90", False):
++            augs.append(T.RandomRotation(angle=[0, 90, 180, 270], sample_style="choice", expand=False))
+ 
+         # Assume always applies to the training set.
+         dataset_names = cfg.DATASETS.TRAIN
+diff --git a/pem/data/datasets/__init__.py b/pem/data/datasets/__init__.py
+index 403a678..34d73f9 100644
+--- a/pem/data/datasets/__init__.py
++++ b/pem/data/datasets/__init__.py
+@@ -7,4 +7,5 @@ from . import (
+     register_coco_panoptic_annos_semseg,
+     register_ade20k_instance,
+     register_mapillary_vistas_panoptic,
++    register_goldmdd_sem_seg,
+ )
+diff --git a/train_net.py b/train_net.py
+index 30dad3a..31fcd4a 100644
+--- a/train_net.py
++++ b/train_net.py
+@@ -32,6 +32,7 @@ from detectron2.engine import (
+     DefaultTrainer,
+     default_argument_parser,
+     default_setup,
++    hooks,
+     launch,
+ )
+ from detectron2.evaluation import (
+@@ -256,6 +257,25 @@ class Trainer(DefaultTrainer):
+             optimizer = maybe_add_gradient_clipping(cfg, optimizer)
+         return optimizer
+ 
++    def build_hooks(self):
++        hook_list = super().build_hooks()
++        if self.cfg.TEST.EVAL_PERIOD <= 0:
++            return hook_list
++        for idx, hook in enumerate(hook_list):
++            if isinstance(hook, hooks.EvalHook):
++                hook_list.insert(
++                    idx + 1,
++                    hooks.BestCheckpointer(
++                        self.cfg.TEST.EVAL_PERIOD,
++                        self.checkpointer,
++                        "sem_seg/mIoU",
++                        mode="max",
++                        file_prefix="model_best_mIoU",
++                    ),
++                )
++                break
++        return hook_list
++
+     @classmethod
+     def test_with_TTA(cls, cfg, model):
+         logger = logging.getLogger("detectron2.trainer")

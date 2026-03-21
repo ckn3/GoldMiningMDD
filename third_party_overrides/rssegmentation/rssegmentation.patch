@@ -1,0 +1,282 @@
+diff --git a/rsseg/datasets/build_dataset.py b/rsseg/datasets/build_dataset.py
+index 0c862fe..6bcb7ce 100644
+--- a/rsseg/datasets/build_dataset.py
++++ b/rsseg/datasets/build_dataset.py
+@@ -6,6 +6,7 @@ from rsseg.datasets.vaihingen_dataset import *
+ from rsseg.datasets.potsdam_dataset import *
+ from rsseg.datasets.base_dataset import *
+ from rsseg.datasets.loveda_dataset import *
++from rsseg.datasets.goldmdd_dataset import *
+ 
+ def get_loader(dataset, cfg):
+     loader = DataLoader(
+diff --git a/rsseg/datasets/transform.py b/rsseg/datasets/transform.py
+index 5b0dff3..50d873a 100644
+--- a/rsseg/datasets/transform.py
++++ b/rsseg/datasets/transform.py
+@@ -26,6 +26,7 @@ SOFTWARE.
+ import random
+ import math
+ import numbers
++from PIL import ImageEnhance
+ 
+ import numpy as np
+ import torchvision.transforms as torch_tr
+@@ -39,13 +40,51 @@ class RandomGaussianBlur(object):
+     """
+     Apply Gaussian Blur
+     """
++    def __init__(self, p=1.0):
++        self.p = p
++
+     def __call__(self, img, mask):
++        if random.random() >= self.p:
++            return img, mask
+         sigma = 0.15 + random.random() * 1.15
+         blurred_img = gaussian(np.array(img), sigma=sigma, channel_axis=-1)
+         blurred_img *= 255
+         return Image.fromarray(blurred_img.astype(np.uint8)),mask
+ 
+ 
++class RandomColorJitter(object):
++    def __init__(self, brightness=0.2, contrast=0.2, saturation=0.15, p=0.8):
++        self.brightness = brightness
++        self.contrast = contrast
++        self.saturation = saturation
++        self.p = p
++
++    def __call__(self, img, mask):
++        if random.random() >= self.p:
++            return img, mask
++        if self.brightness > 0:
++            img = ImageEnhance.Brightness(img).enhance(1.0 + random.uniform(-self.brightness, self.brightness))
++        if self.contrast > 0:
++            img = ImageEnhance.Contrast(img).enhance(1.0 + random.uniform(-self.contrast, self.contrast))
++        if self.saturation > 0:
++            img = ImageEnhance.Color(img).enhance(1.0 + random.uniform(-self.saturation, self.saturation))
++        return img, mask
++
++
++class RandomRotate90(object):
++    def __init__(self, p=1.0):
++        self.p = p
++
++    def __call__(self, img, mask):
++        if random.random() >= self.p:
++            return img, mask
++        k = random.randint(0, 3)
++        if k == 0:
++            return img, mask
++        angle = 90 * k
++        return img.rotate(angle, Image.BILINEAR), mask.rotate(angle, Image.NEAREST)
++
++
+ 
+ class RandomScale(object):
+     def __init__(self, scale_list=[0.75, 1.0, 1.25], mode='value'):
+@@ -565,5 +604,3 @@ class ColorJitter(object):
+         transform = self.get_params(self.brightness, self.contrast,
+                                     self.saturation, self.hue)
+         return transform(img)
+-
+-
+diff --git a/rsseg/losses/build_loss.py b/rsseg/losses/build_loss.py
+index 00c28d1..5f7db0a 100644
+--- a/rsseg/losses/build_loss.py
++++ b/rsseg/losses/build_loss.py
+@@ -1,6 +1,6 @@
+ import torch
+ import torch.nn as nn
+-from rsseg.losses.ce_loss import CELoss
++from rsseg.losses.ce_loss import CELoss, CEPlusDiceLoss
+ class myLoss(nn.Module):
+     def __init__(self, loss_name=['CELoss'], loss_weight=[1.0], ignore_index=255, reduction='mean', **kwargs):
+         super(myLoss, self).__init__()
+@@ -28,4 +28,4 @@ def build_loss(cfg):
+     loss_type = cfg.pop('type')
+     obj_cls = eval(loss_type)
+     obj = obj_cls(**cfg)
+-    return obj
+\ No newline at end of file
++    return obj
+diff --git a/rsseg/losses/ce_loss.py b/rsseg/losses/ce_loss.py
+index cb00583..4d4e746 100644
+--- a/rsseg/losses/ce_loss.py
++++ b/rsseg/losses/ce_loss.py
+@@ -1,5 +1,6 @@
+ import torch
+ import torch.nn as nn
++import torch.nn.functional as F
+ 
+ class CELoss(nn.Module):
+     def __init__(self, ignore_index=255, reduction='mean'):
+@@ -13,3 +14,47 @@ class CELoss(nn.Module):
+     def forward(self, pred, target):
+         loss = self.criterion(pred, target) 
+         return loss
++
++
++class CEPlusDiceLoss(nn.Module):
++    """CE + multiclass Dice over non-ignored pixels."""
++
++    def __init__(
++        self,
++        ignore_index=255,
++        reduction='mean',
++        ce_weight=1.0,
++        dice_weight=1.0,
++        eps=1e-6,
++    ):
++        super(CEPlusDiceLoss, self).__init__()
++        self.ignore_index = ignore_index
++        self.ce_weight = float(ce_weight)
++        self.dice_weight = float(dice_weight)
++        self.eps = float(eps)
++        self.ce = nn.CrossEntropyLoss(ignore_index=ignore_index, reduction=reduction)
++
++    def _dice(self, pred, target):
++        num_classes = pred.shape[1]
++        probs = F.softmax(pred, dim=1)
++        valid = target != self.ignore_index
++        if valid.sum() == 0:
++            return pred.new_tensor(0.0)
++
++        target_safe = target.clone()
++        target_safe[~valid] = 0
++        onehot = F.one_hot(target_safe, num_classes=num_classes).permute(0, 3, 1, 2).float()
++
++        valid_f = valid.unsqueeze(1).float()
++        probs = probs * valid_f
++        onehot = onehot * valid_f
++
++        inter = (probs * onehot).sum(dim=(0, 2, 3))
++        denom = probs.sum(dim=(0, 2, 3)) + onehot.sum(dim=(0, 2, 3))
++        dice = (2.0 * inter + self.eps) / (denom + self.eps)
++        return 1.0 - dice.mean()
++
++    def forward(self, pred, target):
++        ce = self.ce(pred, target)
++        dice = self._dice(pred, target)
++        return self.ce_weight * ce + self.dice_weight * dice
+diff --git a/rsseg/models/backbones/repvit.py b/rsseg/models/backbones/repvit.py
+index 47d29df..a4e0674 100644
+--- a/rsseg/models/backbones/repvit.py
++++ b/rsseg/models/backbones/repvit.py
+@@ -215,17 +215,19 @@ class RepViT(nn.Module):
+         self.features = nn.ModuleList(layers)
+         
+         self.init_cfg = init_cfg
+-        assert(self.init_cfg is not None)
+         self.out_indices = out_indices
+-        self.init_weights()
++        if self.init_cfg is not None or (pretrained not in (None, False)):
++            self.init_weights(pretrained)
+         self = torch.nn.SyncBatchNorm.convert_sync_batchnorm(self)
+         self.train()
+ 
+     def init_weights(self, pretrained=None):
+         if self.init_cfg is not None:
+             ckpt_path = self.init_cfg['checkpoint']
+-        elif pretrained is not None:
++        elif pretrained not in (None, False):
+             ckpt_path = pretrained
++        else:
++            return
+ 
+         ckpt = torch.load(
+             ckpt_path, map_location='cpu')
+diff --git a/rsseg/models/segheads/__init__.py b/rsseg/models/segheads/__init__.py
+index 3688706..8ad910e 100644
+--- a/rsseg/models/segheads/__init__.py
++++ b/rsseg/models/segheads/__init__.py
+@@ -1,3 +1,4 @@
+-from rsseg.models.segheads.logcan_head import LoGCAN_Head
+-from rsseg.models.segheads.doc_head import DOC_Head
+-from rsseg.models.segheads.logcanplus_head import LoGCANPlus_Head
+\ No newline at end of file
++from rsseg.models.segheads.logcan_head import LoGCAN_Head
++from rsseg.models.segheads.doc_head import DOC_Head
++from rsseg.models.segheads.logcanplus_head import LoGCANPlus_Head
++from rsseg.models.segheads.sacanet_head import Sacanet
+diff --git a/rsseg/optimizers/build_optimizer.py b/rsseg/optimizers/build_optimizer.py
+index 9de77e5..41868cd 100644
+--- a/rsseg/optimizers/build_optimizer.py
++++ b/rsseg/optimizers/build_optimizer.py
+@@ -1,7 +1,5 @@
+ import torch
+ import torch.optim as optim
+-from catalyst.contrib.nn import Lookahead
+-from catalyst import utils
+ import math
+ 
+ class lambdax:
+@@ -14,19 +12,28 @@ class lambdax:
+ 
+ def get_optimizer(cfg, net):
+     if cfg.lr_mode == 'multi':
+-        layerwise_params = {"backbone.*": dict(lr=cfg.backbone_lr, weight_decay=cfg.backbone_weight_decay)}
+-        net_params = utils.process_model_params(net, layerwise_params=layerwise_params)
++        backbone_params = []
++        other_params = []
++        for name, p in net.named_parameters():
++            if not p.requires_grad:
++                continue
++            if name.startswith("backbone."):
++                backbone_params.append(p)
++            else:
++                other_params.append(p)
++        net_params = [
++            {"params": backbone_params, "lr": cfg.backbone_lr, "weight_decay": cfg.backbone_weight_decay},
++            {"params": other_params, "lr": cfg.lr, "weight_decay": cfg.weight_decay},
++        ]
+     else:
+         net_params = net.parameters()
+ 
+     if cfg.type == "AdamW":
+         optimizer = optim.AdamW(net_params, lr=cfg.lr, weight_decay=cfg.weight_decay)
+-        # optimizer = Lookahead(optimizer)
+ 
+     elif cfg.type == "SGD":
+         optimizer = optim.SGD(net_params, lr=cfg.lr, weight_decay=cfg.weight_decay, momentum=cfg.momentum,
+                               nesterov=False)
+-        optimizer = Lookahead(optimizer)
+     else:
+         raise KeyError("The optimizer type ( %s ) doesn't exist!!!" % cfg.type)
+ 
+@@ -61,4 +68,4 @@ def build_optimizer(cfg, net):
+     
+ 
+     
+-    
+\ No newline at end of file
++    
+diff --git a/train.py b/train.py
+index d849c68..7761cbd 100644
+--- a/train.py
++++ b/train.py
+@@ -30,8 +30,6 @@ class myTrain(LightningModule):
+         self.cfg = cfg
+         self.net = build_model(cfg.model_config)
+         self.loss = build_loss(cfg.loss_config)
+-
+-        self.loss.to("cuda")
+         self.eval_label_id_left = cfg.eval_label_id_left
+         self.eval_label_id_right = cfg.eval_label_id_right
+         
+@@ -185,7 +183,8 @@ if __name__ == "__main__":
+                               filename = '{epoch:d}',
+                               monitor = cfg.monitor,
+                               mode = 'max',
+-                              save_top_k = cfg.save_top_k)
++                              save_top_k = cfg.save_top_k,
++                              save_last = cfg.save_last)
+     
+     pbar = TQDMProgressBar(refresh_rate=1)
+ 
+@@ -206,4 +205,4 @@ if __name__ == "__main__":
+                       num_sanity_val_steps = 2,
+                       benchmark = True)
+     
+-    trainer.fit(model, ckpt_path=cfg.resume_ckpt_path)
+\ No newline at end of file
++    trainer.fit(model, ckpt_path=cfg.resume_ckpt_path)

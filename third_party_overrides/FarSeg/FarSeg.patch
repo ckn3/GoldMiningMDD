@@ -1,0 +1,15 @@
+diff --git a/module/farsegpp.py b/module/farsegpp.py
+index 00a26f4..900ee36 100644
+--- a/module/farsegpp.py
++++ b/module/farsegpp.py
+@@ -218,7 +218,9 @@ class FarSegPP(er.ERModule, MultiSegmentation):
+             from module.mit import MiTEncoder
+             self.en = MiTEncoder(self.config.backbone)
+ 
+-        del self.de
++        # Compatibility with newer ever versions where ERModule may not define `de`.
++        if hasattr(self, "de"):
++            del self.de
+         self.ppm = PyramidPoolModule(**self.config.ppm)
+         self.fsr = FSRelation(**self.config.fs_relation)
+ 

@@ -1,0 +1,8 @@
+name: bench_geoseg_mamba
+channels:
+  - defaults
+dependencies:
+  - python=3.10
+  - mamba-ssm
+  - causal-conv1d
+prefix: /deac/csc/alqahtaniGrp/cuij/miniconda3/envs/bench_geoseg_mamba

@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+
+# Env
+.env
+.venv/
+
+# Artifacts
+*.pth
+*.pt
+*.ckpt
+*.log
+
+# Large data/checkpoints not tracked in this code repo
+data/
+checkpoints/
+outputs/

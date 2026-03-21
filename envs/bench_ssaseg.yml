@@ -1,0 +1,6 @@
+name: bench_ssaseg
+channels:
+  - defaults
+dependencies:
+  - python=3.8
+prefix: /deac/csc/alqahtaniGrp/cuij/miniconda3/envs/bench_ssaseg

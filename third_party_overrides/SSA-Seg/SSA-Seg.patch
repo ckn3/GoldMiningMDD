@@ -1,0 +1,17 @@
+diff --git a/models/backbones/seaformer.py b/models/backbones/seaformer.py
+index 53352c5..88d9921 100644
+--- a/models/backbones/seaformer.py
++++ b/models/backbones/seaformer.py
+@@ -394,6 +394,7 @@ class SeaFormer(nn.Module):
+         self.cfgs = cfgs
+         self.norm_cfg = norm_cfg
+         self.init_cfg = init_cfg
++        self.pretrained = None
+         if self.init_cfg is not None:
+             self.pretrained = self.init_cfg['checkpoint']
+ 
+@@ -505,4 +506,3 @@ if __name__ == '__main__':
+     model.eval()
+     flops = FlopCountAnalysis(model, input)
+     print(flop_count_table(flops))
+-

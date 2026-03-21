@@ -1,0 +1,4 @@
+relative_path,size_bytes
+sam2_1_default_full_e80_b8_ce_dice_msfpn/best.pth,908789098
+sam2_1_default_full_e80_b8_weighted_ce_dice_msfpn/best.pth,908789162
+sam2_1_default_full_e80_b8_focal_dice_msfpn/best.pth,908789098

@@ -1,0 +1,6 @@
+name: bench_sam_family
+channels:
+  - defaults
+dependencies:
+  - python=3.10
+prefix: /deac/csc/alqahtaniGrp/cuij/miniconda3/envs/bench_sam_family

@@ -1,0 +1,13 @@
+diff --git a/GeoSeg/train_supervision.py b/GeoSeg/train_supervision.py
+index 6c4094b..7920f66 100644
+--- a/GeoSeg/train_supervision.py
++++ b/GeoSeg/train_supervision.py
+@@ -174,7 +174,7 @@ def main():
+                                           save_last=config.save_last, mode=config.monitor_mode,
+                                           dirpath=config.weights_path,
+                                           filename=config.weights_name)
+-    logger = CSVLogger('autodl-tmp/lightning_logs', name=config.log_name)
++    logger = CSVLogger('lightning_logs', name=config.log_name)
+ 
+     model = Supervision_Train(config)
+     if config.pretrained_ckpt_path:
