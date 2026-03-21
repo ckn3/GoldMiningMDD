@@ -13,6 +13,31 @@ Code-only release for GoldMDD experiments (wrappers, configs, scripts, evaluatio
 - See `docs/TRAINING_PROTOCOL.md`.
 - Unified runs target consistent training controls (80 epochs, batch size 8, augmentation preset `goldmdd_v2`) unless explicitly marked as native.
 
+## Hugging Face links
+- Dataset: https://huggingface.co/datasets/ckn3/GoldMiningMDD
+- Model checkpoints: https://huggingface.co/ckn3/GoldMiningMDD-checkpoints
+
+## Patch generation (512x512)
+- Script: `misc/build_cropped_dataset.py`
+- Window size: `512x512`
+- Stride: `256`
+- Filter: drop patches with background ratio `>80%` (`label == 0`)
+- Output naming: `<site>_<row>_<col>` with aligned image/label filenames
+
+Example:
+```bash
+python misc/build_cropped_dataset.py --workers 4
+```
+
+### Patch count after preprocessing
+
+| Split | # Sites | Candidate windows | Kept patches | Dropped (>80% bg) | Kept ratio |
+|---|---:|---:|---:|---:|---:|
+| train | 4 | 91,869 | 65,798 | 26,071 | 0.716 |
+| val | 3 | 18,603 | 15,988 | 2,615 | 0.859 |
+| test | 5 | 40,172 | 40,095 | 77 | 0.998 |
+| Total | 12 | 150,644 | 121,881 | 28,763 | 0.809 |
+
 ## Complete method list
 - Total models: **33**
 
