@@ -14,11 +14,11 @@ Code-only release for GoldMDD experiments (wrappers, configs, scripts, evaluatio
 - Unified runs target consistent training controls (80 epochs, batch size 8, augmentation preset `goldmdd_v2`) unless explicitly marked as native.
 
 ## Hugging Face links
-- Dataset: https://huggingface.co/datasets/kangnicui2/GoldMiningMDD
+- Dataset (EnIGMA): https://huggingface.co/datasets/kangnicui2/EnIGMA
 - Model checkpoints: https://huggingface.co/kangnicui2/GoldMiningMDD-checkpoints
 
 ## Dataset overview and key figures
-GoldMiningMDD is organized by train/validation/test splits with aligned RGB image patches and semantic labels under a unified 14-class taxonomy (background is ignored during loss).
+EnIGMA is organized by train/validation/test splits with aligned RGB image patches and semantic labels under a unified 14-class taxonomy (background is ignored during loss).
 
 The three figures below summarize geographic coverage and class distribution before model training:
 
