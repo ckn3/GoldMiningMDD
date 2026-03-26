@@ -1,6 +1,6 @@
-# GoldMDD Multi-Model Benchmark Code
+# ELDOR Multi-Model Benchmark Code
 
-Code-only release for GoldMDD experiments (wrappers, configs, scripts, evaluation, and experiment summaries).
+Code-only release for ELDOR experiments (wrappers, configs, scripts, evaluation, and experiment summaries).
 
 ## What is included
 - `misc/`: training/eval/analysis scripts used in this benchmark.
@@ -11,14 +11,14 @@ Code-only release for GoldMDD experiments (wrappers, configs, scripts, evaluatio
 
 ## Unified protocol
 - See `docs/TRAINING_PROTOCOL.md`.
-- Unified runs target consistent training controls (80 epochs, batch size 8, augmentation preset `goldmdd_v2`) unless explicitly marked as native.
+- Unified runs target consistent training controls for ELDOR (80 epochs, batch size 8, augmentation preset `goldmdd_v2`) unless explicitly marked as native.
 
 ## Hugging Face links
-- Dataset (EnIGMA): https://huggingface.co/datasets/kangnicui2/EnIGMA
-- Model checkpoints: https://huggingface.co/kangnicui2/GoldMiningMDD-checkpoints
+- Dataset (ELDOR): https://huggingface.co/datasets/IRSC/ELDOR
+- Model checkpoints: https://huggingface.co/IRSC/ELDOR-checkpoints
 
 ## Dataset overview and key figures
-EnIGMA is organized by train/validation/test splits with aligned RGB image patches and semantic labels under a unified 14-class taxonomy (background is ignored during loss).
+ELDOR is organized by train/validation/test splits with aligned RGB image patches and semantic labels under a unified 14-class taxonomy (background is ignored during loss).
 
 The three figures below summarize geographic coverage and class distribution before model training:
 

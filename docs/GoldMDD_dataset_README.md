@@ -1,10 +1,11 @@
-# GoldMDD Data
+# ELDOR Data
 
-- Output dataset root: `GoldMDD/data`
+- Public dataset name: `ELDOR`
+- Local dataset root: `GoldMDD/data`
 - Output folders: `train/image`, `train/label`, `val/image`, `val/label`, `test/image`, `test/label` (copied from `GoldMining/Data/Orthomosaic` and `GoldMining/Data/Label`).
 - Source folders: `Drone_Orthomosaic_V1/Orthomosaic_org` and `Drone_Orthomosaic_V1/Just_labels`
 - Matching rule: label to orthomosaic by filename mapping, then crop/reproject label to orthomosaic grid.
-- Canonical labels: 14 semantic classes (`1..14`) plus `0=Background` after class merging in GoldMDD.
+- Canonical labels: 14 semantic classes (`1..14`) plus `0=Background` after class merging in ELDOR.
 - Split rule in this dataset: train = sites 1/5/7/10 (with `PlayaMirador1` = bottom half); val = sites 3/8 plus `PlayaMirador2` (top half); test = remaining sites.
 
 ## Spatial metadata table (source files + aligned output)
@@ -26,7 +27,7 @@
 
 - Note: `PlayaMirador` is additionally split in GoldMDD into `PlayaMirador1` (bottom half, train) and `PlayaMirador2` (top half, val). The two rows above use the same source files and split the label latitude range at the midpoint.
 
-## Unified class mapping (GoldMDD merged classes)
+## Unified class mapping (ELDOR merged classes)
 
 | Canonical ID | Class | Merged from original IDs | Color swatch | Color (HEX) | Area (ha) | Percentage (%) | Pixel count | Alias names seen in metadata |
 | --- | --- | --- | --- | --- | ---: | ---: | ---: | --- |
@@ -45,7 +46,7 @@
 | 13 | Sluice | 16 | <span style="display:inline-block;width:14px;height:14px;background:#613991;border:1px solid #222;"></span> | `#613991` | 0.0403 | 0.00 | 126,368 | Tolva; Tolvas; Hopper |
 | 14 | Vehicles | 17,18 | <span style="display:inline-block;width:14px;height:14px;background:#969AAE;border:1px solid #222;"></span> | `#969AAE` | 0.0092 | 0.00 | 85,244 | Vehiculos; Vehiculos pequenos; Vehiculos pequeños; Small Vehicles |
 
-## Per-site classes using GoldMDD merged mapping
+## Per-site classes using ELDOR merged mapping
 
 | Site | Split | Output ortho PNG | Output label PNG | Output size (W x H px) | Output total pixels | Merged class IDs present | Merged class names present |
 | --- | --- | --- | --- | --- | ---: | --- | --- |
@@ -65,7 +66,7 @@
 ## Generation workflow
 
 - Source orthomosaic/label alignment and original canonical labels come from `GoldMining/Data`.
-- GoldMDD labels are remapped from the original 19-class canonical IDs into a 14-class merged scheme (stored only under `GoldMDD/data/*/label`).
+- ELDOR labels are remapped from the original 19-class canonical IDs into a 14-class merged scheme (stored only under `GoldMDD/data/*/label`).
 - Merge rules:
   - `Heavy machinery` = original IDs 5 (Front loader), 8 (Excavator), 9 (Heavy machinery), 19 (Dump truck)
   - `Vehicles` = original IDs 17 (Vehicles), 18 (Small vehicles)

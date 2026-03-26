@@ -1,6 +1,6 @@
 # Method Sources and Local Integration
 
-This repository does not vendor full third-party projects. It keeps wrappers, configs, and patches required to reproduce GoldMDD experiments.
+This repository does not vendor full third-party projects. It keeps wrappers, configs, and patches required to reproduce ELDOR experiments.
 
 | Model | Status | Venue | Local path | Official GitHub repo |
 |---|---|---|---|---|
