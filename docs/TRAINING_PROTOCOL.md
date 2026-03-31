@@ -1,6 +1,6 @@
 # Unified Training/Evaluation Protocol
 
-- Dataset root for training: `GoldMDD/data-cropped` (train/val/test patch split for ELDOR).
+- Dataset root for training: ELDOR patch dataset at `GoldMDD/data-cropped` (train/val/test split).
 - Patch size and split prep: `512x512`, stride `256`, invalid/background-heavy patches filtered at dataset build time.
 - Label space: 14 foreground classes; background pixels are excluded from supervised loss and mIoU-present computations.
 - Default unified setup (unless explicitly marked as native):

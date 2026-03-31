@@ -19,7 +19,7 @@ def iter_manifest(manifest: Path):
 
 def main():
     ap = argparse.ArgumentParser(description="Upload best checkpoints listed in CSV manifest to a private HF model repo")
-    ap.add_argument("--repo-id", default="kangnicui2/GoldMiningMDD-checkpoints")
+    ap.add_argument("--repo-id", default="IRSC/ELDOR-checkpoints")
     ap.add_argument("--repo-type", default="model")
     ap.add_argument("--root", default="/deac/csc/yangGrp/cuij/GoldMDD/experiments")
     ap.add_argument(

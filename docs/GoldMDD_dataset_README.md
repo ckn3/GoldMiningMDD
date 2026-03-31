@@ -6,7 +6,7 @@
 - Source folders: `Drone_Orthomosaic_V1/Orthomosaic_org` and `Drone_Orthomosaic_V1/Just_labels`
 - Matching rule: label to orthomosaic by filename mapping, then crop/reproject label to orthomosaic grid.
 - Canonical labels: 14 semantic classes (`1..14`) plus `0=Background` after class merging in ELDOR.
-- Split rule in this dataset: train = sites 1/5/7/10 (with `PlayaMirador1` = bottom half); val = sites 3/8 plus `PlayaMirador2` (top half); test = remaining sites.
+- Split rule in this dataset: train/val/test assignment is listed in the `Split` column of the spatial metadata table.
 
 ## Spatial metadata table (source files + aligned output)
 
@@ -24,8 +24,6 @@
 | PlayaMirador1 | `PlayaMirador_corrected.tif` | `PlayaMirador_classified_corrected.tif` | EPSG:32719 | 22911x22394 | 17608x17608 | 0.056792, 0.056792 | 0.056840, 0.057298 | [-70.377536, -70.365474] | [-13.063390, -13.051829] | [-70.376072, -70.366793] | [-13.062030, -13.057446] | 17624x8883 | 50.1027 | 2022-03-10 | train |
 | PlayaMirador2 | `PlayaMirador_corrected.tif` | `PlayaMirador_classified_corrected.tif` | EPSG:32719 | 22911x22394 | 17608x17608 | 0.056792, 0.056792 | 0.056840, 0.057298 | [-70.377536, -70.365474] | [-13.063390, -13.051829] | [-70.376072, -70.366793] | [-13.057446, -13.052861] | 17624x8883 | 50.1021 | 2022-03-10 | val |
 | SantaInesDosMil | `SantaInesDosMil_corrected.tif` | `SantaInesDosMil_classified_corrected.tif` | EPSG:32719 | 22883x24295 | 17185x17184 | 0.058193, 0.058193 | 0.058873, 0.058471 | [-70.386657, -70.374307] | [-13.063436, -13.050589] | [-70.385274, -70.375895] | [-13.061789, -13.052656] | 17387x17267 | 100.9625 | 2022-03-10 | test |
-
-- Note: `PlayaMirador` is additionally split in GoldMDD into `PlayaMirador1` (bottom half, train) and `PlayaMirador2` (top half, val). The two rows above use the same source files and split the label latitude range at the midpoint.
 
 ## Unified class mapping (ELDOR merged classes)
 
@@ -45,6 +43,26 @@
 | 12 | Bare ground | 15 | <span style="display:inline-block;width:14px;height:14px;background:#2CD874;border:1px solid #222;"></span> | `#2CD874` | 322.9909 | 12.91 | 882,535,708 | Suelo desnudo; Bare soil |
 | 13 | Sluice | 16 | <span style="display:inline-block;width:14px;height:14px;background:#613991;border:1px solid #222;"></span> | `#613991` | 0.0403 | 0.00 | 126,368 | Tolva; Tolvas; Hopper |
 | 14 | Vehicles | 17,18 | <span style="display:inline-block;width:14px;height:14px;background:#969AAE;border:1px solid #222;"></span> | `#969AAE` | 0.0092 | 0.00 | 85,244 | Vehiculos; Vehiculos pequenos; Vehiculos pequeños; Small Vehicles |
+
+## Label color plan (6-digit HEX)
+
+| ID | Class | HEX |
+| --- | --- | --- |
+| 0 | Background | `#000000` |
+| 1 | Building | `#8A6A3D` |
+| 2 | Mining raft | `#7BEBFB` |
+| 3 | Primary Forest | `#B04C18` |
+| 4 | Heavy machinery | `#EE92C6` |
+| 5 | Water bodies | `#4F6F6F` |
+| 6 | Agricultural crop | `#84D08C` |
+| 7 | Compact mounds | `#23F3E3` |
+| 8 | Gravel mounds | `#585400` |
+| 9 | Grass | `#8DB51D` |
+| 10 | Type 1 natural regeneration | `#C2163A` |
+| 11 | Type 2 natural regeneration | `#F77757` |
+| 12 | Bare ground | `#2CD874` |
+| 13 | Sluice | `#613991` |
+| 14 | Vehicles | `#969AAE` |
 
 ## Per-site classes using ELDOR merged mapping
 
