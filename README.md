@@ -91,8 +91,8 @@ python misc/build_cropped_dataset.py --workers 4
 | SESSRS | TGRS2025 | `misc/run_sessrs_postprocess_geoseg_official.py` | https://github.com/qycools/SESSRS.git |
 
 ## Complete results table (all runs)
-- Total runs: **81**
-- Rows with `-` indicate runs not yet finalized.
+
+## Ranking (chronological order)
 
 | status    | model                                               | backbone                                  | loss                       | venue         | params_m   | gflops   | latency_ms_1x3x512x512   | peak_vram_gb   | test_miou_present   | test_macro_f1_present   | test_oa_fg   | test_miou   | best_val_miou   | best_val_miou_present   |
 |:----------|:----------------------------------------------------|:------------------------------------------|:---------------------------|:--------------|:-----------|:---------|:-------------------------|:---------------|:--------------------|:------------------------|:-------------|:------------|:----------------|:------------------------|
@@ -176,7 +176,7 @@ python misc/build_cropped_dataset.py --workers 4
 | completed | SESSRS                                              | BANet (ce+dice)                           | t1/t2 search + postprocess | TGRS2025      | 12.8608    | 31.3805  | 7.7093                   | 0.1029         | 0.2937              | 0.4161                  | 0.6536       | 0.2259      | 0.2791          | 0.3006                  |
 | completed | SESSRS                                              | MANet (ce+dice)                           | t1/t2 search + postprocess | TGRS2025      | 35.8629    | 109.6158 | 7.7557                   | 0.3940         | 0.3604              | 0.4820                  | 0.6775       | 0.3004      | 0.3162          | 0.3162                  |
 | completed | SESSRS                                              | MANet (focal)                             | t1/t2 search + postprocess | TGRS2025      | 35.8629    | 109.6158 | 7.0723                   | 0.3940         | 0.4032              | 0.5467                  | 0.6849       | 0.2880      | 0.1723          | 0.3015                  |
-| running   | SESSRS                                              | MANet (weighted)                          | t1/t2 search + postprocess | TGRS2025      | -          | -        | -                        | -              | -                   | -                       | -            | -           | -               | -                       |
+| completed | SESSRS                                              | MANet (weighted)                          | t1/t2 search + postprocess | TGRS2025      | 35.8629    | 109.6158 | 8.6225                   | 0.3940         | 0.3839              | 0.5238                  | 0.6763       | 0.2742      | 0.3085          | 0.3322                  |
 | completed | SESSRS                                              | UNetFormer (ce+dice)                      | t1/t2 search + postprocess | TGRS2025      | 11.7259    | 23.5509  | 4.9343                   | 0.0876         | 0.3958              | 0.5167                  | 0.7279       | 0.3298      | 0.3399          | 0.3399                  |
 | completed | SESSRS                                              | UNetFormer (focal)                        | t1/t2 search + postprocess | TGRS2025      | 11.7259    | 23.5509  | 4.7844                   | 0.0876         | 0.3873              | 0.5091                  | 0.7195       | 0.3228      | 0.3406          | 0.3406                  |
 | completed | SESSRS                                              | UNetFormer (weighted)                     | t1/t2 search + postprocess | TGRS2025      | 11.7259    | 23.5509  | 5.0644                   | 0.0876         | 0.3578              | 0.4943                  | 0.6816       | 0.2752      | 0.3286          | 0.3286                  |
