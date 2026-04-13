@@ -30,6 +30,14 @@ The three figures below summarize geographic coverage and class distribution bef
 ![Site class heatmap](assets/site_class_pixel_counts_heatmap_merged.png)
 ![Train/Val/Test distribution](assets/train_val_test_class_distribution_merged.png)
 
+## Additional result visualizations
+- `assets/results/selected_methods_test_per_class_iou_ap_heatmaps.png`: class-wise test IoU/AP heatmaps for the eight main-text comparison methods.
+- `assets/results/main24_test_per_class_iou_ap_f1_heatmaps.png`: class-wise test IoU/AP/F1 heatmaps for the 24 main-table runs.
+- `assets/results/selected_methods_confusion_matrices_grid.png`: row-normalized pixel-level confusion matrices for the eight selected methods.
+- `assets/results/selected_methods_average_ratio_confusion_matrix.png`: mean row-normalized confusion matrix averaged over the eight selected methods.
+- `assets/results/test_examples_10cols_10rows.png`: compact qualitative comparison grid used for the main paper figure.
+- `assets/results/classwise_ex/`: class-wise qualitative grids with five test examples per target class.
+
 ## Patch generation (512x512)
 - Script: `misc/build_cropped_dataset.py`
 - Window size: `512x512`
