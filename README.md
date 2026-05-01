@@ -31,12 +31,53 @@ The three figures below summarize geographic coverage and class distribution bef
 ![Train/Val/Test distribution](assets/train_val_test_class_distribution_merged.png)
 
 ## Additional result visualizations
-- `assets/results/selected_methods_test_per_class_iou_ap_heatmaps.png`: class-wise test IoU/AP heatmaps for the eight main-text comparison methods.
-- `assets/results/main24_test_per_class_iou_ap_f1_heatmaps.png`: class-wise test IoU/AP/F1 heatmaps for the 24 main-table runs.
+- `assets/results/selected_methods_test_per_class_iou_ap_heatmaps.png`: class-wise test IoU/AP heatmaps for the eight main-text comparison methods, with AP updated from confidence-derived max/proxy scores.
+- `assets/results/main24_test_per_class_iou_ap_f1_heatmaps.png`: class-wise test IoU/AP/F1 heatmaps for the 24 main-table runs, with AP updated from confidence-derived max/proxy scores.
 - `assets/results/selected_methods_confusion_matrices_grid.png`: row-normalized pixel-level confusion matrices for the eight selected methods.
 - `assets/results/selected_methods_average_ratio_confusion_matrix.png`: mean row-normalized confusion matrix averaged over the eight selected methods.
 - `assets/results/test_examples_10cols_10rows.png`: compact qualitative comparison grid used for the main paper figure.
 - `assets/results/classwise_ex/`: class-wise qualitative grids with five test examples per target class.
+
+![Selected methods test per-class IoU/AP heatmaps](assets/results/selected_methods_test_per_class_iou_ap_heatmaps.png)
+![Main 24 methods test per-class IoU/AP/F1 heatmaps](assets/results/main24_test_per_class_iou_ap_f1_heatmaps.png)
+
+## Segmentation-derived recognition snapshot
+
+The table below reports selected test-set segmentation results and the corresponding segmentation-derived multi-label recognition results. `mIoU_p` is the foreground-present mean IoU. Recognition `mAP` is computed from max pixel-level confidence for regular segmentation models and from matched max proxy confidence for SESSRS post-processing rows.
+
+| Group | Model | Loss | mIoU_p | mIoU | Seg. Macro-F1 | OA | CF1 | OF1 | mAP |
+| --- | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| General | SegFormer | CE+Dice | 0.322 | 0.230 | 0.459 | 0.648 | 0.575 | 0.707 | 0.538 |
+| General | SegFormer | Focal+Dice | 0.333 | 0.238 | 0.476 | 0.639 | 0.601 | 0.705 | 0.586 |
+| General | SegFormer | WCE+Dice | 0.401 | 0.308 | 0.530 | 0.716 | 0.618 | 0.754 | 0.658 |
+| General | EfficientViT | CE+Dice | 0.380 | 0.271 | 0.507 | 0.726 | 0.595 | 0.747 | 0.600 |
+| General | EfficientViT | Focal+Dice | 0.369 | 0.264 | 0.509 | 0.678 | 0.625 | 0.732 | 0.610 |
+| General | EfficientViT | WCE+Dice | 0.379 | 0.271 | 0.518 | 0.715 | 0.632 | 0.749 | 0.623 |
+| Remote sensing | UNetFormer | CE+Dice* | 0.394 | 0.328 | 0.515 | 0.728 | 0.575 | 0.763 | 0.591 |
+| Remote sensing | UNetFormer | Focal+Dice* | 0.377 | 0.314 | 0.499 | 0.718 | 0.547 | 0.728 | 0.581 |
+| Remote sensing | UNetFormer | WCE+Dice* | 0.357 | 0.274 | 0.493 | 0.681 | 0.557 | 0.711 | 0.612 |
+| Remote sensing | MANet | CE+Dice | 0.371 | 0.309 | 0.492 | 0.686 | 0.534 | 0.719 | 0.556 |
+| Remote sensing | MANet | Focal+Dice | 0.400 | 0.286 | 0.543 | 0.685 | 0.577 | 0.701 | 0.617 |
+| Remote sensing | MANet | WCE+Dice | 0.383 | 0.273 | 0.523 | 0.676 | 0.584 | 0.703 | 0.682 |
+| Remote sensing | PyramidMamba | CE+Dice | 0.399 | 0.285 | 0.536 | 0.683 | 0.616 | 0.734 | 0.630 |
+| Remote sensing | PyramidMamba | Focal+Dice | 0.396 | 0.283 | 0.530 | 0.670 | 0.570 | 0.721 | 0.636 |
+| Remote sensing | PyramidMamba | WCE+Dice | 0.441 | 0.315 | 0.586 | 0.697 | 0.651 | 0.720 | 0.702 |
+| VFM-related | RSAM-Seg | CE+Dice | 0.326 | 0.251 | 0.447 | 0.698 | 0.512 | 0.716 | 0.535 |
+| VFM-related | RSAM-Seg | Focal+Dice | 0.345 | 0.265 | 0.464 | 0.743 | 0.590 | 0.759 | 0.570 |
+| VFM-related | RSAM-Seg | WCE+Dice | 0.370 | 0.264 | 0.509 | 0.698 | 0.592 | 0.726 | 0.621 |
+| VFM-related | SESSRS (MANet) | CE+Dice | 0.360 | 0.300 | 0.482 | 0.678 | 0.527 | 0.720 | 0.556 |
+| VFM-related | SESSRS (MANet) | Focal+Dice | 0.403 | 0.288 | 0.547 | 0.685 | 0.577 | 0.701 | 0.617 |
+| VFM-related | SESSRS (MANet) | WCE+Dice | 0.384 | 0.274 | 0.524 | 0.676 | 0.584 | 0.703 | 0.682 |
+| VFM-related | SESSRS (UNetFormer) | CE+Dice* | 0.396 | 0.330 | 0.517 | 0.728 | 0.575 | 0.763 | 0.591 |
+| VFM-related | SESSRS (UNetFormer) | Focal+Dice* | 0.387 | 0.323 | 0.509 | 0.720 | 0.547 | 0.728 | 0.581 |
+| VFM-related | SESSRS (UNetFormer) | WCE+Dice* | 0.358 | 0.275 | 0.494 | 0.682 | 0.557 | 0.711 | 0.612 |
+
+Result files:
+
+- `results/test_multilabel_summary.csv`: test multi-label summary with the `map` column updated to max/proxy mAP.
+- `results/test_multilabel_confidence_max_ap_summary.csv`: compact area-mAP vs max/proxy-mAP comparison for all 93 rows.
+- `results/test_multilabel_confidence_max_ap_all_results_seg_mlc.md`: full per-class AP table and scoring notes.
+- `results/main24_test_per_class_ap_heatmap.csv` and `results/selected_methods_test_per_class_ap_heatmap.csv`: AP values used in the updated heatmaps.
 
 ## Patch generation (512x512)
 - Script: `misc/build_cropped_dataset.py`

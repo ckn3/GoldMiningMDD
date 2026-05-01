@@ -900,101 +900,102 @@ Protocol: image-level labels are derived from predicted and GT segmentation maps
 ### Test
 
 - Source: `/deac/csc/yangGrp/cuij/GoldMDD/experiments/diagnostics/test_multilabel_summary.csv`
+- Note: the `map` column is updated to confidence-derived max/proxy mAP. See `results/test_multilabel_confidence_max_ap_all_results_seg_mlc.md` for the full AP table and scoring details.
 #### General segmentation models
 
 | status    | model            | backbone            | loss                      |     cp |     cr |    cf1 |     op |     or |    of1 |    map |   macro_f1 |   micro_f1 |   sample_f1 |
 |:----------|:-----------------|:--------------------|:--------------------------|-------:|-------:|-------:|-------:|-------:|-------:|-------:|-----------:|-----------:|------------:|
-| completed | DeepLabV3+       | ConvNeXt-Tiny       | ce+dice                   | 0.5586 | 0.6951 | 0.6194 | 0.685  | 0.8133 | 0.7437 | 0.6138 |     0.6135 |     0.7437 |      0.7574 |
-| completed | DeepLabV3+       | ConvNeXt-Tiny       | weighted_ce+dice          | 0.55   | 0.6924 | 0.6131 | 0.6732 | 0.8044 | 0.733  | 0.5937 |     0.6015 |     0.733  |      0.7395 |
-| completed | DeepLabV3+       | ConvNeXt-Tiny       | focal+dice                | 0.5536 | 0.6728 | 0.6074 | 0.6665 | 0.8223 | 0.7362 | 0.5926 |     0.5954 |     0.7362 |      0.7458 |
-| completed | DeepLabV3+       | ResNet-50           | ce+dice                   | 0.4948 | 0.6274 | 0.5533 | 0.6781 | 0.8083 | 0.7375 | 0.5582 |     0.6833 |     0.7375 |      0.7561 |
-| completed | DeepLabV3+       | ResNet-50           | weighted_ce+dice          | 0.5404 | 0.6461 | 0.5886 | 0.6803 | 0.7885 | 0.7304 | 0.5584 |     0.6417 |     0.7304 |      0.7447 |
-| completed | DeepLabV3+       | ResNet-50           | focal+dice                | 0.4881 | 0.714  | 0.5798 | 0.6325 | 0.8604 | 0.7291 | 0.5796 |     0.6257 |     0.7291 |      0.7424 |
-| completed | UPerNet          | Swin-Tiny           | ce+dice                   | 0.5441 | 0.5653 | 0.5545 | 0.704  | 0.7645 | 0.733  | 0.5011 |     0.6095 |     0.733  |      0.7422 |
-| completed | OCRNet           | HRNet-W48           | ce+dice                   | 0.5009 | 0.5395 | 0.5195 | 0.6579 | 0.7061 | 0.6811 | 0.4633 |     0.62   |     0.6811 |      0.6589 |
-| completed | SegFormer        | MiT-B2              | ce+dice                   | 0.5309 | 0.6277 | 0.5753 | 0.6929 | 0.7207 | 0.7065 | 0.5235 |     0.5597 |     0.7065 |      0.7045 |
-| completed | SegFormer        | MiT-B2              | weighted_ce+dice          | 0.5665 | 0.6796 | 0.6179 | 0.734  | 0.775  | 0.7539 | 0.6167 |     0.6747 |     0.7539 |      0.779  |
-| completed | SegFormer        | MiT-B2              | focal+dice                | 0.5288 | 0.6958 | 0.6009 | 0.6582 | 0.7594 | 0.7052 | 0.5691 |     0.5735 |     0.7052 |      0.6986 |
-| completed | Mask2Former      | ResNet-50           | set_matching_ce+mask+dice | 0.6584 | 0.5126 | 0.5764 | 0.763  | 0.6625 | 0.7092 | 0.5094 |     0.6317 |     0.7092 |      0.7125 |
-| completed | SegNeXt          | MSCAN-Tiny          | ce+dice                   | 0.5306 | 0.5334 | 0.532  | 0.6659 | 0.7484 | 0.7048 | 0.4682 |     0.5636 |     0.7048 |      0.6888 |
-| completed | Afformer         | AFFormer-Base       | ce+dice                   | 0.522  | 0.6169 | 0.5655 | 0.6572 | 0.7639 | 0.7065 | 0.5154 |     0.5497 |     0.7065 |      0.6983 |
-| completed | EfficientViT-Seg | EfficientViT-B2     | ce+dice                   | 0.5583 | 0.6376 | 0.5953 | 0.7063 | 0.7937 | 0.7474 | 0.5625 |     0.624  |     0.7474 |      0.7711 |
-| completed | EfficientViT-Seg | EfficientViT-B2     | weighted_ce+dice          | 0.5896 | 0.6812 | 0.6321 | 0.7031 | 0.8023 | 0.7494 | 0.5904 |     0.6113 |     0.7494 |      0.7683 |
-| completed | EfficientViT-Seg | EfficientViT-B2     | focal+dice                | 0.5822 | 0.6753 | 0.6253 | 0.684  | 0.7881 | 0.7324 | 0.5776 |     0.6056 |     0.7324 |      0.7375 |
-| completed | SeaFormer        | SeaFormer-Base      | ce+dice                   | 0.5405 | 0.577  | 0.5582 | 0.6775 | 0.7554 | 0.7143 | 0.4942 |     0.5941 |     0.7143 |      0.7064 |
-| completed | CGRSeg           | EfficientFormerV2-B | ce+dice                   | 0.586  | 0.5601 | 0.5728 | 0.6472 | 0.7446 | 0.6925 | 0.482  |     0.5247 |     0.6925 |      0.6736 |
-| completed | PEM              | ResNet-50           | set_matching_ce+mask+dice | 0.6373 | 0.4949 | 0.5571 | 0.7678 | 0.6664 | 0.7135 | 0.4868 |     0.6062 |     0.7135 |      0.711  |
+| completed | DeepLabV3+ | ConvNeXt-Tiny | ce+dice | 0.5586 | 0.6951 | 0.6194 | 0.685 | 0.8133 | 0.7437 | 0.623 | 0.6135 | 0.7437 | 0.7574 |
+| completed | DeepLabV3+ | ConvNeXt-Tiny | weighted_ce+dice | 0.55 | 0.6924 | 0.6131 | 0.6732 | 0.8044 | 0.733 | 0.6107 | 0.6015 | 0.733 | 0.7395 |
+| completed | DeepLabV3+ | ConvNeXt-Tiny | focal+dice | 0.5536 | 0.6728 | 0.6074 | 0.6665 | 0.8223 | 0.7362 | 0.6179 | 0.5954 | 0.7362 | 0.7458 |
+| completed | DeepLabV3+ | ResNet-50 | ce+dice | 0.4948 | 0.6274 | 0.5533 | 0.6781 | 0.8083 | 0.7375 | 0.5776 | 0.6833 | 0.7375 | 0.7561 |
+| completed | DeepLabV3+ | ResNet-50 | weighted_ce+dice | 0.5404 | 0.6461 | 0.5886 | 0.6803 | 0.7885 | 0.7304 | 0.5664 | 0.6417 | 0.7304 | 0.7447 |
+| completed | DeepLabV3+ | ResNet-50 | focal+dice | 0.4881 | 0.714 | 0.5798 | 0.6325 | 0.8604 | 0.7291 | 0.612 | 0.6257 | 0.7291 | 0.7424 |
+| completed | UPerNet | Swin-Tiny | ce+dice | 0.5441 | 0.5653 | 0.5545 | 0.704 | 0.7645 | 0.733 | 0.5252 | 0.6095 | 0.733 | 0.7422 |
+| completed | OCRNet | HRNet-W48 | ce+dice | 0.5009 | 0.5395 | 0.5195 | 0.6579 | 0.7061 | 0.6811 | 0.4867 | 0.62 | 0.6811 | 0.6589 |
+| completed | SegFormer | MiT-B2 | ce+dice | 0.5309 | 0.6277 | 0.5753 | 0.6929 | 0.7207 | 0.7065 | 0.5382 | 0.5597 | 0.7065 | 0.7045 |
+| completed | SegFormer | MiT-B2 | weighted_ce+dice | 0.5665 | 0.6796 | 0.6179 | 0.734 | 0.775 | 0.7539 | 0.6576 | 0.6747 | 0.7539 | 0.779 |
+| completed | SegFormer | MiT-B2 | focal+dice | 0.5288 | 0.6958 | 0.6009 | 0.6582 | 0.7594 | 0.7052 | 0.5857 | 0.5735 | 0.7052 | 0.6986 |
+| completed | Mask2Former | ResNet-50 | set_matching_ce+mask+dice | 0.6584 | 0.5126 | 0.5764 | 0.763 | 0.6625 | 0.7092 | 0.5297 | 0.6317 | 0.7092 | 0.7125 |
+| completed | SegNeXt | MSCAN-Tiny | ce+dice | 0.5306 | 0.5334 | 0.532 | 0.6659 | 0.7484 | 0.7048 | 0.4756 | 0.5636 | 0.7048 | 0.6888 |
+| completed | Afformer | AFFormer-Base | ce+dice | 0.522 | 0.6169 | 0.5655 | 0.6572 | 0.7639 | 0.7065 | 0.5297 | 0.5497 | 0.7065 | 0.6983 |
+| completed | EfficientViT-Seg | EfficientViT-B2 | ce+dice | 0.5583 | 0.6376 | 0.5953 | 0.7063 | 0.7937 | 0.7474 | 0.6002 | 0.624 | 0.7474 | 0.7711 |
+| completed | EfficientViT-Seg | EfficientViT-B2 | weighted_ce+dice | 0.5896 | 0.6812 | 0.6321 | 0.7031 | 0.8023 | 0.7494 | 0.6228 | 0.6113 | 0.7494 | 0.7683 |
+| completed | EfficientViT-Seg | EfficientViT-B2 | focal+dice | 0.5822 | 0.6753 | 0.6253 | 0.684 | 0.7881 | 0.7324 | 0.61 | 0.6056 | 0.7324 | 0.7375 |
+| completed | SeaFormer | SeaFormer-Base | ce+dice | 0.5405 | 0.577 | 0.5582 | 0.6775 | 0.7554 | 0.7143 | 0.5171 | 0.5941 | 0.7143 | 0.7064 |
+| completed | CGRSeg | EfficientFormerV2-B | ce+dice | 0.586 | 0.5601 | 0.5728 | 0.6472 | 0.7446 | 0.6925 | 0.499 | 0.5247 | 0.6925 | 0.6736 |
+| completed | PEM | ResNet-50 | set_matching_ce+mask+dice | 0.6373 | 0.4949 | 0.5571 | 0.7678 | 0.6664 | 0.7135 | 0.5069 | 0.6062 | 0.7135 | 0.711 |
 
 #### Remote-sensing-specific methods
 
 | status    | model        | backbone                | loss                    |     cp |     cr |    cf1 |     op |     or |    of1 |    map |   macro_f1 |   micro_f1 |   sample_f1 |
 |:----------|:-------------|:------------------------|:------------------------|-------:|-------:|-------:|-------:|-------:|-------:|-------:|-----------:|-----------:|------------:|
-| completed | FarSeg       | ResNet-50               | ce (native)             | 0.488  | 0.6234 | 0.5475 | 0.7013 | 0.8159 | 0.7543 | 0.5263 |     0.6695 |     0.7543 |      0.7658 |
-| completed | FarSeg       | ResNet-50               | ce+dice                 | 0.4617 | 0.643  | 0.5375 | 0.6716 | 0.8039 | 0.7318 | 0.5562 |     0.6499 |     0.7318 |      0.742  |
-| completed | FarSeg       | ResNet-50               | weighted_ce+dice        | 0.4766 | 0.7369 | 0.5788 | 0.6265 | 0.7857 | 0.6971 | 0.5762 |     0.5455 |     0.6971 |      0.705  |
-| completed | FarSeg       | ResNet-50               | focal+dice              | 0.4884 | 0.6471 | 0.5567 | 0.6889 | 0.8537 | 0.7625 | 0.5582 |     0.6822 |     0.7625 |      0.7887 |
-| completed | BANet        | ResT-Lite               | ce+dice                 | 0.4616 | 0.5574 | 0.505  | 0.6664 | 0.7606 | 0.7104 | 0.4664 |     0.6238 |     0.7104 |      0.7155 |
-| completed | ABCNet       | ResNet-18               | ce+dice+aux_ce          | 0.5194 | 0.5399 | 0.5294 | 0.7339 | 0.7366 | 0.7353 | 0.4916 |     0.6593 |     0.7353 |      0.746  |
-| completed | MANet        | ResNet-50               | ce+dice                 | 0.4338 | 0.6937 | 0.5338 | 0.6062 | 0.8818 | 0.7185 | 0.5693 |     0.6545 |     0.7185 |      0.7376 |
-| completed | MANet        | ResNet-50               | weighted_ce+dice        | 0.4458 | 0.8443 | 0.5835 | 0.586  | 0.8794 | 0.7034 | 0.6559 |     0.5535 |     0.7034 |      0.7236 |
-| completed | MANet        | ResNet-50               | focal+dice              | 0.4344 | 0.861  | 0.5774 | 0.5777 | 0.8897 | 0.7005 | 0.6643 |     0.5444 |     0.7005 |      0.7203 |
-| completed | UNetFormer   | ResNet-18               | ce+dice+aux_ce          | 0.5221 | 0.639  | 0.5747 | 0.6912 | 0.8521 | 0.7633 | 0.5648 |     0.7105 |     0.7633 |      0.7839 |
-| completed | UNetFormer   | ResNet-18               | weighted_ce+dice+aux_ce | 0.4444 | 0.7464 | 0.5571 | 0.6076 | 0.8561 | 0.7107 | 0.5826 |     0.5893 |     0.7107 |      0.7314 |
-| completed | UNetFormer   | ResNet-18               | focal+dice+aux_focal    | 0.4633 | 0.6671 | 0.5469 | 0.6344 | 0.8535 | 0.7278 | 0.5613 |     0.6704 |     0.7278 |      0.7533 |
-| completed | DC-Swin      | Swin-Small              | ce+dice                 | 0.4535 | 0.5773 | 0.508  | 0.6489 | 0.8161 | 0.723  | 0.4726 |     0.6255 |     0.723  |      0.7345 |
-| completed | A2FPN        | ResNet-18               | ce+dice                 | 0.5133 | 0.5665 | 0.5386 | 0.7381 | 0.7526 | 0.7453 | 0.5239 |     0.6678 |     0.7453 |      0.7725 |
-| completed | A2FPN        | ResNet-18               | weighted_ce+dice        | 0.566  | 0.6809 | 0.6182 | 0.7081 | 0.7544 | 0.7305 | 0.5982 |     0.6064 |     0.7305 |      0.7554 |
-| completed | A2FPN        | ResNet-18               | focal+dice              | 0.4574 | 0.623  | 0.5275 | 0.6502 | 0.7846 | 0.7111 | 0.5219 |     0.6394 |     0.7111 |      0.7161 |
-| completed | LoGCAN       | ResNet-50               | ce+aux_ce (native)      | 0.5961 | 0.5941 | 0.5951 | 0.6678 | 0.8413 | 0.7446 | 0.5335 |     0.6306 |     0.7446 |      0.7664 |
-| completed | FarSeg++     | MiT-B2                  | ce (native)             | 0.54   | 0.5397 | 0.5399 | 0.7078 | 0.7409 | 0.724  | 0.4864 |     0.5932 |     0.724  |      0.726  |
-| completed | SACANet      | HRNet-W32               | ce+aux_ce (native)      | 0.62   | 0.5916 | 0.6055 | 0.68   | 0.7801 | 0.7266 | 0.5281 |     0.6192 |     0.7266 |      0.7213 |
-| completed | DOCNet       | HRNet-W32               | ce+aux_ce (native)      | 0.6101 | 0.5911 | 0.6004 | 0.7001 | 0.7815 | 0.7385 | 0.5145 |     0.6207 |     0.7385 |      0.7455 |
-| completed | PPMambaSeg   | swsl-ResNet-18          | ce+dice                 | 0.4914 | 0.6305 | 0.5523 | 0.667  | 0.8063 | 0.7301 | 0.5402 |     0.6806 |     0.7301 |      0.7332 |
-| completed | PPMambaSeg   | swsl-ResNet-18          | weighted_ce+dice        | 0.5786 | 0.7293 | 0.6453 | 0.6509 | 0.8175 | 0.7247 | 0.622  |     0.6273 |     0.7247 |      0.7318 |
-| completed | PPMambaSeg   | swsl-ResNet-18          | focal+dice              | 0.4956 | 0.6459 | 0.5609 | 0.6726 | 0.8394 | 0.7468 | 0.5624 |     0.6895 |     0.7468 |      0.7636 |
-| completed | RS3Mamba     | ResNet-18 + VMamba-Tiny | ce+dice                 | 0.3354 | 0.4376 | 0.3797 | 0.6214 | 0.8425 | 0.7153 | 0.4047 |     0.753  |     0.7153 |      0.749  |
-| completed | RS3Mamba     | ResNet-18 + VMamba-Tiny | weighted_ce+dice        | 0.3574 | 0.692  | 0.4714 | 0.5223 | 0.8905 | 0.6584 | 0.4716 |     0.5523 |     0.6584 |      0.6762 |
-| completed | RS3Mamba     | ResNet-18 + VMamba-Tiny | focal+dice              | 0.4559 | 0.5104 | 0.4816 | 0.6167 | 0.872  | 0.7225 | 0.4554 |     0.6587 |     0.7225 |      0.7541 |
-| completed | PyramidMamba | Swin-Base               | ce+dice                 | 0.5523 | 0.6965 | 0.6161 | 0.6568 | 0.8324 | 0.7343 | 0.605  |     0.668  |     0.7343 |      0.7337 |
-| completed | PyramidMamba | Swin-Base               | weighted_ce+dice        | 0.5602 | 0.7758 | 0.6506 | 0.6263 | 0.8459 | 0.7197 | 0.6749 |     0.6181 |     0.7197 |      0.7357 |
-| completed | PyramidMamba | Swin-Base               | focal+dice              | 0.4768 | 0.7094 | 0.5703 | 0.6385 | 0.8289 | 0.7213 | 0.5994 |     0.6183 |     0.7213 |      0.7184 |
-| completed | LoGCAN++     | RepViT-M2.3             | ce+aux_ce (native)      | 0.5133 | 0.5051 | 0.5091 | 0.6588 | 0.746  | 0.6997 | 0.419  |     0.5142 |     0.6997 |      0.6945 |
-| completed | MF-Mamba     | HRNet-W18               | ce+dice                 | 0.4403 | 0.6114 | 0.5119 | 0.6508 | 0.789  | 0.7133 | 0.4807 |     0.6195 |     0.7133 |      0.7104 |
-| completed | MCPNet       | ResNet-50               | ce+dice                 | 0.4849 | 0.5565 | 0.5182 | 0.6956 | 0.7545 | 0.7238 | 0.4649 |     0.6357 |     0.7238 |      0.7242 |
-| completed | MCPNet       | ResNet-50               | weighted_ce+dice        | 0.5195 | 0.6184 | 0.5646 | 0.6749 | 0.7615 | 0.7156 | 0.5141 |     0.616  |     0.7156 |      0.713  |
-| completed | MCPNet       | ResNet-50               | focal+dice              | 0.4945 | 0.5715 | 0.5302 | 0.6993 | 0.7839 | 0.7392 | 0.4849 |     0.5524 |     0.7392 |      0.7538 |
+| completed | FarSeg | ResNet-50 | ce (native) | 0.488 | 0.6234 | 0.5475 | 0.7013 | 0.8159 | 0.7543 | 0.5576 | 0.6695 | 0.7543 | 0.7658 |
+| completed | FarSeg | ResNet-50 | ce+dice | 0.4617 | 0.643 | 0.5375 | 0.6716 | 0.8039 | 0.7318 | 0.5752 | 0.6499 | 0.7318 | 0.742 |
+| completed | FarSeg | ResNet-50 | weighted_ce+dice | 0.4766 | 0.7369 | 0.5788 | 0.6265 | 0.7857 | 0.6971 | 0.6159 | 0.5455 | 0.6971 | 0.705 |
+| completed | FarSeg | ResNet-50 | focal+dice | 0.4884 | 0.6471 | 0.5567 | 0.6889 | 0.8537 | 0.7625 | 0.5773 | 0.6822 | 0.7625 | 0.7887 |
+| completed | BANet | ResT-Lite | ce+dice | 0.4616 | 0.5574 | 0.505 | 0.6664 | 0.7606 | 0.7104 | 0.4863 | 0.6238 | 0.7104 | 0.7155 |
+| completed | ABCNet | ResNet-18 | ce+dice+aux_ce | 0.5194 | 0.5399 | 0.5294 | 0.7339 | 0.7366 | 0.7353 | 0.515 | 0.6593 | 0.7353 | 0.746 |
+| completed | MANet | ResNet-50 | ce+dice | 0.4338 | 0.6937 | 0.5338 | 0.6062 | 0.8818 | 0.7185 | 0.5556 | 0.6545 | 0.7185 | 0.7376 |
+| completed | MANet | ResNet-50 | weighted_ce+dice | 0.4458 | 0.8443 | 0.5835 | 0.586 | 0.8794 | 0.7034 | 0.6817 | 0.5535 | 0.7034 | 0.7236 |
+| completed | MANet | ResNet-50 | focal+dice | 0.4344 | 0.861 | 0.5774 | 0.5777 | 0.8897 | 0.7005 | 0.617 | 0.5444 | 0.7005 | 0.7203 |
+| completed | UNetFormer | ResNet-18 | ce+dice+aux_ce | 0.5221 | 0.639 | 0.5747 | 0.6912 | 0.8521 | 0.7633 | 0.5913 | 0.7105 | 0.7633 | 0.7839 |
+| completed | UNetFormer | ResNet-18 | weighted_ce+dice+aux_ce | 0.4444 | 0.7464 | 0.5571 | 0.6076 | 0.8561 | 0.7107 | 0.6119 | 0.5893 | 0.7107 | 0.7314 |
+| completed | UNetFormer | ResNet-18 | focal+dice+aux_focal | 0.4633 | 0.6671 | 0.5469 | 0.6344 | 0.8535 | 0.7278 | 0.5807 | 0.6704 | 0.7278 | 0.7533 |
+| completed | DC-Swin | Swin-Small | ce+dice | 0.4535 | 0.5773 | 0.508 | 0.6489 | 0.8161 | 0.723 | 0.4953 | 0.6255 | 0.723 | 0.7345 |
+| completed | A2FPN | ResNet-18 | ce+dice | 0.5133 | 0.5665 | 0.5386 | 0.7381 | 0.7526 | 0.7453 | 0.5592 | 0.6678 | 0.7453 | 0.7725 |
+| completed | A2FPN | ResNet-18 | weighted_ce+dice | 0.566 | 0.6809 | 0.6182 | 0.7081 | 0.7544 | 0.7305 | 0.6176 | 0.6064 | 0.7305 | 0.7554 |
+| completed | A2FPN | ResNet-18 | focal+dice | 0.4574 | 0.623 | 0.5275 | 0.6502 | 0.7846 | 0.7111 | 0.5414 | 0.6394 | 0.7111 | 0.7161 |
+| completed | LoGCAN | ResNet-50 | ce+aux_ce (native) | 0.5961 | 0.5941 | 0.5951 | 0.6678 | 0.8413 | 0.7446 | 0.5499 | 0.6306 | 0.7446 | 0.7664 |
+| completed | FarSeg++ | MiT-B2 | ce (native) | 0.54 | 0.5397 | 0.5399 | 0.7078 | 0.7409 | 0.724 | 0.4957 | 0.5932 | 0.724 | 0.726 |
+| completed | SACANet | HRNet-W32 | ce+aux_ce (native) | 0.62 | 0.5916 | 0.6055 | 0.68 | 0.7801 | 0.7266 | 0.5525 | 0.6192 | 0.7266 | 0.7213 |
+| completed | DOCNet | HRNet-W32 | ce+aux_ce (native) | 0.6101 | 0.5911 | 0.6004 | 0.7001 | 0.7815 | 0.7385 | 0.5317 | 0.6207 | 0.7385 | 0.7455 |
+| completed | PPMambaSeg | swsl-ResNet-18 | ce+dice | 0.4914 | 0.6305 | 0.5523 | 0.667 | 0.8063 | 0.7301 | 0.5615 | 0.6806 | 0.7301 | 0.7332 |
+| completed | PPMambaSeg | swsl-ResNet-18 | weighted_ce+dice | 0.5786 | 0.7293 | 0.6453 | 0.6509 | 0.8175 | 0.7247 | 0.6408 | 0.6273 | 0.7247 | 0.7318 |
+| completed | PPMambaSeg | swsl-ResNet-18 | focal+dice | 0.4956 | 0.6459 | 0.5609 | 0.6726 | 0.8394 | 0.7468 | 0.5828 | 0.6895 | 0.7468 | 0.7636 |
+| completed | RS3Mamba | ResNet-18 + VMamba-Tiny | ce+dice | 0.3354 | 0.4376 | 0.3797 | 0.6214 | 0.8425 | 0.7153 | 0.4235 | 0.753 | 0.7153 | 0.749 |
+| completed | RS3Mamba | ResNet-18 + VMamba-Tiny | weighted_ce+dice | 0.3574 | 0.692 | 0.4714 | 0.5223 | 0.8905 | 0.6584 | 0.5263 | 0.5523 | 0.6584 | 0.6762 |
+| completed | RS3Mamba | ResNet-18 + VMamba-Tiny | focal+dice | 0.4559 | 0.5104 | 0.4816 | 0.6167 | 0.872 | 0.7225 | 0.4709 | 0.6587 | 0.7225 | 0.7541 |
+| completed | PyramidMamba | Swin-Base | ce+dice | 0.5523 | 0.6965 | 0.6161 | 0.6568 | 0.8324 | 0.7343 | 0.6301 | 0.668 | 0.7343 | 0.7337 |
+| completed | PyramidMamba | Swin-Base | weighted_ce+dice | 0.5602 | 0.7758 | 0.6506 | 0.6263 | 0.8459 | 0.7197 | 0.7024 | 0.6181 | 0.7197 | 0.7357 |
+| completed | PyramidMamba | Swin-Base | focal+dice | 0.4768 | 0.7094 | 0.5703 | 0.6385 | 0.8289 | 0.7213 | 0.6365 | 0.6183 | 0.7213 | 0.7184 |
+| completed | LoGCAN++ | RepViT-M2.3 | ce+aux_ce (native) | 0.5133 | 0.5051 | 0.5091 | 0.6588 | 0.746 | 0.6997 | 0.4524 | 0.5142 | 0.6997 | 0.6945 |
+| completed | MF-Mamba | HRNet-W18 | ce+dice | 0.4403 | 0.6114 | 0.5119 | 0.6508 | 0.789 | 0.7133 | 0.5137 | 0.6195 | 0.7133 | 0.7104 |
+| completed | MCPNet | ResNet-50 | ce+dice | 0.4849 | 0.5565 | 0.5182 | 0.6956 | 0.7545 | 0.7238 | 0.5063 | 0.6357 | 0.7238 | 0.7242 |
+| completed | MCPNet | ResNet-50 | weighted_ce+dice | 0.5195 | 0.6184 | 0.5646 | 0.6749 | 0.7615 | 0.7156 | 0.5545 | 0.616 | 0.7156 | 0.713 |
+| completed | MCPNet | ResNet-50 | focal+dice | 0.4945 | 0.5715 | 0.5302 | 0.6993 | 0.7839 | 0.7392 | 0.5267 | 0.5524 | 0.7392 | 0.7538 |
 
 #### Methods related to vision foundation models
 
 | status    | model    | backbone                                  | loss                       |     cp |     cr |    cf1 |     op |     or |    of1 |    map |   macro_f1 |   micro_f1 |   sample_f1 |
 |:----------|:---------|:------------------------------------------|:---------------------------|-------:|-------:|-------:|-------:|-------:|-------:|-------:|-----------:|-----------:|------------:|
-| completed | HQ-SAM   | ViT-B + HQ decoder (full finetune, msfpn) | ce+dice                    | 0.3647 | 0.6824 | 0.4754 | 0.4954 | 0.9257 | 0.6455 | 0.4749 |     0.5098 |     0.6455 |      0.6488 |
-| completed | HQ-SAM   | ViT-B + HQ decoder (full finetune, msfpn) | weighted_ce+dice           | 0.328  | 0.737  | 0.454  | 0.4455 | 0.9243 | 0.6012 | 0.4625 |     0.4226 |     0.6012 |      0.5995 |
-| completed | HQ-SAM   | ViT-B + HQ decoder (full finetune, msfpn) | focal+dice                 | 0.3846 | 0.656  | 0.4849 | 0.5066 | 0.9178 | 0.6529 | 0.4821 |     0.5258 |     0.6529 |      0.6623 |
-| completed | SAM_RS   | ABCNet + SAM priors                       | seg+bdy+obj (native)       | 0.53   | 0.5205 | 0.5252 | 0.7355 | 0.7214 | 0.7284 | 0.4666 |     0.6442 |     0.7284 |      0.7352 |
-| completed | SAM_RS   | CMTFNet + SAM priors                      | seg+bdy+obj (native)       | 0.5355 | 0.5312 | 0.5334 | 0.7243 | 0.7374 | 0.7308 | 0.4615 |     0.6571 |     0.7308 |      0.7269 |
-| completed | SAM_RS   | FTUNetFormer + SAM priors                 | seg+bdy+obj (native)       | 0.4921 | 0.5071 | 0.4995 | 0.7213 | 0.7331 | 0.7271 | 0.4528 |     0.6172 |     0.7271 |      0.7409 |
-| completed | SAM_RS   | UNetFormer + SAM priors                   | seg+bdy+obj (native)       | 0.4799 | 0.5933 | 0.5306 | 0.6829 | 0.7843 | 0.7301 | 0.4944 |     0.6442 |     0.7301 |      0.7384 |
-| completed | SAM2.1   | Hiera-B+ (frozen backbone, msfpn)         | ce+dice                    | 0.3745 | 0.6554 | 0.4767 | 0.5165 | 0.906  | 0.6579 | 0.4621 |     0.5117 |     0.6579 |      0.6603 |
-| completed | SAM2.1   | Hiera-B+ (frozen backbone, msfpn)         | weighted_ce+dice           | 0.3157 | 0.7515 | 0.4446 | 0.4238 | 0.9081 | 0.5779 | 0.4107 |     0.4031 |     0.5779 |      0.5986 |
-| completed | SAM2.1   | Hiera-B+ (frozen backbone, msfpn)         | focal+dice                 | 0.3508 | 0.6742 | 0.4615 | 0.4933 | 0.9156 | 0.6412 | 0.4541 |     0.4904 |     0.6412 |      0.6411 |
-| completed | SAM2.1   | Hiera-B+ (full finetune, msfpn)           | ce+dice                    | 0.4654 | 0.5394 | 0.4996 | 0.6785 | 0.7464 | 0.7108 | 0.4595 |     0.6116 |     0.7108 |      0.7148 |
-| completed | SAM2.1   | Hiera-B+ (full finetune, msfpn)           | weighted_ce+dice           | 0.427  | 0.6527 | 0.5163 | 0.6359 | 0.7738 | 0.6981 | 0.485  |     0.5313 |     0.6981 |      0.7258 |
-| completed | SAM2.1   | Hiera-B+ (full finetune, msfpn)           | focal+dice                 | 0.4484 | 0.577  | 0.5046 | 0.6897 | 0.7728 | 0.7289 | 0.464  |     0.6143 |     0.7289 |      0.744  |
-| completed | RSAM-Seg | SAM-ViT-B (frozen encoder)                | ce+dice                    | 0.4322 | 0.628  | 0.5121 | 0.6393 | 0.8147 | 0.7164 | 0.5046 |     0.6171 |     0.7164 |      0.74   |
-| completed | RSAM-Seg | SAM-ViT-B (frozen encoder)                | weighted_ce+dice           | 0.4842 | 0.7614 | 0.592  | 0.6559 | 0.814  | 0.7264 | 0.5869 |     0.5666 |     0.7264 |      0.7512 |
-| completed | RSAM-Seg | SAM-ViT-B (frozen encoder)                | focal+dice                 | 0.5499 | 0.6354 | 0.5896 | 0.7046 | 0.823  | 0.7592 | 0.5454 |     0.6147 |     0.7592 |      0.7843 |
-| completed | SESSRS   | A2FPN (ce+dice)                           | t1/t2 search + postprocess | 0.5133 | 0.5665 | 0.5386 | 0.7381 | 0.7526 | 0.7453 | 0.524  |     0.6678 |     0.7453 |      0.7725 |
-| completed | SESSRS   | A2FPN (focal)                             | t1/t2 search + postprocess | 0.4574 | 0.623  | 0.5275 | 0.6502 | 0.7846 | 0.7111 | 0.5218 |     0.6394 |     0.7111 |      0.7161 |
-| completed | SESSRS   | A2FPN (weighted)                          | t1/t2 search + postprocess | 0.566  | 0.6809 | 0.6181 | 0.7081 | 0.7544 | 0.7305 | 0.5983 |     0.6064 |     0.7305 |      0.7553 |
-| completed | SESSRS   | ABCNet (ce+dice+aux)                      | t1/t2 search + postprocess | 0.5193 | 0.5399 | 0.5294 | 0.7338 | 0.7367 | 0.7353 | 0.4916 |     0.6593 |     0.7353 |      0.746  |
-| completed | SESSRS   | BANet (ce+dice)                           | t1/t2 search + postprocess | 0.4616 | 0.5574 | 0.505  | 0.6664 | 0.7606 | 0.7104 | 0.4664 |     0.6238 |     0.7104 |      0.7155 |
-| completed | SESSRS   | MANet (ce+dice)                           | t1/t2 search + postprocess | 0.4261 | 0.6917 | 0.5273 | 0.6085 | 0.8824 | 0.7203 | 0.5617 |     0.643  |     0.7203 |      0.734  |
-| completed | SESSRS   | MANet (focal)                             | t1/t2 search + postprocess | 0.4344 | 0.861  | 0.5774 | 0.5777 | 0.8897 | 0.7005 | 0.6645 |     0.5444 |     0.7005 |      0.7203 |
-| completed | SESSRS   | MANet (weighted)                          | t1/t2 search + postprocess | 0.4458 | 0.8443 | 0.5835 | 0.586  | 0.8794 | 0.7033 | 0.6557 |     0.5535 |     0.7033 |      0.7236 |
-| completed | SESSRS   | UNetFormer (ce+dice)                      | t1/t2 search + postprocess | 0.5221 | 0.639  | 0.5747 | 0.6912 | 0.8521 | 0.7633 | 0.5646 |     0.7105 |     0.7633 |      0.7838 |
-| completed | SESSRS   | UNetFormer (focal)                        | t1/t2 search + postprocess | 0.4633 | 0.6671 | 0.5468 | 0.6343 | 0.8535 | 0.7278 | 0.5612 |     0.6704 |     0.7278 |      0.7533 |
-| completed | SESSRS   | UNetFormer (weighted)                     | t1/t2 search + postprocess | 0.4444 | 0.7464 | 0.5571 | 0.6075 | 0.8561 | 0.7107 | 0.5828 |     0.5893 |     0.7107 |      0.7314 |
+| completed | HQ-SAM | ViT-B + HQ decoder (full finetune, msfpn) | ce+dice | 0.3647 | 0.6824 | 0.4754 | 0.4954 | 0.9257 | 0.6455 | 0.4697 | 0.5098 | 0.6455 | 0.6488 |
+| completed | HQ-SAM | ViT-B + HQ decoder (full finetune, msfpn) | weighted_ce+dice | 0.328 | 0.737 | 0.454 | 0.4455 | 0.9243 | 0.6012 | 0.4693 | 0.4226 | 0.6012 | 0.5995 |
+| completed | HQ-SAM | ViT-B + HQ decoder (full finetune, msfpn) | focal+dice | 0.3846 | 0.656 | 0.4849 | 0.5066 | 0.9178 | 0.6529 | 0.471 | 0.5258 | 0.6529 | 0.6623 |
+| completed | SAM_RS | ABCNet + SAM priors | seg+bdy+obj (native) | 0.53 | 0.5205 | 0.5252 | 0.7355 | 0.7214 | 0.7284 | 0.4938 | 0.6442 | 0.7284 | 0.7352 |
+| completed | SAM_RS | CMTFNet + SAM priors | seg+bdy+obj (native) | 0.5355 | 0.5312 | 0.5334 | 0.7243 | 0.7374 | 0.7308 | 0.4867 | 0.6571 | 0.7308 | 0.7269 |
+| completed | SAM_RS | FTUNetFormer + SAM priors | seg+bdy+obj (native) | 0.4921 | 0.5071 | 0.4995 | 0.7213 | 0.7331 | 0.7271 | 0.4757 | 0.6172 | 0.7271 | 0.7409 |
+| completed | SAM_RS | UNetFormer + SAM priors | seg+bdy+obj (native) | 0.4799 | 0.5933 | 0.5306 | 0.6829 | 0.7843 | 0.7301 | 0.5091 | 0.6442 | 0.7301 | 0.7384 |
+| completed | SAM2.1 | Hiera-B+ (frozen backbone, msfpn) | ce+dice | 0.3745 | 0.6554 | 0.4767 | 0.5165 | 0.906 | 0.6579 | 0.4668 | 0.5117 | 0.6579 | 0.6603 |
+| completed | SAM2.1 | Hiera-B+ (frozen backbone, msfpn) | weighted_ce+dice | 0.3157 | 0.7515 | 0.4446 | 0.4238 | 0.9081 | 0.5779 | 0.4665 | 0.4031 | 0.5779 | 0.5986 |
+| completed | SAM2.1 | Hiera-B+ (frozen backbone, msfpn) | focal+dice | 0.3508 | 0.6742 | 0.4615 | 0.4933 | 0.9156 | 0.6412 | 0.4648 | 0.4904 | 0.6412 | 0.6411 |
+| completed | SAM2.1 | Hiera-B+ (full finetune, msfpn) | ce+dice | 0.4654 | 0.5394 | 0.4996 | 0.6785 | 0.7464 | 0.7108 | 0.4929 | 0.6116 | 0.7108 | 0.7148 |
+| completed | SAM2.1 | Hiera-B+ (full finetune, msfpn) | weighted_ce+dice | 0.427 | 0.6527 | 0.5163 | 0.6359 | 0.7738 | 0.6981 | 0.5113 | 0.5313 | 0.6981 | 0.7258 |
+| completed | SAM2.1 | Hiera-B+ (full finetune, msfpn) | focal+dice | 0.4484 | 0.577 | 0.5046 | 0.6897 | 0.7728 | 0.7289 | 0.5124 | 0.6143 | 0.7289 | 0.744 |
+| completed | RSAM-Seg | SAM-ViT-B (frozen encoder) | ce+dice | 0.4322 | 0.628 | 0.5121 | 0.6393 | 0.8147 | 0.7164 | 0.5349 | 0.6171 | 0.7164 | 0.74 |
+| completed | RSAM-Seg | SAM-ViT-B (frozen encoder) | weighted_ce+dice | 0.4842 | 0.7614 | 0.592 | 0.6559 | 0.814 | 0.7264 | 0.6206 | 0.5666 | 0.7264 | 0.7512 |
+| completed | RSAM-Seg | SAM-ViT-B (frozen encoder) | focal+dice | 0.5499 | 0.6354 | 0.5896 | 0.7046 | 0.823 | 0.7592 | 0.5705 | 0.6147 | 0.7592 | 0.7843 |
+| completed | SESSRS | A2FPN (ce+dice) | t1/t2 search + postprocess | 0.5133 | 0.5665 | 0.5386 | 0.7381 | 0.7526 | 0.7453 | 0.5592 | 0.6678 | 0.7453 | 0.7725 |
+| completed | SESSRS | A2FPN (focal) | t1/t2 search + postprocess | 0.4574 | 0.623 | 0.5275 | 0.6502 | 0.7846 | 0.7111 | 0.5414 | 0.6394 | 0.7111 | 0.7161 |
+| completed | SESSRS | A2FPN (weighted) | t1/t2 search + postprocess | 0.566 | 0.6809 | 0.6181 | 0.7081 | 0.7544 | 0.7305 | 0.6176 | 0.6064 | 0.7305 | 0.7553 |
+| completed | SESSRS | ABCNet (ce+dice+aux) | t1/t2 search + postprocess | 0.5193 | 0.5399 | 0.5294 | 0.7338 | 0.7367 | 0.7353 | 0.515 | 0.6593 | 0.7353 | 0.746 |
+| completed | SESSRS | BANet (ce+dice) | t1/t2 search + postprocess | 0.4616 | 0.5574 | 0.505 | 0.6664 | 0.7606 | 0.7104 | 0.4863 | 0.6238 | 0.7104 | 0.7155 |
+| completed | SESSRS | MANet (ce+dice) | t1/t2 search + postprocess | 0.4261 | 0.6917 | 0.5273 | 0.6085 | 0.8824 | 0.7203 | 0.5556 | 0.643 | 0.7203 | 0.734 |
+| completed | SESSRS | MANet (focal) | t1/t2 search + postprocess | 0.4344 | 0.861 | 0.5774 | 0.5777 | 0.8897 | 0.7005 | 0.617 | 0.5444 | 0.7005 | 0.7203 |
+| completed | SESSRS | MANet (weighted) | t1/t2 search + postprocess | 0.4458 | 0.8443 | 0.5835 | 0.586 | 0.8794 | 0.7033 | 0.6817 | 0.5535 | 0.7033 | 0.7236 |
+| completed | SESSRS | UNetFormer (ce+dice) | t1/t2 search + postprocess | 0.5221 | 0.639 | 0.5747 | 0.6912 | 0.8521 | 0.7633 | 0.5913 | 0.7105 | 0.7633 | 0.7838 |
+| completed | SESSRS | UNetFormer (focal) | t1/t2 search + postprocess | 0.4633 | 0.6671 | 0.5468 | 0.6343 | 0.8535 | 0.7278 | 0.5807 | 0.6704 | 0.7278 | 0.7533 |
+| completed | SESSRS | UNetFormer (weighted) | t1/t2 search + postprocess | 0.4444 | 0.7464 | 0.5571 | 0.6075 | 0.8561 | 0.7107 | 0.612 | 0.5893 | 0.7107 | 0.7314 |
 
 
 #### Test per-class precision
@@ -1294,103 +1295,119 @@ Protocol: image-level labels are derived from predicted and GT segmentation maps
 | completed | SESSRS   | UNetFormer (focal)                        | t1/t2 search + postprocess |     0.5568 | -             |           0.8276 | -                 |         0.885  |              0.4554 | -                |          0.5489 | -       |        0.7282 |        0.6194 |        0.7417 | -        | -          |
 | completed | SESSRS   | UNetFormer (weighted)                     | t1/t2 search + postprocess |     0.3654 | 0.4491        |           0.8347 | -                 |         0.8724 |              0.2961 | -                |          0.4452 | -       |        0.7184 |        0.5952 |        0.7271 | -        | -          |
 
-#### Test per-class ap
+#### Test per-class AP
 
-- Source: `/deac/csc/yangGrp/cuij/GoldMDD/experiments/diagnostics/test_multilabel_per_class_ap.csv`
+Per-class AP is reported for the ten classes present in the test split, using the same class abbreviations as the paper tables.
+
 ##### General segmentation models
 
-| status    | model            | backbone            | loss                      |   Building |   Mining raft |   Primary Forest | Heavy machinery   |   Water bodies |   Agricultural crop | Compact mounds   |   Gravel mounds | Grass   |   Type1 regen |   Type2 regen |   Bare ground |   Sluice | Vehicles   |
-|:----------|:-----------------|:--------------------|:--------------------------|-----------:|--------------:|-----------------:|:------------------|---------------:|--------------------:|:-----------------|----------------:|:--------|--------------:|--------------:|--------------:|---------:|:-----------|
-| completed | DeepLabV3+       | ConvNeXt-Tiny       | ce+dice                   |     0.6052 |        0.4658 |           0.8194 | -                 |         0.9275 |              0.5027 | -                |          0.748  | -       |        0.7153 |        0.4888 |        0.745  |   0.1207 | -          |
-| completed | DeepLabV3+       | ConvNeXt-Tiny       | weighted_ce+dice          |     0.6532 |        0.376  |           0.8261 | -                 |         0.9182 |              0.357  | -                |          0.7399 | -       |        0.7008 |        0.4437 |        0.6979 |   0.224  | -          |
-| completed | DeepLabV3+       | ConvNeXt-Tiny       | focal+dice                |     0.6245 |        0.4539 |           0.8287 | -                 |         0.9246 |              0.4409 | -                |          0.7084 | -       |        0.7101 |        0.4718 |        0.7239 |   0.0396 | -          |
-| completed | DeepLabV3+       | ResNet-50           | ce+dice                   |     0.7532 |        0.0189 |           0.8289 | -                 |         0.9254 |              0.4024 | -                |          0.7955 | -       |        0.7086 |        0.4885 |        0.6508 |   0.01   | -          |
-| completed | DeepLabV3+       | ResNet-50           | weighted_ce+dice          |     0.717  |        0.4056 |           0.8288 | -                 |         0.9044 |              0.1567 | -                |          0.7362 | -       |        0.7037 |        0.4822 |        0.6393 |   0.01   | -          |
-| completed | DeepLabV3+       | ResNet-50           | focal+dice                |     0.6571 |        0.4209 |           0.85   | -                 |         0.9307 |              0.2984 | -                |          0.741  | -       |        0.7182 |        0.4814 |        0.6882 |   0.01   | -          |
-| completed | UPerNet          | Swin-Tiny           | ce+dice                   |     0.4256 |        0.191  |           0.8053 | -                 |         0.9051 |              0.3399 | -                |          0.5622 | -       |        0.6561 |        0.4232 |        0.6929 |   0.01   | -          |
-| completed | OCRNet           | HRNet-W48           | ce+dice                   |     0.4672 |        0.0189 |           0.7802 | -                 |         0.8503 |              0.2013 | -                |          0.6585 | -       |        0.6977 |        0.4206 |        0.528  |   0.01   | -          |
-| completed | SegFormer        | MiT-B2              | ce+dice                   |     0.4826 |        0.3052 |           0.7937 | -                 |         0.8617 |              0.2905 | -                |          0.7258 | -       |        0.702  |        0.4548 |        0.5543 |   0.0638 | -          |
-| completed | SegFormer        | MiT-B2              | weighted_ce+dice          |     0.7568 |        0.5136 |           0.82   | -                 |         0.9244 |              0.5274 | -                |          0.7699 | -       |        0.7207 |        0.4213 |        0.7023 |   0.01   | -          |
-| completed | SegFormer        | MiT-B2              | focal+dice                |     0.6103 |        0.4562 |           0.8228 | -                 |         0.8389 |              0.4665 | -                |          0.7213 | -       |        0.7217 |        0.4734 |        0.5231 |   0.0571 | -          |
-| completed | Mask2Former      | ResNet-50           | set_matching_ce+mask+dice |     0.5012 |        0.2957 |           0.8039 | -                 |         0.7864 |              0.2685 | -                |          0.6755 | -       |        0.6778 |        0.4819 |        0.5934 |   0.01   | -          |
-| completed | SegNeXt          | MSCAN-Tiny          | ce+dice                   |     0.5003 |        0.1381 |           0.8036 | -                 |         0.851  |              0.1061 | -                |          0.5822 | -       |        0.6999 |        0.4166 |        0.5746 |   0.01   | -          |
-| completed | Afformer         | AFFormer-Base       | ce+dice                   |     0.5499 |        0.2323 |           0.8121 | -                 |         0.833  |              0.3415 | -                |          0.6212 | -       |        0.7235 |        0.4558 |        0.5381 |   0.0461 | -          |
-| completed | EfficientViT-Seg | EfficientViT-B2     | ce+dice                   |     0.5544 |        0.2311 |           0.8274 | -                 |         0.9165 |              0.5232 | -                |          0.657  | -       |        0.6978 |        0.4614 |        0.746  |   0.01   | -          |
-| completed | EfficientViT-Seg | EfficientViT-B2     | weighted_ce+dice          |     0.5431 |        0.3716 |           0.8295 | -                 |         0.916  |              0.4473 | -                |          0.7063 | -       |        0.6907 |        0.4719 |        0.72   |   0.2073 | -          |
-| completed | EfficientViT-Seg | EfficientViT-B2     | focal+dice                |     0.4667 |        0.4423 |           0.8391 | -                 |         0.9075 |              0.4824 | -                |          0.7242 | -       |        0.6992 |        0.4349 |        0.6618 |   0.1182 | -          |
-| completed | SeaFormer        | SeaFormer-Base      | ce+dice                   |     0.4831 |        0.11   |           0.8054 | -                 |         0.83   |              0.4067 | -                |          0.6018 | -       |        0.7317 |        0.4431 |        0.5206 |   0.01   | -          |
-| completed | CGRSeg           | EfficientFormerV2-B | ce+dice                   |     0.5475 |        0.2301 |           0.8074 | -                 |         0.8201 |              0.2376 | -                |          0.557  | -       |        0.6735 |        0.4046 |        0.5192 |   0.0231 | -          |
-| completed | PEM              | ResNet-50           | set_matching_ce+mask+dice |     0.3711 |        0.1412 |           0.8212 | -                 |         0.7481 |              0.4424 | -                |          0.6294 | -       |        0.6638 |        0.5076 |        0.5334 |   0.01   | -          |
+| Model        | Backbone            | Loss             | Score | mAP    | BU     | MR     | PF     | WB     | AC     | GM     | T1R    | T2R    | BG     | SL     |
+| ------------ | ------------------- | ---------------- | ----- | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ |
+| DeepLabV3+   | ConvNeXt-Tiny       | CE+Dice          | max   | 0.6230 | 0.5605 | 0.4701 | 0.8847 | 0.9299 | 0.4738 | 0.7446 | 0.7435 | 0.5157 | 0.8092 | 0.0980 |
+| DeepLabV3+   | ConvNeXt-Tiny       | Focal+Dice       | max   | 0.6179 | 0.6140 | 0.4814 | 0.8796 | 0.9305 | 0.4805 | 0.6994 | 0.7469 | 0.5092 | 0.8130 | 0.0247 |
+| DeepLabV3+   | ConvNeXt-Tiny       | WCE+Dice         | max   | 0.6107 | 0.6399 | 0.3737 | 0.8786 | 0.9266 | 0.3730 | 0.7248 | 0.7488 | 0.4562 | 0.7829 | 0.2023 |
+| DeepLabV3+   | ResNet-50           | CE+Dice          | max   | 0.5776 | 0.7742 | 0.0189 | 0.8792 | 0.9309 | 0.4392 | 0.7893 | 0.7381 | 0.4932 | 0.7031 | 0.0100 |
+| DeepLabV3+   | ResNet-50           | Focal+Dice       | max   | 0.6120 | 0.6631 | 0.3782 | 0.8915 | 0.9342 | 0.4640 | 0.7316 | 0.7507 | 0.5020 | 0.7952 | 0.0100 |
+| DeepLabV3+   | ResNet-50           | WCE+Dice         | max   | 0.5664 | 0.7206 | 0.3840 | 0.8781 | 0.9187 | 0.1457 | 0.7374 | 0.7482 | 0.4850 | 0.6364 | 0.0100 |
+| UPerNet      | Swin-Tiny           | CE+Dice          | max   | 0.5252 | 0.4622 | 0.1962 | 0.8641 | 0.9184 | 0.3475 | 0.5842 | 0.7145 | 0.4247 | 0.7305 | 0.0100 |
+| OCRNet       | HRNet-W48           | CE+Dice          | max   | 0.4867 | 0.4815 | 0.0189 | 0.8225 | 0.8599 | 0.3158 | 0.6986 | 0.7299 | 0.4226 | 0.5076 | 0.0100 |
+| BiSeNetv2 | Custom Bilateral | CE+Dice | max | 0.5377 | 0.4594 | 0.0189 | 0.8778 | 0.9257 | 0.4250 | 0.7560 | 0.7736 | 0.4815 | 0.6496 | 0.0100 |
+| BiSeNetv2 | Custom Bilateral | Focal+Dice | max | 0.5263 | 0.3515 | 0.0189 | 0.9016 | 0.9179 | 0.4481 | 0.6983 | 0.7525 | 0.5067 | 0.6578 | 0.0100 |
+| BiSeNetv2 | Custom Bilateral | WCE+Dice | max | 0.5369 | 0.3610 | 0.0189 | 0.8482 | 0.9442 | 0.4472 | 0.7794 | 0.7533 | 0.4421 | 0.7650 | 0.0100 |
+| SegFormer    | MiT-B2              | CE+Dice          | max   | 0.5382 | 0.5163 | 0.3023 | 0.8575 | 0.8678 | 0.2783 | 0.7244 | 0.7231 | 0.4819 | 0.5599 | 0.0701 |
+| SegFormer    | MiT-B2              | Focal+Dice       | max   | 0.5857 | 0.5922 | 0.4603 | 0.8903 | 0.8403 | 0.5325 | 0.7161 | 0.7384 | 0.4723 | 0.5539 | 0.0605 |
+| SegFormer    | MiT-B2              | WCE+Dice         | max   | 0.6576 | 0.8137 | 0.5563 | 0.8925 | 0.9333 | 0.5681 | 0.8198 | 0.7717 | 0.4194 | 0.7908 | 0.0100 |
+| STDC2 | STDCNet | CE+Dice | max | 0.5016 | 0.2907 | 0.0189 | 0.8943 | 0.9225 | 0.3793 | 0.5378 | 0.6640 | 0.4966 | 0.8024 | 0.0100 |
+| STDC2 | STDCNet | Focal+Dice | max | 0.5010 | 0.2553 | 0.0189 | 0.8924 | 0.9105 | 0.3562 | 0.6966 | 0.7334 | 0.4529 | 0.6834 | 0.0100 |
+| STDC2 | STDCNet | WCE+Dice | max | 0.5756 | 0.5716 | 0.2593 | 0.8718 | 0.9157 | 0.4984 | 0.6962 | 0.7486 | 0.4659 | 0.7181 | 0.0100 |
+| Mask2Former | ResNet-50 | Set CE+Mask+Dice | query-score proxy | 0.5297 | 0.4482 | 0.3164 | 0.7934 | 0.7863 | 0.3046 | 0.6250 | 0.6906 | 0.5706 | 0.7516 | 0.0100 |
+| SegNeXt      | MSCAN-Tiny          | CE+Dice          | max   | 0.4756 | 0.4830 | 0.1331 | 0.8519 | 0.8595 | 0.1045 | 0.5783 | 0.7317 | 0.4265 | 0.5776 | 0.0100 |
+| DDRNet | DDRNet-23-slim | Focal+Dice | max | 0.5081 | 0.4808 | 0.0189 | 0.8657 | 0.8715 | 0.3883 | 0.6356 | 0.7235 | 0.4485 | 0.6381 | 0.0100 |
+| Afformer     | AFFormer-Base       | CE+Dice          | max   | 0.5297 | 0.5744 | 0.2345 | 0.8592 | 0.8407 | 0.3401 | 0.6210 | 0.7575 | 0.4570 | 0.5805 | 0.0319 |
+| EfficientViT | EfficientViT-B2     | CE+Dice          | max   | 0.6002 | 0.6018 | 0.2333 | 0.8910 | 0.9257 | 0.5477 | 0.7617 | 0.7343 | 0.4750 | 0.8210 | 0.0100 |
+| EfficientViT | EfficientViT-B2     | Focal+Dice       | max   | 0.6100 | 0.5371 | 0.4208 | 0.8769 | 0.9121 | 0.4961 | 0.7526 | 0.7441 | 0.4659 | 0.7921 | 0.1021 |
+| EfficientViT | EfficientViT-B2     | WCE+Dice         | max   | 0.6228 | 0.6490 | 0.3473 | 0.8843 | 0.9280 | 0.4724 | 0.7022 | 0.7340 | 0.5165 | 0.8111 | 0.1827 |
+| SeaFormer    | SeaFormer-Base      | CE+Dice          | max   | 0.5171 | 0.5452 | 0.1100 | 0.8709 | 0.8387 | 0.4316 | 0.6091 | 0.7631 | 0.4593 | 0.5326 | 0.0100 |
+| PIDNet | PIDNet-M | CE+Dice | max | 0.5254 | 0.4811 | 0.0189 | 0.8766 | 0.9101 | 0.4882 | 0.5863 | 0.7391 | 0.4270 | 0.7172 | 0.0100 |
+| PIDNet | PIDNet-M | Focal+Dice | max | 0.4298 | 0.1607 | 0.0189 | 0.8815 | 0.8879 | 0.0578 | 0.3648 | 0.7354 | 0.4331 | 0.7475 | 0.0100 |
+| PIDNet | PIDNet-M | WCE+Dice | max | 0.5254 | 0.3210 | 0.3226 | 0.8719 | 0.9172 | 0.3865 | 0.5997 | 0.6427 | 0.4775 | 0.7047 | 0.0100 |
+| CGRSeg       | EfficientFormerV2-B | CE+Dice          | max   | 0.4990 | 0.5869 | 0.2319 | 0.8501 | 0.8265 | 0.2199 | 0.5555 | 0.7172 | 0.4265 | 0.5447 | 0.0307 |
+| PEM | ResNet-50 | Set CE+Mask+Dice | query-score proxy | 0.5069 | 0.3560 | 0.1290 | 0.8110 | 0.7546 | 0.3815 | 0.5961 | 0.6932 | 0.5735 | 0.7643 | 0.0100 |
+| VMamba | VMamba-Tiny | CE+Dice | max | 0.4648 | 0.3841 | 0.0189 | 0.8790 | 0.8191 | 0.1858 | 0.6347 | 0.6951 | 0.4674 | 0.5540 | 0.0100 |
 
+| MP-Former | Mask2Former Swin-L | Focal+Dice | query-score proxy | 0.3122 | 0.0150 | 0.0189 | 0.8288 | 0.6130 | 0.0452 | 0.2435 | 0.5106 | 0.4081 | 0.4289 | 0.0100 |
 ##### Remote-sensing-specific methods
 
-| status    | model        | backbone                | loss                    |   Building |   Mining raft |   Primary Forest | Heavy machinery   |   Water bodies |   Agricultural crop | Compact mounds   |   Gravel mounds | Grass   |   Type1 regen |   Type2 regen |   Bare ground |   Sluice | Vehicles   |
-|:----------|:-------------|:------------------------|:------------------------|-----------:|--------------:|-----------------:|:------------------|---------------:|--------------------:|:-----------------|----------------:|:--------|--------------:|--------------:|--------------:|---------:|:-----------|
-| completed | FarSeg       | ResNet-50               | ce (native)             |     0.5609 |        0.0189 |           0.8159 | -                 |         0.9365 |              0.2624 | -                |          0.6678 | -       |        0.704  |        0.485  |        0.8019 |   0.01   | -          |
-| completed | FarSeg       | ResNet-50               | ce+dice                 |     0.6463 |        0.0189 |           0.8007 | -                 |         0.9154 |              0.4912 | -                |          0.7195 | -       |        0.689  |        0.4522 |        0.8192 |   0.01   | -          |
-| completed | FarSeg       | ResNet-50               | weighted_ce+dice        |     0.5255 |        0.2317 |           0.8135 | -                 |         0.9243 |              0.4754 | -                |          0.7647 | -       |        0.6114 |        0.4361 |        0.6766 |   0.3031 | -          |
-| completed | FarSeg       | ResNet-50               | focal+dice              |     0.6595 |        0.0189 |           0.8512 | -                 |         0.9454 |              0.3198 | -                |          0.7362 | -       |        0.7057 |        0.4941 |        0.8416 |   0.01   | -          |
-| completed | BANet        | ResT-Lite               | ce+dice                 |     0.4034 |        0.0185 |           0.8114 | -                 |         0.8521 |              0.2936 | -                |          0.5988 | -       |        0.671  |        0.4584 |        0.547  |   0.01   | -          |
-| completed | ABCNet       | ResNet-18               | ce+dice+aux_ce          |     0.45   |        0.0189 |           0.804  | -                 |         0.8934 |              0.2952 | -                |          0.7071 | -       |        0.6422 |        0.4369 |        0.6587 |   0.01   | -          |
-| completed | MANet        | ResNet-50               | ce+dice                 |     0.8302 |        0.0181 |           0.8444 | -                 |         0.9393 |              0.4726 | -                |          0.7492 | -       |        0.7051 |        0.4388 |        0.6855 |   0.01   | -          |
-| completed | MANet        | ResNet-50               | weighted_ce+dice        |     0.8666 |        0.6568 |           0.844  | -                 |         0.9322 |              0.4933 | -                |          0.7667 | -       |        0.6882 |        0.4221 |        0.6779 |   0.2113 | -          |
-| completed | MANet        | ResNet-50               | focal+dice              |     0.8194 |        0.5011 |           0.8504 | -                 |         0.9284 |              0.5012 | -                |          0.7777 | -       |        0.7159 |        0.4493 |        0.6484 |   0.4515 | -          |
-| completed | UNetFormer   | ResNet-18               | ce+dice+aux_ce          |     0.7397 |        0.0189 |           0.8217 | -                 |         0.9336 |              0.493  | -                |          0.7374 | -       |        0.7264 |        0.4957 |        0.672  |   0.01   | -          |
-| completed | UNetFormer   | ResNet-18               | weighted_ce+dice+aux_ce |     0.7636 |        0.4324 |           0.8399 | -                 |         0.9235 |              0.3679 | -                |          0.7284 | -       |        0.684  |        0.454  |        0.6225 |   0.01   | -          |
-| completed | UNetFormer   | ResNet-18               | focal+dice+aux_focal    |     0.7687 |        0.0189 |           0.8402 | -                 |         0.9316 |              0.4355 | -                |          0.6966 | -       |        0.6914 |        0.5004 |        0.7197 |   0.01   | -          |
-| completed | DC-Swin      | Swin-Small              | ce+dice                 |     0.428  |        0.0189 |           0.8201 | -                 |         0.9109 |              0.2035 | -                |          0.6009 | -       |        0.6889 |        0.4542 |        0.5905 |   0.01   | -          |
-| completed | A2FPN        | ResNet-18               | ce+dice                 |     0.5576 |        0.0189 |           0.8095 | -                 |         0.9243 |              0.2816 | -                |          0.7047 | -       |        0.6389 |        0.4708 |        0.8223 |   0.01   | -          |
-| completed | A2FPN        | ResNet-18               | weighted_ce+dice        |     0.6513 |        0.3785 |           0.8072 | -                 |         0.9099 |              0.3942 | -                |          0.7274 | -       |        0.6695 |        0.453  |        0.6719 |   0.3189 | -          |
-| completed | A2FPN        | ResNet-18               | focal+dice              |     0.7207 |        0.0189 |           0.8215 | -                 |         0.8943 |              0.3064 | -                |          0.7211 | -       |        0.6777 |        0.4353 |        0.6133 |   0.01   | -          |
-| completed | LoGCAN       | ResNet-50               | ce+aux_ce (native)      |     0.5255 |        0.2614 |           0.8496 | -                 |         0.91   |              0.4964 | -                |          0.3804 | -       |        0.6881 |        0.5363 |        0.6775 |   0.01   | -          |
-| completed | FarSeg++     | MiT-B2                  | ce (native)             |     0.4468 |        0.3042 |           0.8162 | -                 |         0.862  |              0.1655 | -                |          0.54   | -       |        0.6702 |        0.4827 |        0.5669 |   0.0099 | -          |
-| completed | SACANet      | HRNet-W32               | ce+aux_ce (native)      |     0.5265 |        0.0935 |           0.8374 | -                 |         0.8724 |              0.5306 | -                |          0.6368 | -       |        0.7136 |        0.4366 |        0.6241 |   0.01   | -          |
-| completed | DOCNet       | HRNet-W32               | ce+aux_ce (native)      |     0.4204 |        0.2258 |           0.821  | -                 |         0.8827 |              0.3717 | -                |          0.6047 | -       |        0.6746 |        0.454  |        0.6803 |   0.01   | -          |
-| completed | PPMambaSeg   | swsl-ResNet-18          | ce+dice                 |     0.6582 |        0.0189 |           0.8313 | -                 |         0.897  |              0.4797 | -                |          0.7839 | -       |        0.6724 |        0.4708 |        0.58   |   0.01   | -          |
-| completed | PPMambaSeg   | swsl-ResNet-18          | weighted_ce+dice        |     0.7491 |        0.405  |           0.8324 | -                 |         0.9055 |              0.4652 | -                |          0.7539 | -       |        0.6691 |        0.4581 |        0.6029 |   0.3785 | -          |
-| completed | PPMambaSeg   | swsl-ResNet-18          | focal+dice              |     0.7525 |        0.0189 |           0.8294 | -                 |         0.9193 |              0.5382 | -                |          0.7644 | -       |        0.7042 |        0.4355 |        0.652  |   0.01   | -          |
-| completed | RS3Mamba     | ResNet-18 + VMamba-Tiny | ce+dice                 |     0.015  |        0.0189 |           0.835  | -                 |         0.9211 |              0.0453 | -                |          0.2438 | -       |        0.7098 |        0.5734 |        0.6743 |   0.01   | -          |
-| completed | RS3Mamba     | ResNet-18 + VMamba-Tiny | weighted_ce+dice        |     0.2461 |        0.0189 |           0.8381 | -                 |         0.9119 |              0.5113 | -                |          0.4579 | -       |        0.6828 |        0.4594 |        0.5796 |   0.01   | -          |
-| completed | RS3Mamba     | ResNet-18 + VMamba-Tiny | focal+dice              |     0.015  |        0.0189 |           0.8337 | -                 |         0.9247 |              0.3136 | -                |          0.4751 | -       |        0.7018 |        0.5669 |        0.6947 |   0.01   | -          |
-| completed | PyramidMamba | Swin-Base               | ce+dice                 |     0.8151 |        0.4789 |           0.8273 | -                 |         0.9148 |              0.4122 | -                |          0.7793 | -       |        0.7308 |        0.4671 |        0.6143 |   0.01   | -          |
-| completed | PyramidMamba | Swin-Base               | weighted_ce+dice        |     0.8546 |        0.5716 |           0.8331 | -                 |         0.9176 |              0.5685 | -                |          0.8074 | -       |        0.7448 |        0.4954 |        0.6073 |   0.3488 | -          |
-| completed | PyramidMamba | Swin-Base               | focal+dice              |     0.8613 |        0.4011 |           0.825  | -                 |         0.9023 |              0.4437 | -                |          0.7756 | -       |        0.7288 |        0.4502 |        0.5961 |   0.01   | -          |
-| completed | LoGCAN++     | RepViT-M2.3             | ce+aux_ce (native)      |     0.2195 |        0.0827 |           0.7894 | -                 |         0.817  |              0.173  | -                |          0.4654 | -       |        0.6348 |        0.4529 |        0.5453 |   0.01   | -          |
-| completed | MF-Mamba     | HRNet-W18               | ce+dice                 |     0.4628 |        0.0189 |           0.8232 | -                 |         0.8577 |              0.3328 | -                |          0.6314 | -       |        0.6567 |        0.4514 |        0.5622 |   0.01   | -          |
-| completed | MCPNet       | ResNet-50               | ce+dice                 |     0.2473 |        0.0186 |           0.8107 | -                 |         0.8566 |              0.2788 | -                |          0.6732 | -       |        0.6966 |        0.4893 |        0.568  |   0.0099 | -          |
-| completed | MCPNet       | ResNet-50               | weighted_ce+dice        |     0.2923 |        0.3333 |           0.8132 | -                 |         0.8431 |              0.4577 | -                |          0.6093 | -       |        0.7335 |        0.4871 |        0.5613 |   0.01   | -          |
-| completed | MCPNet       | ResNet-50               | focal+dice              |     0.2555 |        0.0189 |           0.8211 | -                 |         0.8938 |              0.4785 | -                |          0.5638 | -       |        0.7134 |        0.4863 |        0.6041 |   0.0136 | -          |
+| Model        | Backbone    | Loss             | Score | mAP    | BU     | MR     | PF     | WB     | AC     | GM     | T1R    | T2R    | BG     | SL     |
+| ------------ | ----------- | ---------------- | ----- | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ |
+| FarSeg       | ResNet-50   | CE               | max   | 0.5576 | 0.5435 | 0.0189 | 0.8746 | 0.9459 | 0.3968 | 0.7467 | 0.7406 | 0.4529 | 0.8462 | 0.0100 |
+| FarSeg       | ResNet-50   | CE+Dice          | max   | 0.5752 | 0.5892 | 0.0189 | 0.8490 | 0.9422 | 0.5241 | 0.7795 | 0.7598 | 0.4413 | 0.8379 | 0.0100 |
+| FarSeg       | ResNet-50   | Focal+Dice       | max   | 0.5773 | 0.7438 | 0.0189 | 0.9053 | 0.9516 | 0.2878 | 0.7579 | 0.7630 | 0.4816 | 0.8528 | 0.0100 |
+| FarSeg       | ResNet-50   | WCE+Dice         | max   | 0.6159 | 0.6762 | 0.3389 | 0.8606 | 0.9338 | 0.5183 | 0.7662 | 0.6375 | 0.4348 | 0.6965 | 0.2962 |
+| BANet        | ResT-Lite   | CE+Dice          | max   | 0.4863 | 0.5043 | 0.0185 | 0.8800 | 0.8655 | 0.2897 | 0.5945 | 0.6983 | 0.4473 | 0.5548 | 0.0100 |
+| ABCNet       | ResNet-18   | CE+Dice$^{*}$    | max   | 0.5150 | 0.5336 | 0.0189 | 0.8696 | 0.9077 | 0.2597 | 0.7413 | 0.6850 | 0.4197 | 0.7041 | 0.0100 |
+| MANet        | ResNet-50   | CE+Dice          | max   | 0.5556 | 0.7770 | 0.0181 | 0.8558 | 0.9490 | 0.5034 | 0.5916 | 0.7336 | 0.4234 | 0.6941 | 0.0100 |
+| MANet        | ResNet-50   | Focal+Dice       | max   | 0.6170 | 0.7816 | 0.2292 | 0.8944 | 0.9397 | 0.5425 | 0.7294 | 0.7422 | 0.4348 | 0.6382 | 0.2377 |
+| MANet        | ResNet-50   | WCE+Dice         | max   | 0.6817 | 0.8797 | 0.7104 | 0.8894 | 0.9461 | 0.5387 | 0.8221 | 0.7289 | 0.4043 | 0.6655 | 0.2316 |
+| UNetFormer   | ResNet-18   | CE+Dice$^{*}$    | max   | 0.5913 | 0.7615 | 0.0189 | 0.9018 | 0.9415 | 0.4988 | 0.7970 | 0.7621 | 0.4917 | 0.7298 | 0.0100 |
+| UNetFormer   | ResNet-18   | Focal+Dice$^{*}$ | max   | 0.5807 | 0.7688 | 0.0189 | 0.8928 | 0.9451 | 0.4542 | 0.7449 | 0.7203 | 0.5087 | 0.7437 | 0.0100 |
+| UNetFormer   | ResNet-18   | WCE+Dice$^{*}$   | max   | 0.6119 | 0.8290 | 0.4190 | 0.8935 | 0.9273 | 0.4719 | 0.7618 | 0.7550 | 0.4596 | 0.5921 | 0.0100 |
+| DC-Swin      | Swin-Small  | CE+Dice          | max   | 0.4953 | 0.4915 | 0.0189 | 0.8828 | 0.9204 | 0.2186 | 0.6074 | 0.7343 | 0.4530 | 0.6165 | 0.0100 |
+| A2-FPN       | ResNet-18   | CE+Dice          | max   | 0.5592 | 0.6169 | 0.0189 | 0.8789 | 0.9370 | 0.3888 | 0.7417 | 0.6752 | 0.4866 | 0.8384 | 0.0100 |
+| A2-FPN       | ResNet-18   | Focal+Dice       | max   | 0.5414 | 0.7121 | 0.0189 | 0.8722 | 0.9017 | 0.3364 | 0.7490 | 0.7505 | 0.4352 | 0.6282 | 0.0100 |
+| A2-FPN       | ResNet-18   | WCE+Dice         | max   | 0.6176 | 0.6652 | 0.3397 | 0.8789 | 0.9183 | 0.4605 | 0.7435 | 0.7266 | 0.4551 | 0.6861 | 0.3019 |
+| LoGCAN       | ResNet-50   | CE$^{*}$         | max   | 0.5499 | 0.5547 | 0.2676 | 0.9053 | 0.9331 | 0.4860 | 0.4014 | 0.7218 | 0.5253 | 0.6934 | 0.0100 |
+| FarSeg++     | MiT-B2      | CE               | max   | 0.4957 | 0.4085 | 0.3274 | 0.8789 | 0.8719 | 0.1357 | 0.5440 | 0.7032 | 0.4743 | 0.6031 | 0.0099 |
+| SACANet      | HRNet-W32   | CE$^{*}$         | max   | 0.5525 | 0.5654 | 0.0937 | 0.8755 | 0.8899 | 0.5717 | 0.6314 | 0.7664 | 0.4211 | 0.7002 | 0.0100 |
+| DOCNet       | HRNet-W32   | CE$^{*}$         | max   | 0.5317 | 0.5083 | 0.2296 | 0.8815 | 0.9130 | 0.3333 | 0.6102 | 0.7011 | 0.4370 | 0.6935 | 0.0100 |
+| PPMambaSeg   | SWSL        | CE+Dice          | max   | 0.5615 | 0.6559 | 0.0189 | 0.8838 | 0.8978 | 0.4776 | 0.8051 | 0.7090 | 0.5149 | 0.6416 | 0.0100 |
+| PPMambaSeg   | SWSL        | Focal+Dice       | max   | 0.5828 | 0.7406 | 0.0189 | 0.8977 | 0.9258 | 0.5313 | 0.8103 | 0.7524 | 0.4300 | 0.7112 | 0.0100 |
+| PPMambaSeg   | SWSL        | WCE+Dice         | max   | 0.6408 | 0.7717 | 0.3993 | 0.8787 | 0.9093 | 0.4862 | 0.7686 | 0.7121 | 0.4693 | 0.6474 | 0.3652 |
+| RS3Mamba     | VMamba-Tiny | CE+Dice          | max   | 0.4235 | 0.0150 | 0.0189 | 0.9011 | 0.9291 | 0.0453 | 0.2438 | 0.7405 | 0.5423 | 0.7889 | 0.0100 |
+| RS3Mamba     | VMamba-Tiny | Focal+Dice       | max   | 0.4709 | 0.0150 | 0.0189 | 0.8981 | 0.9312 | 0.3472 | 0.4767 | 0.7502 | 0.5131 | 0.7485 | 0.0100 |
+| RS3Mamba     | VMamba-Tiny | WCE+Dice         | max   | 0.5263 | 0.4916 | 0.0189 | 0.8792 | 0.9219 | 0.5172 | 0.5694 | 0.7669 | 0.4904 | 0.5971 | 0.0100 |
+| PyramidMamba | Swin-Base   | CE+Dice          | max   | 0.6301 | 0.7195 | 0.4744 | 0.8822 | 0.9089 | 0.4577 | 0.7697 | 0.7673 | 0.4868 | 0.8241 | 0.0100 |
+| PyramidMamba | Swin-Base   | Focal+Dice       | max   | 0.6365 | 0.8647 | 0.4124 | 0.8799 | 0.9025 | 0.5748 | 0.7770 | 0.7689 | 0.4686 | 0.7060 | 0.0100 |
+| PyramidMamba | Swin-Base   | WCE+Dice         | max   | 0.7024 | 0.8734 | 0.5746 | 0.8683 | 0.9185 | 0.5646 | 0.8256 | 0.7681 | 0.5418 | 0.7480 | 0.3406 |
+| LoGCAN++     | RepViT-M2.3 | CE$^{*}$         | max   | 0.4524 | 0.3992 | 0.0829 | 0.8489 | 0.8472 | 0.1764 | 0.4763 | 0.6906 | 0.4567 | 0.5363 | 0.0100 |
+| MF-Mamba     | HRNet-W18   | CE+Dice          | max   | 0.5137 | 0.5553 | 0.0189 | 0.8765 | 0.8671 | 0.3626 | 0.6620 | 0.7263 | 0.4751 | 0.5832 | 0.0100 |
+| MCPNet | ResNet-50 | CE+Dice | max | 0.5063 | 0.4156 | 0.0186 | 0.8820 | 0.8715 | 0.3612 | 0.6907 | 0.7297 | 0.5011 | 0.5824 | 0.0100 |
+| MCPNet | ResNet-50 | Focal+Dice | max | 0.5267 | 0.4573 | 0.0189 | 0.8901 | 0.9069 | 0.4804 | 0.5895 | 0.7350 | 0.5057 | 0.6699 | 0.0136 |
+| MCPNet | ResNet-50 | WCE+Dice | max | 0.5545 | 0.3707 | 0.3980 | 0.8808 | 0.8533 | 0.5057 | 0.6440 | 0.7542 | 0.5084 | 0.6202 | 0.0100 |
 
 ##### Methods related to vision foundation models
 
-| status    | model    | backbone                                  | loss                       |   Building |   Mining raft |   Primary Forest | Heavy machinery   |   Water bodies |   Agricultural crop | Compact mounds   |   Gravel mounds | Grass   |   Type1 regen |   Type2 regen |   Bare ground |   Sluice | Vehicles   |
-|:----------|:---------|:------------------------------------------|:---------------------------|-----------:|--------------:|-----------------:|:------------------|---------------:|--------------------:|:-----------------|----------------:|:--------|--------------:|--------------:|--------------:|---------:|:-----------|
-| completed | HQ-SAM   | ViT-B + HQ decoder (full finetune, msfpn) | ce+dice                    |     0.4167 |        0.1321 |           0.8749 | -                 |         0.9146 |              0.1273 | -                |          0.5248 | -       |        0.7358 |        0.4594 |        0.5535 |   0.01   | -          |
-| completed | HQ-SAM   | ViT-B + HQ decoder (full finetune, msfpn) | weighted_ce+dice           |     0.3655 |        0.1955 |           0.8802 | -                 |         0.8954 |              0.1129 | -                |          0.4819 | -       |        0.721  |        0.439  |        0.5242 |   0.0095 | -          |
-| completed | HQ-SAM   | ViT-B + HQ decoder (full finetune, msfpn) | focal+dice                 |     0.4746 |        0.181  |           0.8791 | -                 |         0.9106 |              0.1158 | -                |          0.4782 | -       |        0.7145 |        0.4888 |        0.5688 |   0.01   | -          |
-| completed | SAM_RS   | ABCNet + SAM priors                       | seg+bdy+obj (native)       |     0.2258 |        0.0189 |           0.798  | -                 |         0.9012 |              0.3196 | -                |          0.635  | -       |        0.6556 |        0.4541 |        0.6473 |   0.01   | -          |
-| completed | SAM_RS   | CMTFNet + SAM priors                      | seg+bdy+obj (native)       |     0.4057 |        0.0189 |           0.8107 | -                 |         0.8679 |              0.1417 | -                |          0.6313 | -       |        0.668  |        0.4534 |        0.6074 |   0.01   | -          |
-| completed | SAM_RS   | FTUNetFormer + SAM priors                 | seg+bdy+obj (native)       |     0.3986 |        0.0189 |           0.8033 | -                 |         0.8646 |              0.171  | -                |          0.5149 | -       |        0.6742 |        0.5325 |        0.5399 |   0.01   | -          |
-| completed | SAM_RS   | UNetFormer + SAM priors                   | seg+bdy+obj (native)       |     0.4161 |        0.0189 |           0.8251 | -                 |         0.8991 |              0.269  | -                |          0.6813 | -       |        0.7122 |        0.4914 |        0.6211 |   0.01   | -          |
-| completed | SAM2.1   | Hiera-B+ (frozen backbone, msfpn)         | ce+dice                    |     0.4801 |        0.1719 |           0.8524 | -                 |         0.8667 |              0.0801 | -                |          0.5118 | -       |        0.7099 |        0.4239 |        0.5145 |   0.01   | -          |
-| completed | SAM2.1   | Hiera-B+ (frozen backbone, msfpn)         | weighted_ce+dice           |     0.1094 |        0.1042 |           0.8711 | -                 |         0.8678 |              0.061  | -                |          0.4988 | -       |        0.671  |        0.4103 |        0.5014 |   0.0118 | -          |
-| completed | SAM2.1   | Hiera-B+ (frozen backbone, msfpn)         | focal+dice                 |     0.3368 |        0.2089 |           0.8769 | -                 |         0.8726 |              0.0737 | -                |          0.5452 | -       |        0.6877 |        0.4242 |        0.5045 |   0.01   | -          |
-| completed | SAM2.1   | Hiera-B+ (full finetune, msfpn)           | ce+dice                    |     0.4621 |        0.0189 |           0.8062 | -                 |         0.848  |              0.2161 | -                |          0.542  | -       |        0.693  |        0.4542 |        0.5449 |   0.01   | -          |
-| completed | SAM2.1   | Hiera-B+ (full finetune, msfpn)           | weighted_ce+dice           |     0.2097 |        0.3964 |           0.8205 | -                 |         0.8782 |              0.3169 | -                |          0.4935 | -       |        0.6721 |        0.4716 |        0.581  |   0.01   | -          |
-| completed | SAM2.1   | Hiera-B+ (full finetune, msfpn)           | focal+dice                 |     0.383  |        0.0189 |           0.8162 | -                 |         0.8574 |              0.2637 | -                |          0.5548 | -       |        0.6786 |        0.4799 |        0.5779 |   0.01   | -          |
-| completed | RSAM-Seg | SAM-ViT-B (frozen encoder)                | ce+dice                    |     0.5349 |        0.0189 |           0.8133 | -                 |         0.904  |              0.3774 | -                |          0.5414 | -       |        0.7021 |        0.4758 |        0.668  |   0.01   | -          |
-| completed | RSAM-Seg | SAM-ViT-B (frozen encoder)                | weighted_ce+dice           |     0.6478 |        0.453  |           0.8247 | -                 |         0.906  |              0.4637 | -                |          0.6663 | -       |        0.6742 |        0.4601 |        0.6346 |   0.1382 | -          |
-| completed | RSAM-Seg | SAM-ViT-B (frozen encoder)                | focal+dice                 |     0.4918 |        0.1961 |           0.8341 | -                 |         0.9069 |              0.3793 | -                |          0.6757 | -       |        0.7176 |        0.5535 |        0.6892 |   0.01   | -          |
-| completed | SESSRS   | A2FPN (ce+dice)                           | t1/t2 search + postprocess |     0.5604 |        0.0189 |           0.8095 | -                 |         0.9243 |              0.2812 | -                |          0.7034 | -       |        0.639  |        0.4708 |        0.8223 |   0.01   | -          |
-| completed | SESSRS   | A2FPN (focal)                             | t1/t2 search + postprocess |     0.7206 |        0.0189 |           0.8215 | -                 |         0.8942 |              0.3063 | -                |          0.7198 | -       |        0.6778 |        0.4354 |        0.6132 |   0.01   | -          |
-| completed | SESSRS   | A2FPN (weighted)                          | t1/t2 search + postprocess |     0.6534 |        0.3786 |           0.8071 | -                 |         0.9099 |              0.3939 | -                |          0.726  | -       |        0.6695 |        0.4531 |        0.6719 |   0.3191 | -          |
-| completed | SESSRS   | ABCNet (ce+dice+aux)                      | t1/t2 search + postprocess |     0.4507 |        0.0189 |           0.804  | -                 |         0.8935 |              0.2952 | -                |          0.7062 | -       |        0.6423 |        0.4369 |        0.6587 |   0.01   | -          |
-| completed | SESSRS   | BANet (ce+dice)                           | t1/t2 search + postprocess |     0.4024 |        0.0185 |           0.8114 | -                 |         0.852  |              0.2933 | -                |          0.6    | -       |        0.671  |        0.4585 |        0.547  |   0.01   | -          |
-| completed | SESSRS   | MANet (ce+dice)                           | t1/t2 search + postprocess |     0.7823 |        0.0194 |           0.8482 | -                 |         0.9273 |              0.4235 | -                |          0.7551 | -       |        0.7357 |        0.4317 |        0.684  |   0.0102 | -          |
-| completed | SESSRS   | MANet (focal)                             | t1/t2 search + postprocess |     0.8213 |        0.5013 |           0.8504 | -                 |         0.9285 |              0.5011 | -                |          0.7783 | -       |        0.7158 |        0.4493 |        0.6483 |   0.451  | -          |
-| completed | SESSRS   | MANet (weighted)                          | t1/t2 search + postprocess |     0.8665 |        0.6566 |           0.844  | -                 |         0.9322 |              0.4919 | -                |          0.7666 | -       |        0.6882 |        0.4221 |        0.6778 |   0.2113 | -          |
-| completed | SESSRS   | UNetFormer (ce+dice)                      | t1/t2 search + postprocess |     0.7391 |        0.0189 |           0.8217 | -                 |         0.9338 |              0.4927 | -                |          0.7362 | -       |        0.7263 |        0.4957 |        0.6716 |   0.01   | -          |
-| completed | SESSRS   | UNetFormer (focal)                        | t1/t2 search + postprocess |     0.7689 |        0.0189 |           0.8402 | -                 |         0.9317 |              0.4354 | -                |          0.6956 | -       |        0.6916 |        0.5005 |        0.7197 |   0.01   | -          |
-| completed | SESSRS   | UNetFormer (weighted)                     | t1/t2 search + postprocess |     0.7647 |        0.4332 |           0.8399 | -                 |         0.9235 |              0.3672 | -                |          0.729  | -       |        0.6839 |        0.4542 |        0.6225 |   0.01   | -          |
+| Model    | Backbone                   | Loss        | Score            | mAP    | BU     | MR     | PF     | WB     | AC     | GM     | T1R    | T2R    | BG     | SL     |
+| -------- | -------------------------- | ----------- | ---------------- | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ |
+| HQ-SAM   | ViT-B + HQ Decoder         | CE+Dice     | max              | 0.4697 | 0.4272 | 0.0977 | 0.8905 | 0.9218 | 0.1728 | 0.5084 | 0.7092 | 0.4227 | 0.5372 | 0.0100 |
+| HQ-SAM   | ViT-B + HQ Decoder         | Focal+Dice  | max              | 0.4710 | 0.5042 | 0.1114 | 0.8973 | 0.9182 | 0.1216 | 0.4533 | 0.7032 | 0.4449 | 0.5463 | 0.0100 |
+| HQ-SAM   | ViT-B + HQ Decoder         | WCE+Dice    | max              | 0.4693 | 0.4210 | 0.1291 | 0.8922 | 0.9088 | 0.1921 | 0.5121 | 0.7033 | 0.4122 | 0.5130 | 0.0095 |
+| SAM_RS   | ABCNet + SAM Priors        | Seg+Bdy+Obj | max              | 0.4938 | 0.4019 | 0.0189 | 0.8645 | 0.9125 | 0.2399 | 0.6537 | 0.6969 | 0.4391 | 0.7011 | 0.0100 |
+| SAM_RS   | CMTFNet + SAM Priors       | Seg+Bdy+Obj | max              | 0.4867 | 0.5065 | 0.0189 | 0.8661 | 0.8742 | 0.1383 | 0.6519 | 0.7126 | 0.4589 | 0.6297 | 0.0100 |
+| SAM_RS   | FTUNetFormer + SAM Priors  | Seg+Bdy+Obj | max              | 0.4757 | 0.4173 | 0.0189 | 0.8821 | 0.8749 | 0.1570 | 0.6086 | 0.6996 | 0.5340 | 0.5551 | 0.0100 |
+| SAM_RS   | UNetFormer + SAM Priors    | Seg+Bdy+Obj | max              | 0.5091 | 0.4374 | 0.0189 | 0.8913 | 0.9069 | 0.2495 | 0.7081 | 0.7474 | 0.4871 | 0.6345 | 0.0100 |
+| SAM2.1   | Hiera-B+ (Frozen, MSFPN)   | CE+Dice     | max              | 0.4668 | 0.5237 | 0.1335 | 0.8854 | 0.8844 | 0.1010 | 0.5053 | 0.7059 | 0.4033 | 0.5151 | 0.0100 |
+| SAM2.1   | Hiera-B+ (Frozen, MSFPN)   | Focal+Dice  | max              | 0.4648 | 0.5176 | 0.1467 | 0.8940 | 0.8874 | 0.0643 | 0.5239 | 0.7078 | 0.3942 | 0.5023 | 0.0100 |
+| SAM2.1   | Hiera-B+ (Frozen, MSFPN)   | WCE+Dice    | max              | 0.4665 | 0.4531 | 0.2150 | 0.8880 | 0.8756 | 0.0649 | 0.5488 | 0.7134 | 0.3982 | 0.4952 | 0.0126 |
+| SAM2.1   | Hiera-B+ (Full FT, MSFPN)  | CE+Dice     | max              | 0.4929 | 0.5516 | 0.0189 | 0.8773 | 0.8599 | 0.2326 | 0.5910 | 0.7171 | 0.4537 | 0.6164 | 0.0100 |
+| SAM2.1   | Hiera-B+ (Full FT, MSFPN)  | Focal+Dice  | max              | 0.5124 | 0.6102 | 0.0189 | 0.8771 | 0.8750 | 0.2271 | 0.6144 | 0.7275 | 0.4858 | 0.6777 | 0.0100 |
+| SAM2.1   | Hiera-B+ (Full FT, MSFPN)  | WCE+Dice    | max              | 0.5113 | 0.3644 | 0.3615 | 0.8940 | 0.8916 | 0.2359 | 0.5707 | 0.7070 | 0.4720 | 0.6060 | 0.0100 |
+| RSAM-Seg | SAM-ViT-B (Frozen Encoder) | CE+Dice     | max              | 0.5349 | 0.5917 | 0.0189 | 0.8828 | 0.9084 | 0.3755 | 0.6160 | 0.7402 | 0.4752 | 0.7300 | 0.0100 |
+| RSAM-Seg | SAM-ViT-B (Frozen Encoder) | Focal+Dice  | max              | 0.5705 | 0.6099 | 0.2017 | 0.9024 | 0.9202 | 0.3439 | 0.6827 | 0.7598 | 0.5294 | 0.7449 | 0.0100 |
+| RSAM-Seg | SAM-ViT-B (Frozen Encoder) | WCE+Dice    | max              | 0.6206 | 0.6679 | 0.4979 | 0.8896 | 0.9172 | 0.4805 | 0.7221 | 0.7459 | 0.4666 | 0.6769 | 0.1417 |
+| SESSRS | A2-FPN (CE+Dice) | Postprocess | sessrs_proxy_max | 0.5592 | 0.6169 | 0.0189 | 0.8789 | 0.9370 | 0.3888 | 0.7417 | 0.6752 | 0.4866 | 0.8384 | 0.0100 |
+| SESSRS | A2-FPN (Focal+Dice) | Postprocess | sessrs_proxy_max | 0.5414 | 0.7121 | 0.0189 | 0.8722 | 0.9017 | 0.3364 | 0.7490 | 0.7505 | 0.4353 | 0.6282 | 0.0100 |
+| SESSRS | A2-FPN (WCE+Dice) | Postprocess | sessrs_proxy_max | 0.6176 | 0.6652 | 0.3398 | 0.8789 | 0.9183 | 0.4605 | 0.7433 | 0.7266 | 0.4550 | 0.6861 | 0.3019 |
+| SESSRS | ABCNet (CE+Dice)$^{*}$ | Postprocess | sessrs_proxy_max | 0.5150 | 0.5336 | 0.0189 | 0.8696 | 0.9078 | 0.2597 | 0.7413 | 0.6850 | 0.4196 | 0.7041 | 0.0100 |
+| SESSRS | BANet (CE+Dice) | Postprocess | sessrs_proxy_max | 0.4863 | 0.5043 | 0.0185 | 0.8800 | 0.8655 | 0.2898 | 0.5945 | 0.6983 | 0.4473 | 0.5548 | 0.0100 |
+| SESSRS | MANet (CE+Dice) | Postprocess | sessrs_proxy_max | 0.5556 | 0.7770 | 0.0181 | 0.8558 | 0.9489 | 0.5034 | 0.5917 | 0.7334 | 0.4235 | 0.6941 | 0.0100 |
+| SESSRS | MANet (Focal+Dice) | Postprocess | sessrs_proxy_max | 0.6170 | 0.7816 | 0.2291 | 0.8943 | 0.9397 | 0.5424 | 0.7294 | 0.7421 | 0.4348 | 0.6382 | 0.2379 |
+| SESSRS | MANet (WCE+Dice) | Postprocess | sessrs_proxy_max | 0.6817 | 0.8797 | 0.7103 | 0.8894 | 0.9463 | 0.5389 | 0.8220 | 0.7288 | 0.4043 | 0.6655 | 0.2316 |
+| SESSRS | UNetFormer (CE+Dice) | Postprocess | sessrs_proxy_max | 0.5913 | 0.7615 | 0.0189 | 0.9018 | 0.9415 | 0.4988 | 0.7970 | 0.7620 | 0.4917 | 0.7298 | 0.0100 |
+| SESSRS | UNetFormer (Focal+Dice) | Postprocess | sessrs_proxy_max | 0.5807 | 0.7688 | 0.0189 | 0.8928 | 0.9451 | 0.4542 | 0.7449 | 0.7202 | 0.5087 | 0.7437 | 0.0100 |
+| SESSRS | UNetFormer (WCE+Dice) | Postprocess | sessrs_proxy_max | 0.6120 | 0.8290 | 0.4201 | 0.8934 | 0.9273 | 0.4719 | 0.7618 | 0.7550 | 0.4596 | 0.5921 | 0.0100 |
+
+- Source: `results/test_multilabel_confidence_max_ap_all_results_seg_mlc.md`
+
 
 <!-- MULTILABEL_PROTOCOL_END -->

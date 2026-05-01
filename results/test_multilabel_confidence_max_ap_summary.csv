@@ -1,0 +1,94 @@
+model,backbone,loss,status,score_type,area_map,max_proxy_map
+DeepLabV3+,ConvNeXt-Tiny,CE+Dice,computed,max,0.6138,0.6230
+DeepLabV3+,ConvNeXt-Tiny,Focal+Dice,computed,max,0.5926,0.6179
+DeepLabV3+,ConvNeXt-Tiny,WCE+Dice,computed,max,0.5937,0.6107
+DeepLabV3+,ResNet-50,CE+Dice,computed,max,0.5582,0.5776
+DeepLabV3+,ResNet-50,Focal+Dice,computed,max,0.5796,0.6120
+DeepLabV3+,ResNet-50,WCE+Dice,computed,max,0.5584,0.5664
+UPerNet,Swin-Tiny,CE+Dice,computed,max,0.5011,0.5252
+OCRNet,HRNet-W48,CE+Dice,computed,max,0.4633,0.4867
+BiSeNetv2,Custom Bilateral,CE+Dice,computed,max,0.5487,0.5377
+BiSeNetv2,Custom Bilateral,Focal+Dice,computed,max,0.5278,0.5263
+BiSeNetv2,Custom Bilateral,WCE+Dice,computed,max,0.5440,0.5369
+SegFormer,MiT-B2,CE+Dice,computed,max,0.5235,0.5382
+SegFormer,MiT-B2,Focal+Dice,computed,max,0.5691,0.5857
+SegFormer,MiT-B2,WCE+Dice,computed,max,0.6167,0.6576
+STDC2,STDCNet,CE+Dice,computed,max,0.5054,0.5016
+STDC2,STDCNet,Focal+Dice,computed,max,0.5061,0.5010
+STDC2,STDCNet,WCE+Dice,computed,max,0.5441,0.5756
+Mask2Former,ResNet-50,Set CE+Mask+Dice,computed,query-score proxy,0.5094,0.5297
+SegNeXt,MSCAN-Tiny,CE+Dice,computed,max,0.4682,0.4756
+DDRNet,DDRNet-23-slim,Focal+Dice,computed,max,0.4659,0.5081
+Afformer,AFFormer-Base,CE+Dice,computed,max,0.5154,0.5297
+EfficientViT,EfficientViT-B2,CE+Dice,computed,max,0.5625,0.6002
+EfficientViT,EfficientViT-B2,Focal+Dice,computed,max,0.5776,0.6100
+EfficientViT,EfficientViT-B2,WCE+Dice,computed,max,0.5904,0.6228
+SeaFormer,SeaFormer-Base,CE+Dice,computed,max,0.4942,0.5171
+PIDNet,PIDNet-M,CE+Dice,computed,max,0.5203,0.5254
+PIDNet,PIDNet-M,Focal+Dice,computed,max,0.4289,0.4298
+PIDNet,PIDNet-M,WCE+Dice,computed,max,0.5248,0.5254
+CGRSeg,EfficientFormerV2-B,CE+Dice,computed,max,0.4820,0.4990
+PEM,ResNet-50,Set CE+Mask+Dice,computed,query-score proxy,0.4868,0.5069
+VMamba,VMamba-Tiny,CE+Dice,computed,max,0.4378,0.4648
+MP-Former,Mask2Former Swin-L,Focal+Dice,computed,query-score proxy,0.3311,0.3122
+FarSeg,ResNet-50,CE,computed,max,0.5263,0.5576
+FarSeg,ResNet-50,CE+Dice,computed,max,0.5562,0.5752
+FarSeg,ResNet-50,Focal+Dice,computed,max,0.5582,0.5773
+FarSeg,ResNet-50,WCE+Dice,computed,max,0.5762,0.6159
+BANet,ResT-Lite,CE+Dice,computed,max,0.4664,0.4863
+ABCNet,ResNet-18,CE+Dice$^{*}$,computed,max,0.4916,0.5150
+MANet,ResNet-50,CE+Dice,computed,max,0.5693,0.5556
+MANet,ResNet-50,Focal+Dice,computed,max,0.6643,0.6170
+MANet,ResNet-50,WCE+Dice,computed,max,0.6559,0.6817
+UNetFormer,ResNet-18,CE+Dice$^{*}$,computed,max,0.5648,0.5913
+UNetFormer,ResNet-18,Focal+Dice$^{*}$,computed,max,0.5613,0.5807
+UNetFormer,ResNet-18,WCE+Dice$^{*}$,computed,max,0.5826,0.6119
+DC-Swin,Swin-Small,CE+Dice,computed,max,0.4726,0.4953
+A2-FPN,ResNet-18,CE+Dice,computed,max,0.5239,0.5592
+A2-FPN,ResNet-18,Focal+Dice,computed,max,0.5219,0.5414
+A2-FPN,ResNet-18,WCE+Dice,computed,max,0.5982,0.6176
+LoGCAN,ResNet-50,CE$^{*}$,computed,max,0.5335,0.5499
+FarSeg++,MiT-B2,CE,computed,max,0.4864,0.4957
+SACANet,HRNet-W32,CE$^{*}$,computed,max,0.5281,0.5525
+DOCNet,HRNet-W32,CE$^{*}$,computed,max,0.5145,0.5317
+PPMambaSeg,SWSL,CE+Dice,computed,max,0.5402,0.5615
+PPMambaSeg,SWSL,Focal+Dice,computed,max,0.5624,0.5828
+PPMambaSeg,SWSL,WCE+Dice,computed,max,0.6220,0.6408
+RS3Mamba,VMamba-Tiny,CE+Dice,computed,max,0.4047,0.4235
+RS3Mamba,VMamba-Tiny,Focal+Dice,computed,max,0.4554,0.4709
+RS3Mamba,VMamba-Tiny,WCE+Dice,computed,max,0.4716,0.5263
+PyramidMamba,Swin-Base,CE+Dice,computed,max,0.6050,0.6301
+PyramidMamba,Swin-Base,Focal+Dice,computed,max,0.5994,0.6365
+PyramidMamba,Swin-Base,WCE+Dice,computed,max,0.6749,0.7024
+LoGCAN++,RepViT-M2.3,CE$^{*}$,computed,max,0.4190,0.4524
+MF-Mamba,HRNet-W18,CE+Dice,computed,max,0.4807,0.5137
+MCPNet,ResNet-50,CE+Dice,computed,max,0.4649,0.5063
+MCPNet,ResNet-50,Focal+Dice,computed,max,0.4849,0.5267
+MCPNet,ResNet-50,WCE+Dice,computed,max,0.5141,0.5545
+HQ-SAM,ViT-B + HQ Decoder,CE+Dice,computed,max,0.4749,0.4697
+HQ-SAM,ViT-B + HQ Decoder,Focal+Dice,computed,max,0.4821,0.4710
+HQ-SAM,ViT-B + HQ Decoder,WCE+Dice,computed,max,0.4625,0.4693
+SAM_RS,ABCNet + SAM Priors,Seg+Bdy+Obj,computed,max,0.4666,0.4938
+SAM_RS,CMTFNet + SAM Priors,Seg+Bdy+Obj,computed,max,0.4615,0.4867
+SAM_RS,FTUNetFormer + SAM Priors,Seg+Bdy+Obj,computed,max,0.4528,0.4757
+SAM_RS,UNetFormer + SAM Priors,Seg+Bdy+Obj,computed,max,0.4944,0.5091
+SAM2.1,"Hiera-B+ (Frozen, MSFPN)",CE+Dice,computed,max,0.4621,0.4668
+SAM2.1,"Hiera-B+ (Frozen, MSFPN)",Focal+Dice,computed,max,0.4541,0.4648
+SAM2.1,"Hiera-B+ (Frozen, MSFPN)",WCE+Dice,computed,max,0.4107,0.4665
+SAM2.1,"Hiera-B+ (Full FT, MSFPN)",CE+Dice,computed,max,0.4595,0.4929
+SAM2.1,"Hiera-B+ (Full FT, MSFPN)",Focal+Dice,computed,max,0.4640,0.5124
+SAM2.1,"Hiera-B+ (Full FT, MSFPN)",WCE+Dice,computed,max,0.4850,0.5113
+RSAM-Seg,SAM-ViT-B (Frozen Encoder),CE+Dice,computed,max,0.5046,0.5349
+RSAM-Seg,SAM-ViT-B (Frozen Encoder),Focal+Dice,computed,max,0.5454,0.5705
+RSAM-Seg,SAM-ViT-B (Frozen Encoder),WCE+Dice,computed,max,0.5869,0.6206
+SESSRS,A2-FPN (CE+Dice),Postprocess,computed,sessrs_proxy_max,0.5240,0.5592
+SESSRS,A2-FPN (Focal+Dice),Postprocess,computed,sessrs_proxy_max,0.5218,0.5414
+SESSRS,A2-FPN (WCE+Dice),Postprocess,computed,sessrs_proxy_max,0.5983,0.6176
+SESSRS,ABCNet (CE+Dice)$^{*}$,Postprocess,computed,sessrs_proxy_max,0.4916,0.5150
+SESSRS,BANet (CE+Dice),Postprocess,computed,sessrs_proxy_max,0.4664,0.4863
+SESSRS,MANet (CE+Dice),Postprocess,computed,sessrs_proxy_max,0.5695,0.5556
+SESSRS,MANet (Focal+Dice),Postprocess,computed,sessrs_proxy_max,0.6645,0.6170
+SESSRS,MANet (WCE+Dice),Postprocess,computed,sessrs_proxy_max,0.6557,0.6817
+SESSRS,UNetFormer (CE+Dice),Postprocess,computed,sessrs_proxy_max,0.5646,0.5913
+SESSRS,UNetFormer (Focal+Dice),Postprocess,computed,sessrs_proxy_max,0.5612,0.5807
+SESSRS,UNetFormer (WCE+Dice),Postprocess,computed,sessrs_proxy_max,0.5828,0.6120
