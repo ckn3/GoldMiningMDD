@@ -38,8 +38,6 @@ The three figures below summarize geographic coverage and class distribution bef
 
 The **ELDOR Interactive Explorer** is a high-performance, browser-based platform designed to eliminate the hardware and technical barriers associated with massive UAV orthomosaic analysis. By leveraging a **Cloud-Optimized GeoTIFF (COG)** and **STAC-based** architecture, it enables non-technical domain experts to browse gigapixel-scale imagery at native resolution and execute asynchronous model inference on custom regions of interest (ROIs). This unified geographic interface bridges the gap between raw geospatial data and actionable ecological insights without requiring local high-end hardware or complex coding environments.
 
----
-
 ### Key Technical Specifications
 
 | Component          | Technology Stack                                                |
@@ -50,8 +48,9 @@ The **ELDOR Interactive Explorer** is a high-performance, browser-based platform
 | **Database**       | PostgreSQL + PostGIS (Vector Geometries & Cataloging)           |
 | **Raster Storage** | MinIO (S3-compatible storage) & TiTiler-pgSTAC (Dynamic Tiling) |
 
-<img src="assets/explorer/overlay.gif" width="400" />
-<img src="assets/explorer/overaly_zoom.gif.gif" width="400" />
+<!-- <img src="assets/explorer/overlay.gif" width="400" /> -->
+
+<img src="assets/explorer/overaly_zoom.gif.gif"/>
 
 ## Additional result visualizations
 
