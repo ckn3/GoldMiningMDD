@@ -1,0 +1,158 @@
+"""
+SALGL trainer for GoldMDD MLC.
+Uses ResNet-101 + GGNN (Graph-based Global-Local) with scene/label embeddings.
+Paper: jasonseu/SALGL, ICCV2023
+"""
+import sys, os, argparse, time
+from pathlib import Path
+
+MLC_ROOT = Path(os.environ.get('GOLDMDD_MLC_REPO',
+    Path(__file__).resolve().parents[2] / 'multi-label-classification'))
+REPO     = MLC_ROOT / 'repos/SALGL'
+sys.path.insert(0, str(REPO))
+sys.path.insert(0, str(MLC_ROOT / 'utils/dataset'))
+sys.path.insert(0, str(MLC_ROOT / 'utils/metrics'))
+sys.path.insert(0, str(MLC_ROOT / 'utils'))
+
+import torch
+import torch.nn as nn
+from torch.cuda.amp import GradScaler, autocast
+import logging
+import argparse as ap
+
+from goldmdd_mlc import build_dataloader, NUM_CLASSES
+from evaluate_mlc import evaluate, save_results
+from train_mlc_base import build_optimizer, build_scheduler, load_protocol
+
+logging.basicConfig(level=logging.INFO,
+    format='%(asctime)s | %(levelname)s | %(message)s', datefmt='%H:%M:%S')
+logger = logging.getLogger(__name__)
+
+
+def build_salgl_cfg():
+    """Build SALGL config namespace with GoldMDD settings."""
+    cfg = ap.Namespace(
+        backbone='resnet101',
+        img_size=512,
+        num_classes=NUM_CLASSES,
+        embed_type='random',   # random embeddings (no GloVe needed)
+        embed_path=None,
+        num_scenes=6,          # number of scene prototypes
+        num_steps=2,           # GGNN steps
+        pos=False,             # no position embedding
+        soft=False,            # hard scene assignment
+        distributed=False,
+        normalize=True,
+        ignore_self=True,
+        outmess=True,   # GGNN: concatenate input+output messages
+    )
+    return cfg
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--resume', action='store_true')
+    parser.add_argument('--gpu', default='0')
+    args = parser.parse_args()
+
+    os.environ['CUDA_VISIBLE_DEVICES'] = args.gpu
+    device = torch.device('cuda')
+    cfg    = load_protocol()
+
+    model_name = 'salgl'
+    out_dir    = Path(cfg['output']['runs_dir']) / model_name
+    (out_dir / 'checkpoints').mkdir(parents=True, exist_ok=True)
+    (out_dir / 'results').mkdir(parents=True, exist_ok=True)
+    logging.getLogger().addHandler(logging.FileHandler(out_dir / 'train.log'))
+
+    # Import SALGL modules
+    from models import resnet  # trigger backbone registration
+    from models.salgl import SALGL, salgl as build_salgl
+    from lib.aslloss import AsymmetricLoss as SALGL_ASL
+
+    salgl_cfg = build_salgl_cfg()
+    model = build_salgl(True, cfg=salgl_cfg).to(device)
+
+    total     = sum(p.numel() for p in model.parameters()) / 1e6
+    trainable = sum(p.numel() for p in model.parameters() if p.requires_grad) / 1e6
+    logger.info(f"SALGL (ResNet-101+GGNN): {total:.2f}M total, {trainable:.2f}M trainable")
+
+    data_root  = cfg['dataset']['data_root']
+    batch_size = cfg['training']['batch_size']
+    train_loader, _ = build_dataloader(data_root, 'train', batch_size, 4)
+    val_loader,   _ = build_dataloader(data_root, 'val',   batch_size, 4)
+
+    # SALGL uses ASL
+    criterion = SALGL_ASL(gamma_neg=4, gamma_pos=0, clip=0.05)
+    optimizer = build_optimizer(model, cfg)
+    scheduler = build_scheduler(optimizer, cfg, len(train_loader))
+    scaler    = GradScaler()
+
+    epochs = cfg['training']['epochs']
+    best_map = 0.0; start_ep = 1
+
+    if args.resume and (out_dir / 'checkpoints/last.pt').exists():
+        ck = torch.load(out_dir / 'checkpoints/last.pt', map_location=device)
+        model.load_state_dict(ck['model'])
+        start_ep = ck['epoch'] + 1
+        best_map = ck.get('map', 0.0)
+        logger.info(f"Resumed from epoch {ck['epoch']}")
+
+    csv_path = out_dir / 'train_log.csv'
+    if not args.resume:
+        with open(csv_path, 'w') as f:
+            f.write('epoch,train_loss,val_map,val_cf1,val_macro_f1\n')
+
+    for epoch in range(start_ep, epochs + 1):
+        model.train()
+        total_loss = 0.0; t0 = time.time()
+        for imgs, labels in train_loader:
+            imgs   = imgs.to(device, non_blocking=True)
+            labels = labels.to(device, non_blocking=True)
+            optimizer.zero_grad()
+            with autocast():
+                # SALGL needs labels during training for co-matrix update
+                output = model(imgs, labels)
+                logits = output['logits']
+                loss   = criterion(logits, labels)
+            scaler.scale(loss).backward()
+            scaler.unscale_(optimizer)
+            torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
+            scaler.step(optimizer); scaler.update(); scheduler.step()
+            total_loss += loss.item()
+
+        train_loss  = total_loss / len(train_loader)
+        val_metrics = evaluate(model, val_loader, device,
+            forward_fn=lambda m, x: m(x)['logits'])
+        elapsed = time.time() - t0
+        logger.info(f"[salgl] Epoch {epoch:03d}/{epochs} | "
+                    f"loss={train_loss:.4f} mAP={val_metrics['map']:.4f} "
+                    f"CF1={val_metrics['cf1']:.4f} macro_F1={val_metrics['macro_f1']:.4f} | "
+                    f"{elapsed:.1f}s")
+        with open(csv_path, 'a') as f:
+            f.write(f"{epoch},{train_loss:.4f},{val_metrics['map']:.4f},"
+                    f"{val_metrics['cf1']:.4f},{val_metrics['macro_f1']:.4f}\n")
+
+        torch.save({'epoch': epoch, 'model': model.state_dict(),
+                    'map': val_metrics['map']},
+                   out_dir / 'checkpoints/last.pt')
+        if val_metrics['map'] > best_map:
+            best_map = val_metrics['map']
+            torch.save({'epoch': epoch, 'model': model.state_dict(),
+                        'map': best_map, 'metrics': val_metrics},
+                       out_dir / 'checkpoints/best.pt')
+            logger.info(f"  ★ New best mAP={best_map:.4f}")
+
+    logger.info(f"Training complete. Best mAP={best_map:.4f}")
+    test_loader, _ = build_dataloader(data_root, 'test', batch_size, 4)
+    ck = torch.load(out_dir / 'checkpoints/best.pt', map_location=device)
+    model.load_state_dict(ck['model'])
+    test_metrics = evaluate(model, test_loader, device,
+        forward_fn=lambda m, x: m(x)['logits'])
+    save_results(test_metrics, str(out_dir / 'results/multilabel_results.json'),
+                 model_name, 'test')
+    logger.info(f"Test mAP={test_metrics['map']:.4f}")
+
+
+if __name__ == '__main__':
+    main()
