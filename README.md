@@ -50,7 +50,7 @@ The **ELDOR Interactive Explorer** is a high-performance, browser-based platform
 
 <!-- <img src="assets/explorer/overlay.gif" width="400" /> -->
 
-<img src="assets/explorer/overaly_zoom.gif.gif"/>
+<img src="assets/explorer/overaly_zoom.gif"/>
 
 ## Additional result visualizations
 
