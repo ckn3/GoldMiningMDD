@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """Q2L trainer for GoldMDD MLC.
 Paper: Query2Label: A Simple Transformer Way to Multi-Label Classification (NeurIPS2021)
 Backbone: ResNet-101 + Transformer decoder, Loss: ASL

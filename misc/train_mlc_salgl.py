@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """
 SALGL trainer for GoldMDD MLC.
 Uses ResNet-101 + GGNN (Graph-based Global-Local) with scene/label embeddings.
@@ -51,6 +52,9 @@ def build_salgl_cfg():
 
 def main():
     parser = argparse.ArgumentParser()
+    parser.add_argument('--data-root', type=str, default=None,
+                        help='Path to GoldMDD data-cropped directory. '
+                             'Overrides protocol.yaml if set.')
     parser.add_argument('--resume', action='store_true')
     parser.add_argument('--gpu', default='0')
     args = parser.parse_args()

@@ -87,7 +87,7 @@ class BaseMLCTrainer:
         logger.info(f"Model: {self.model_name} | {total:.1f}M total, {trainable:.1f}M trainable")
 
         # Data
-        data_root  = cfg['dataset']['data_root']
+        data_root  = args.data_root if args.data_root else cfg['dataset']['data_root']
         batch_size = cfg['training']['batch_size']
         train_loader, _ = build_dataloader(data_root, 'train', batch_size, num_workers=4)
         val_loader,   _ = build_dataloader(data_root, 'val',   batch_size, num_workers=4)
@@ -182,6 +182,9 @@ class BaseMLCTrainer:
 
 def get_base_args():
     parser = argparse.ArgumentParser()
+    parser.add_argument('--data-root', type=str, default=None,
+                        help='Path to GoldMDD data-cropped directory. '
+                             'Overrides protocol.yaml dataset.data_root if set.')
     parser.add_argument('--resume', action='store_true')
     parser.add_argument('--gpu', default='0')
     return parser

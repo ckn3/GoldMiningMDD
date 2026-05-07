@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """ADD-GCN trainer for GoldMDD MLC.
 Paper: Add-GCN: Attention-Driven Dynamic Graph Convolutional Network (ECCV2020)
 Backbone: ResNet-101 + Dynamic GCN, Loss: BCE

@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """
 DualCoOp trainer for GoldMDD MLC.
 Uses CLIP RN-101 + dual context optimization (positive/negative prompts).
@@ -77,6 +78,9 @@ def build_dualcoop_cfg():
 
 def main():
     parser = argparse.ArgumentParser()
+    parser.add_argument('--data-root', type=str, default=None,
+                        help='Path to GoldMDD data-cropped directory. '
+                             'Overrides protocol.yaml if set.')
     parser.add_argument('--resume', action='store_true')
     parser.add_argument('--gpu', default='0')
     args = parser.parse_args()

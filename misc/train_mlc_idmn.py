@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """IDMN trainer for GoldMDD MLC.
 Paper: IDMN — Instance-Dependent Multi-Label Noise (JSTARS2024)
 Backbone: ResNet-50, Loss: SAT (Self-Adaptive Training)

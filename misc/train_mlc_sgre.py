@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """
 SGRE trainer for GoldMDD MLC.
 Uses SGRE's ResNet-101 backbone (registered via @register_backbone)
@@ -54,6 +55,9 @@ class SGREModel(nn.Module):
 
 def main():
     parser = argparse.ArgumentParser()
+    parser.add_argument('--data-root', type=str, default=None,
+                        help='Path to GoldMDD data-cropped directory. '
+                             'Overrides protocol.yaml if set.')
     parser.add_argument('--resume', action='store_true')
     parser.add_argument('--gpu', default='0')
     args = parser.parse_args()

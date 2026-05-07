@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """CSRA trainer for GoldMDD MLC."""
 import sys, os, argparse, time
 from pathlib import Path
@@ -25,6 +26,9 @@ logger = logging.getLogger(__name__)
 
 def main():
     parser = argparse.ArgumentParser()
+    parser.add_argument('--data-root', type=str, default=None,
+                        help='Path to GoldMDD data-cropped directory. '
+                             'Overrides protocol.yaml if set.')
     parser.add_argument('--resume', action='store_true')
     parser.add_argument('--gpu', default='0')
     args = parser.parse_args()

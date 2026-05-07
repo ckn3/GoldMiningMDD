@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """ML-GCN trainer for GoldMDD MLC.
 Paper: Multi-Label Image Recognition with Graph Convolutional Networks (CVPR2019)
 Backbone: ResNet-101 + GCN, Loss: BCE, Word embeddings + adjacency matrix required.

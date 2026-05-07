@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """TDRG trainer for GoldMDD MLC.
 Paper: Transformer-based Dual Relation Graph for Multi-label Image Recognition (ICCV2021)
 Backbone: ResNet-101 multi-scale + GCN, Loss: BCE, needs adj_file

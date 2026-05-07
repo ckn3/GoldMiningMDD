@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """
 GRN trainer for GoldMDD MLC.
 Uses ResNet18 + classification head + BCE loss.
@@ -37,6 +38,9 @@ def build_grn_model():
 
 def main():
     parser = argparse.ArgumentParser()
+    parser.add_argument('--data-root', type=str, default=None,
+                        help='Path to GoldMDD data-cropped directory. '
+                             'Overrides protocol.yaml if set.')
     parser.add_argument('--resume', action='store_true')
     parser.add_argument('--gpu', default='0')
     args = parser.parse_args()

@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """
 HSVLT trainer for GoldMDD MLC.
 Uses ConvNeXt backbone + cross-attention transformer + ASL loss.
@@ -106,6 +107,9 @@ def build_hsvlt_model():
 
 def main():
     parser = argparse.ArgumentParser()
+    parser.add_argument('--data-root', type=str, default=None,
+                        help='Path to GoldMDD data-cropped directory. '
+                             'Overrides protocol.yaml if set.')
     parser.add_argument('--resume', action='store_true')
     parser.add_argument('--gpu', default='0')
     args = parser.parse_args()
