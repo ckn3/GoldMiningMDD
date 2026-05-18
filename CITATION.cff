@@ -1,0 +1,42 @@
+cff-version: 1.2.0
+message: "If you use ELDOR or this benchmark code, please cite the arXiv preprint."
+title: "ELDOR: A Dataset and Benchmark for Illegal Gold Mining in the Amazon Rainforest"
+authors:
+  - family-names: Cui
+    given-names: Kangning
+  - family-names: Bohara
+    given-names: Surendra
+  - family-names: Prasai
+    given-names: Suraj
+  - family-names: Shao
+    given-names: Zishan
+  - family-names: Tang
+    given-names: Wei
+  - family-names: Pillaca
+    given-names: Martin
+  - family-names: Flores
+    given-names: Edwin
+  - family-names: Yang
+    given-names: Zhen
+  - family-names: Larsen
+    given-names: Gregory
+  - family-names: Dethier
+    given-names: Evan
+  - family-names: Lutz
+    given-names: David
+  - family-names: Morel
+    given-names: Jean-Michel
+  - family-names: Silman
+    given-names: Miles
+  - family-names: Pauca
+    given-names: Victor
+  - family-names: Yang
+    given-names: Fan
+year: 2026
+repository-code: "https://github.com/ckn3/GoldMiningMDD"
+url: "https://arxiv.org/abs/2605.15397"
+identifiers:
+  - type: doi
+    value: 10.48550/arXiv.2605.15397
+  - type: url
+    value: "https://arxiv.org/pdf/2605.15397"

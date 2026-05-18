@@ -2,6 +2,12 @@
 
 Code-only release for ELDOR experiments (wrappers, configs, scripts, evaluation, and experiment summaries).
 
+## Paper
+
+- arXiv: https://arxiv.org/abs/2605.15397
+- PDF: https://arxiv.org/pdf/2605.15397
+- Title: **ELDOR: A Dataset and Benchmark for Illegal Gold Mining in the Amazon Rainforest**
+
 ## What is included
 
 - `misc/`: training/eval/analysis scripts used in this benchmark.
@@ -19,6 +25,17 @@ Code-only release for ELDOR experiments (wrappers, configs, scripts, evaluation,
 
 - Dataset (ELDOR): https://huggingface.co/datasets/IRSC/ELDOR
 - Model checkpoints: https://huggingface.co/IRSC/ELDOR-checkpoints
+
+## Citation
+
+```bibtex
+@article{cui2026eldor,
+  title={ELDOR: A Dataset and Benchmark for Illegal Gold Mining in the Amazon Rainforest},
+  author={Cui, Kangning and Bohara, Surendra and Prasai, Suraj and Shao, Zishan and Tang, Wei and Pillaca, Martin and Flores, Edwin and Yang, Zhen and Larsen, Gregory and Dethier, Evan and Lutz, David and Morel, Jean-Michel and Silman, Miles and Pauca, Victor and Yang, Fan},
+  journal={arXiv preprint arXiv:2605.15397},
+  year={2026}
+}
+```
 
 ## Dataset overview and key figures
 
